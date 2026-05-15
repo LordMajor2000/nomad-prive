@@ -15,7 +15,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
 
-export default function Home() {
+export default function LocaleHome() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (

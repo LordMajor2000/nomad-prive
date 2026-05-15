@@ -12,6 +12,25 @@ import Link from "next/link";
 const GEO_URL =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
+const visitedOnly = [
+  { name: "Dubai", coordinates: [55.3, 25.2] as [number, number] },
+  { name: "Moscow", coordinates: [37.6, 55.8] as [number, number] },
+  { name: "St. Petersburg", coordinates: [30.3, 59.9] as [number, number] },
+  { name: "Goa, India", coordinates: [73.8, 15.5] as [number, number] },
+  { name: "Malaga", coordinates: [-4.4, 36.7] as [number, number] },
+  { name: "Fuerteventura", coordinates: [-13.9, 28.4] as [number, number] },
+  { name: "Tenerife", coordinates: [-16.6, 28.3] as [number, number] },
+  { name: "Tarifa", coordinates: [-5.6, 36.0] as [number, number] },
+  { name: "Gibraltar", coordinates: [-5.4, 36.1] as [number, number] },
+  { name: "Paris", coordinates: [2.3, 48.9] as [number, number] },
+  { name: "London", coordinates: [-0.1, 51.5] as [number, number] },
+  { name: "Rome", coordinates: [12.5, 41.9] as [number, number] },
+  { name: "Berlin", coordinates: [13.4, 52.5] as [number, number] },
+  { name: "Vienna", coordinates: [16.4, 48.2] as [number, number] },
+  { name: "Marbella", coordinates: [-4.9, 36.5] as [number, number] },
+  { name: "Madeira", coordinates: [-16.9, 32.7] as [number, number] },
+];
+
 const destinations = [
   {
     name: "Sri Lanka",
@@ -59,6 +78,7 @@ const destinations = [
 
 export default function WorldMap() {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
+  const [activeVisited, setActiveVisited] = useState<string | null>(null);
 
   return (
     <section
@@ -101,7 +121,7 @@ export default function WorldMap() {
               color: "#C9A96E",
             }}
           >
-            Where We&apos;ve Taken Our Clients
+            23 destinations across 4 continents
           </span>
         </div>
         <h2
@@ -115,7 +135,7 @@ export default function WorldMap() {
             whiteSpace: "pre-line",
           }}
         >
-          {"The World,\nMapped."}
+          {"We’ve stood here.\nWe know the way."}
         </h2>
       </div>
 
@@ -178,6 +198,55 @@ export default function WorldMap() {
               ))
             }
           </Geographies>
+
+          {visitedOnly.map((place) => (
+            <Marker
+              key={place.name}
+              coordinates={place.coordinates}
+              onMouseEnter={() => setActiveVisited(place.name)}
+              onMouseLeave={() => setActiveVisited(null)}
+            >
+              <circle
+                cx={0}
+                cy={0}
+                r={3}
+                fill="rgba(201,169,110,0.35)"
+                style={{ cursor: "default" }}
+              />
+              {activeVisited === place.name && (
+                <foreignObject
+                  x={-50}
+                  y={-36}
+                  width={100}
+                  height={28}
+                  style={{ overflow: "visible", pointerEvents: "none" }}
+                >
+                  <div
+                    style={{
+                      background: "rgba(17,17,17,0.92)",
+                      border: "1px solid rgba(201,169,110,0.2)",
+                      borderRadius: "2px",
+                      padding: "4px 8px",
+                      width: "100px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "0.65rem",
+                        color: "rgba(201,169,110,0.8)",
+                        fontFamily: "var(--font-inter), Inter, sans-serif",
+                        letterSpacing: "0.05em",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {place.name}
+                    </span>
+                  </div>
+                </foreignObject>
+              )}
+            </Marker>
+          ))}
 
           {destinations.map((dest) => (
             <Marker

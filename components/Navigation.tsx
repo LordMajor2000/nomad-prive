@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Compass, Lock } from "lucide-react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const navLinks = [
   { label: "Destinations", href: "/destinations" },
@@ -113,6 +115,10 @@ export default function Navigation() {
             )}
           </Link>
 
+          {/* Language switcher + Hamburger */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <LanguageSwitcher />
+
           {/* Hamburger icon — always visible */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -160,6 +166,7 @@ export default function Navigation() {
               }}
             />
           </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -229,7 +236,68 @@ export default function Navigation() {
                   </motion.li>
                 );
               })}
+
+              {/* Quiz link */}
+              <motion.li
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.07 + 0.1, duration: 0.4 }}
+              >
+                <Link
+                  href="/quiz"
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.6rem",
+                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "1.4rem",
+                    fontWeight: 700,
+                    color: isActive("/quiz") ? "var(--gold-primary)" : "rgba(201,169,110,0.85)",
+                    textDecoration: "none",
+                    letterSpacing: "0.05em",
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  <Compass size={20} />
+                  Find My Destination
+                </Link>
+              </motion.li>
             </ul>
+
+            {/* Client login — subtle */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.65, duration: 0.4 }}
+              style={{ marginTop: "2rem" }}
+            >
+              <Link
+                href="/client/login"
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,0.3)",
+                  textDecoration: "none",
+                  transition: "color 0.3s ease",
+                  fontFamily: "var(--font-inter), Inter, sans-serif",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.6)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.3)";
+                }}
+              >
+                <Lock size={13} />
+                Client Login
+              </Link>
+            </motion.div>
 
             <div
               style={{

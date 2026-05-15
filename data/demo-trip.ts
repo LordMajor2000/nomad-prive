@@ -1,0 +1,35 @@
+export const demoTrip = {
+  clientName: "James & Sarah",
+  destination: "Amalfi Coast, Italy",
+  dates: "June 14–21, 2026",
+  status: "Confirmed",
+  travelers: 2,
+  package: "PRIVÉ",
+  hotel: {
+    name: "Il San Pietro di Positano",
+    checkIn: "June 14, 2026 — 15:00",
+    checkOut: "June 21, 2026 — 11:00",
+    address: "Via Laurito 2, Positano, SA 84017",
+    roomType: "Junior Suite Sea View",
+    confirmationNumber: "ISP-2026-0614-NP",
+  },
+  transfers: [
+    { type: "Arrival", date: "June 14", time: "12:30", from: "Naples Airport (NAP)", to: "Il San Pietro di Positano", vehicle: "Private Mercedes V-Class" },
+    { type: "Day Trip", date: "June 17", time: "09:00", from: "Hotel", to: "Ravello & Amalfi Town", vehicle: "Private boat + guide" },
+    { type: "Departure", date: "June 21", time: "09:00", from: "Il San Pietro di Positano", to: "Naples Airport (NAP)", vehicle: "Private Mercedes V-Class" },
+  ],
+  experiences: [
+    { date: "June 14 (Evening)", title: "Welcome dinner", detail: "La Tagliata restaurant, Montepertuso — reservation at 20:00" },
+    { date: "June 15", title: "Private boat day", detail: "Full-day boat hire, Capri + Li Galli islands, lunch on board" },
+    { date: "June 16", title: "Cooking class", detail: "Casa Costigliola, 10:00 — pasta & limoncello, private group" },
+    { date: "June 17", title: "Ravello & Amalfi", detail: "Private guide, Villa Cimbrone gardens, Amalfi Cathedral" },
+    { date: "June 18", title: "Free day", detail: "At leisure — beach club access at Arienzo Beach Club reserved" },
+    { date: "June 19", title: "Sunset aperitivo", detail: "Bar Calypso, Positano, 18:30 — reserved terrace table" },
+    { date: "June 20 (Final evening)", title: "Farewell dinner", detail: "Ristorante Max, Positano — 20:00, tasting menu" },
+  ],
+  contacts: [
+    { role: "Your Travel Designer", name: "Nomad Privé", phone: "+36 XX XXX XXXX", available: "24/7 on WhatsApp" },
+    { role: "Hotel Concierge", name: "Il San Pietro", phone: "+39 089 875 455", available: "8:00–22:00" },
+  ],
+  emergencyNote: "For any urgent matter during your trip, WhatsApp us directly. We respond within minutes.",
+}

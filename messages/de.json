@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "destinations": "Reiseziele",
+    "packages": "Pakete",
+    "journal": "Journal",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "quiz": "Mein Reiseziel finden",
+    "client": "Kundenbereich"
+  },
+  "hero": {
+    "title1": "DIE WELT,",
+    "title2": "NACH IHREN BEDINGUNGEN.",
+    "tagline": "Hyperpersonalisierte Luxusreisen, gestaltet für Wenige."
+  },
+  "about": {
+    "label": "Unsere Geschichte",
+    "heading": "Zwei Menschen. Eine Leidenschaft.",
+    "subheading": "Wir gründeten Nomad Privé, weil die Reisen, die wir uns vorstellten, nicht existierten.",
+    "readMore": "Lesen Sie unsere vollständige Geschichte →"
+  },
+  "packages": {
+    "label": "Pakete",
+    "heading": "Das Erlebnis, das für Sie gemacht wurde",
+    "viewAll": "Alle Pakete vergleichen →"
+  },
+  "contact": {
+    "label": "Kontakt aufnehmen",
+    "heading": "Beginnen Sie Ihre Traumreise",
+    "send": "Anfrage senden"
+  },
+  "footer": {
+    "tagline": "Jede Reise ist ein Meisterwerk.",
+    "referral": "Wir nehmen neue Kunden ausschließlich auf persönliche Empfehlung an.",
+    "cta": "Ihre nächste Reise beginnt mit einem Gespräch.",
+    "getInTouch": "Kontakt aufnehmen",
+    "navigate": "Navigation",
+    "contact": "Kontakt",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "quiz": {
+    "title": "Finden Sie Ihr perfektes Reiseziel",
+    "subtitle": "4 kurze Fragen. Wir sagen Ihnen, wohin Sie reisen sollten.",
+    "result": "Basierend auf Ihren Antworten ist dies Ihre perfekte Reise.",
+    "retake": "Quiz wiederholen",
+    "readMore": "Mehr lesen über",
+    "startPlanning": "Reise planen"
+  }
+}

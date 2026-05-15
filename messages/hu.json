@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "destinations": "Úticélok",
+    "packages": "Csomagok",
+    "journal": "Blog",
+    "about": "Rólunk",
+    "contact": "Kapcsolat",
+    "quiz": "Melyik út passzol hozzám?",
+    "client": "Ügyfél belépés"
+  },
+  "hero": {
+    "title1": "A VILÁG,",
+    "title2": "A TE FELTÉTELEID.",
+    "tagline": "Hiperszemélyesített luxusutazás, keveseknek."
+  },
+  "about": {
+    "label": "A mi sztorink",
+    "heading": "Két ember. Egy szenvedély.",
+    "subheading": "Azért alapítottuk a Nomad Privé-t, mert az utazások, amiket akartunk, nem léteztek.",
+    "readMore": "Olvasd el a teljes történetünket →"
+  },
+  "packages": {
+    "label": "Csomagok",
+    "heading": "A neked szóló élmény",
+    "viewAll": "Összes csomag →"
+  },
+  "contact": {
+    "label": "Kapcsolatfelvétel",
+    "heading": "Kezdd el az álomutazásodat",
+    "send": "Küldöm a kérésemet"
+  },
+  "footer": {
+    "tagline": "Minden utazás egy életmű.",
+    "referral": "Kizárólag személyes ajánlás alapján fogadunk új ügyfeleket.",
+    "cta": "A következő utazásod egy beszélgetéssel kezdődik.",
+    "getInTouch": "Kapcsolatfelvétel",
+    "navigate": "Navigáció",
+    "contact": "Kapcsolat",
+    "rights": "Minden jog fenntartva."
+  },
+  "quiz": {
+    "title": "Találd meg a tökéletes úticéled",
+    "subtitle": "4 gyors kérdés. Mi megmondjuk, hová menj.",
+    "result": "A válaszaid alapján ez a tökéletes utazásod.",
+    "retake": "Újra kitöltöm",
+    "readMore": "Olvass többet:",
+    "startPlanning": "Tervezés indítása"
+  }
+}

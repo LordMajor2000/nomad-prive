@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "destinations": "Destinácie",
+    "packages": "Balíky",
+    "journal": "Denník",
+    "about": "O nás",
+    "contact": "Kontakt",
+    "quiz": "Nájsť moju destináciu",
+    "client": "Klientska zóna"
+  },
+  "hero": {
+    "title1": "SVET,",
+    "title2": "PODĽA VAŠICH PRAVIDIEL.",
+    "tagline": "Hyperpersonalizované luxusné cestovanie, stvorené pre výnimočných."
+  },
+  "about": {
+    "label": "Náš príbeh",
+    "heading": "Dvaja ľudia. Jedna vášeň.",
+    "subheading": "Nomad Privé sme založili preto, že cesty, o ktorých sme snívali, neexistovali.",
+    "readMore": "Prečítajte si náš príbeh →"
+  },
+  "packages": {
+    "label": "Balíky",
+    "heading": "Zážitok vytvorený pre vás",
+    "viewAll": "Porovnať všetky balíky →"
+  },
+  "contact": {
+    "label": "Kontaktujte nás",
+    "heading": "Začnite svoju vysnívanú cestu",
+    "send": "Odoslať moju žiadosť"
+  },
+  "footer": {
+    "tagline": "Každá cesta je majstrovské dielo.",
+    "referral": "Nových klientov prijímame výlučne na základe osobných odporúčaní.",
+    "cta": "Vaša ďalšia cesta začína rozhovorom.",
+    "getInTouch": "Kontaktujte nás",
+    "navigate": "Navigácia",
+    "contact": "Kontakt",
+    "rights": "Všetky práva vyhradené."
+  },
+  "quiz": {
+    "title": "Nájdite svoju dokonalú destináciu",
+    "subtitle": "4 rýchle otázky. Povieme vám, kam ísť.",
+    "result": "Na základe vašich odpovedí je toto vaša dokonalá cesta.",
+    "retake": "Zopakovať kvíz",
+    "readMore": "Čítajte viac o",
+    "startPlanning": "Začať plánovať"
+  }
+}

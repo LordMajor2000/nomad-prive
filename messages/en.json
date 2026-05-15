@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "destinations": "Destinations",
+    "packages": "Packages",
+    "journal": "Journal",
+    "about": "About",
+    "contact": "Contact",
+    "quiz": "Find My Destination",
+    "client": "Client Login"
+  },
+  "hero": {
+    "title1": "THE WORLD,",
+    "title2": "ON YOUR TERMS.",
+    "tagline": "Hyper-personalized luxury travel, crafted for the few."
+  },
+  "about": {
+    "label": "Our Story",
+    "heading": "Two People. One Obsession.",
+    "subheading": "We started Nomad Privé because the trips we wanted didn't exist.",
+    "readMore": "Read our full story →"
+  },
+  "packages": {
+    "label": "Packages",
+    "heading": "The Experience Made for You",
+    "viewAll": "Compare all packages →"
+  },
+  "contact": {
+    "label": "Get in touch",
+    "heading": "Begin Your Dream Journey",
+    "send": "Send My Request"
+  },
+  "footer": {
+    "tagline": "Every journey is a masterpiece.",
+    "referral": "We accept new clients exclusively through personal referrals.",
+    "cta": "Your next journey begins with a conversation.",
+    "getInTouch": "Get in touch",
+    "navigate": "Navigate",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  },
+  "quiz": {
+    "title": "Find Your Perfect Destination",
+    "subtitle": "Answer 4 quick questions. We'll tell you where to go.",
+    "result": "Based on your answers, this is your perfect journey.",
+    "retake": "Retake quiz",
+    "readMore": "Read about",
+    "startPlanning": "Start Planning"
+  }
+}

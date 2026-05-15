@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "destinations": "Destinations",
+    "packages": "Formules",
+    "journal": "Journal",
+    "about": "À propos",
+    "contact": "Contact",
+    "quiz": "Trouver ma destination",
+    "client": "Espace client"
+  },
+  "hero": {
+    "title1": "LE MONDE,",
+    "title2": "SELON VOS TERMES.",
+    "tagline": "Des voyages de luxe hyperpersonnalisés, pensés pour une clientèle d'exception."
+  },
+  "about": {
+    "label": "Notre histoire",
+    "heading": "Deux personnes. Une obsession.",
+    "subheading": "Nous avons fondé Nomad Privé parce que les voyages dont nous rêvions n'existaient pas.",
+    "readMore": "Lire notre histoire complète →"
+  },
+  "packages": {
+    "label": "Formules",
+    "heading": "L'expérience taillée pour vous",
+    "viewAll": "Comparer toutes les formules →"
+  },
+  "contact": {
+    "label": "Nous contacter",
+    "heading": "Commencez votre voyage de rêve",
+    "send": "Envoyer ma demande"
+  },
+  "footer": {
+    "tagline": "Chaque voyage est un chef-d'œuvre.",
+    "referral": "Nous acceptons de nouveaux clients exclusivement par recommandation personnelle.",
+    "cta": "Votre prochain voyage commence par une conversation.",
+    "getInTouch": "Nous contacter",
+    "navigate": "Navigation",
+    "contact": "Contact",
+    "rights": "Tous droits réservés."
+  },
+  "quiz": {
+    "title": "Trouvez votre destination parfaite",
+    "subtitle": "4 questions rapides. Nous vous dirons où aller.",
+    "result": "En fonction de vos réponses, voici votre voyage idéal.",
+    "retake": "Recommencer le quiz",
+    "readMore": "En savoir plus sur",
+    "startPlanning": "Commencer à planifier"
+  }
+}
