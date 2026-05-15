@@ -9,30 +9,30 @@ const packages = [
   {
     number: "01",
     name: "SIGNATURE",
-    tagline: "Az élmény, ahogy lennie kell.",
+    tagline: "The experience, as it should be.",
     description:
-      "Teljes körű élményutazás. Minden részlet elrendezve, minden pillanat megtervezett. Mi gondoskodunk mindenről — Ön csak jelen van.",
-    price: "Egyedi árajánlat",
-    features: ["Repülő & transzfer", "Prémium szállás", "Privát túrák", "24/7 concierge"],
+      "A fully curated experience. Every detail arranged, every moment considered. We take care of everything — you simply arrive.",
+    price: "Custom quote",
+    features: ["Flights & transfers", "Premium accommodation", "Private tours", "24/7 concierge"],
   },
   {
     number: "02",
     name: "BESPOKE",
-    tagline: "Az Ön álmai, a mi tudásunk.",
+    tagline: "Your vision, our expertise.",
     description:
-      "Közösen alkotjuk meg az útját. Az Ön álmai, a mi helyi tudásunk és kapcsolataink. Az eredmény: egy teljesen egyedi, soha nem ismétlődő utazás.",
-    price: "Egyedi árajánlat",
-    features: ["Testre szabott itiner", "Privát élmények", "Helyi insider hozzáférés", "Személyes tervező"],
+      "We craft your journey together. Your vision, our local knowledge and connections. The result: a completely unique, never-repeated journey.",
+    price: "Custom quote",
+    features: ["Tailored itinerary", "Private experiences", "Local insider access", "Personal planner"],
     featured: true,
   },
   {
     number: "03",
     name: "PRIVATE COLLECTION",
-    tagline: "Csak a keveseknek.",
+    tagline: "For the select few.",
     description:
-      "Csak ajánlással. Limitált férőhelyek. A legkizárólagosabb élmények — olyan helyek és pillanatok, amelyek a nyilvánosság számára elérhetetlenek.",
-    price: "Csak ajánlással",
-    features: ["Zártkörű hozzáférés", "Ultra-privát helyszínek", "Személyes kísérővel", "Limitált foglalás"],
+      "By referral only. Limited availability. The most exclusive experiences — places and moments inaccessible to the public.",
+    price: "By referral only",
+    features: ["Exclusive access", "Ultra-private venues", "Personal escort", "Limited bookings"],
   },
 ];
 
@@ -126,7 +126,7 @@ export default function PackagesSection() {
               color: "var(--gold-primary)",
             }}
           >
-            Csomagok
+            Packages
           </span>
         </div>
         <h2
@@ -140,9 +140,9 @@ export default function PackagesSection() {
             opacity: 0,
           }}
         >
-          Válassza az Önhöz illő{" "}
+          Choose the experience{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            élményt
+            made for you
           </em>
         </h2>
       </div>
@@ -360,7 +360,7 @@ export default function PackagesSection() {
                     "var(--cream)";
                 }}
               >
-                Érdeklődöm
+                Enquire
                 <span>→</span>
               </motion.a>
             </div>

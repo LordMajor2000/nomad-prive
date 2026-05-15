@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { label: "Csomagok", href: "#csomagok" },
-  { label: "Blog", href: "#blog" },
-  { label: "Rólunk", href: "#rolunk" },
-  { label: "Kapcsolat", href: "#kapcsolat" },
+  { label: "Packages", href: "#csomagok" },
+  { label: "Journal", href: "#blog" },
+  { label: "About", href: "#rolunk" },
+  { label: "Contact", href: "#kapcsolat" },
 ];
 
 export default function Navigation() {
@@ -77,7 +77,7 @@ export default function Navigation() {
             textDecoration: "none",
           }}
         >
-          Aurum Voyages
+          Nomad Privé
         </a>
 
         {/* Desktop Links */}

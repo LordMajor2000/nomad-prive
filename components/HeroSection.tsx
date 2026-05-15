@@ -12,7 +12,7 @@ export default function HeroSection() {
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
 
-  const titleText = "AURUM VOYAGES";
+  const titleText = "NOMAD PRIVÉ";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -250,7 +250,7 @@ export default function HeroSection() {
             opacity: 0,
           }}
         >
-          Minden utazás egy életmű.
+          Every journey is a masterpiece.
         </p>
       </div>
 
@@ -279,7 +279,7 @@ export default function HeroSection() {
             fontWeight: 400,
           }}
         >
-          Görgess
+          Scroll
         </span>
         <div
           style={{

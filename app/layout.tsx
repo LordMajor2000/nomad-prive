@@ -20,19 +20,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Aurum Voyages — Személyre Szabott Élményutazások",
+  title: "Nomad Privé — Bespoke Luxury Travel",
   description:
-    "Nem utazást szervezünk. Emlékeket tervezünk. Hyper-perszonalizált luxusutazások a világ legkülönlegesebb helyszíneire.",
+    "Hyper-personalized luxury travel experiences for the discerning traveler.",
   keywords: [
-    "luxus utazás",
-    "személyre szabott utazás",
-    "élményutazás",
-    "prémium travel",
-    "Aurum Voyages",
+    "luxury travel",
+    "bespoke travel",
+    "private travel",
+    "premium travel",
+    "Nomad Privé",
   ],
   openGraph: {
-    title: "Aurum Voyages",
-    description: "Minden utazás egy életmű.",
+    title: "Nomad Privé",
+    description: "Every journey is a masterpiece.",
     type: "website",
   },
 };
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hu" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body
         style={{
           fontFamily: "var(--font-inter), Inter, sans-serif",

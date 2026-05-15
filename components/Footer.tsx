@@ -43,7 +43,7 @@ export default function Footer() {
                 marginBottom: "0.75rem",
               }}
             >
-              Aurum Voyages
+              Nomad Privé
             </div>
             <p
               style={{
@@ -56,7 +56,7 @@ export default function Footer() {
                 lineHeight: 1.7,
               }}
             >
-              Kizárólag személyes referencia alapján fogadunk új ügyfeleket.
+              We accept new clients exclusively through personal referrals.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export default function Footer() {
               opacity: 0.6,
             }}
           >
-            © {currentYear} Aurum Voyages. Minden jog fenntartva.
+            © {currentYear} Nomad Privé. All rights reserved.
           </p>
           <div
             style={{
@@ -183,7 +183,7 @@ export default function Footer() {
                 (e.target as HTMLAnchorElement).style.opacity = "0.5";
               }}
             >
-              Adatvédelem
+              Privacy Policy
             </a>
             <a
               href="#"
@@ -202,7 +202,7 @@ export default function Footer() {
                 (e.target as HTMLAnchorElement).style.opacity = "0.5";
               }}
             >
-              ÁSZF
+              Terms & Conditions
             </a>
           </div>
         </div>

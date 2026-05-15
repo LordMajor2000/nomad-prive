@@ -4,39 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-
-const blogPosts = [
-  {
-    location: "Amalfi-part, Olaszország",
-    date: "2024. szeptember",
-    title: "Ahol a sziklák a tengernek hajolnak",
-    teaser:
-      "Az Amalfi-part nem csupán egy úticél — egy érzés. Citromfák, türkizkék vizek és kis halászfalvak, ahol az idő megáll.",
-    gradient:
-      "linear-gradient(135deg, #0A1628 0%, #162035 40%, #1A2A40 70%, #0D1822 100%)",
-    accentColor: "rgba(60,100,160,0.4)",
-  },
-  {
-    location: "Dubrovnik, Horvátország",
-    date: "2024. június",
-    title: "Az Adriai-tenger gyöngyszeme",
-    teaser:
-      "Középkori falak, kristálytiszta vizek és naplementék, amelyek aranyszínre festik a köveket. Dubrovnik nem egy utazás — egy életkép.",
-    gradient:
-      "linear-gradient(135deg, #0A1F2E 0%, #102535 40%, #152C3A 70%, #0A1A28 100%)",
-    accentColor: "rgba(201,169,110,0.3)",
-  },
-  {
-    location: "Santorini, Görögország",
-    date: "2024. május",
-    title: "Égszínkék kupolák és fehér csend",
-    teaser:
-      "Oia szűk sikátorai, a kalderára néző teraszok, a legromantikusabb naplementék — Santorini mindig többet nyújt, mint amit el tudunk képzelni.",
-    gradient:
-      "linear-gradient(135deg, #141428 0%, #1C1C35 40%, #20203C 70%, #101020 100%)",
-    accentColor: "rgba(100,80,180,0.3)",
-  },
-];
+import { blogPosts } from "@/data/blog-posts";
 
 export default function BlogSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -128,7 +96,7 @@ export default function BlogSection() {
               color: "var(--gold-primary)",
             }}
           >
-            Útinapló
+            Journal
           </span>
         </div>
         <h2
@@ -142,9 +110,9 @@ export default function BlogSection() {
             opacity: 0,
           }}
         >
-          Hol jártunk{" "}
+          Where We've{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            már
+            Been
           </em>
         </h2>
       </div>
@@ -161,7 +129,7 @@ export default function BlogSection() {
       >
         {blogPosts.map((post, i) => (
           <motion.div
-            key={post.location}
+            key={post.slug}
             ref={(el) => { cardsRef.current[i] = el; }}
             whileHover={{ y: -6, transition: { duration: 0.3, ease: "easeOut" } }}
             style={{
@@ -191,7 +159,7 @@ export default function BlogSection() {
                   transform: "translateX(-50%)",
                   width: "70%",
                   height: "30%",
-                  background: post.accentColor,
+                  background: "rgba(201,169,110,0.15)",
                   filter: "blur(30px)",
                   borderRadius: "50%",
                 }}
@@ -242,7 +210,7 @@ export default function BlogSection() {
                     letterSpacing: "0.03em",
                   }}
                 >
-                  {post.location}
+                  {post.location}, {post.country}
                 </span>
               </div>
             </div>
@@ -271,7 +239,7 @@ export default function BlogSection() {
                   fontWeight: 300,
                 }}
               >
-                {post.teaser}
+                {post.excerpt}
               </p>
 
               <motion.a
@@ -303,7 +271,7 @@ export default function BlogSection() {
                   ).style.borderColor = "rgba(201,169,110,0.3)";
                 }}
               >
-                Olvasd el <span>→</span>
+                Read more <span>→</span>
               </motion.a>
             </div>
           </motion.div>

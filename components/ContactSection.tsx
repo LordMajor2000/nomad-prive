@@ -6,9 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 
 const formFields = [
-  { name: "nev", label: "Teljes neve", type: "text", placeholder: "Kovács Anna" },
-  { name: "email", label: "E-mail cím", type: "email", placeholder: "anna@example.com" },
-  { name: "telefon", label: "Telefonszám", type: "tel", placeholder: "+36 30 123 4567" },
+  { name: "nev", label: "Name", type: "text", placeholder: "Anna Smith" },
+  { name: "email", label: "Email", type: "email", placeholder: "anna@example.com" },
+  { name: "telefon", label: "Phone", type: "tel", placeholder: "+1 212 555 0100" },
 ];
 
 export default function ContactSection() {
@@ -136,7 +136,7 @@ export default function ContactSection() {
               color: "var(--gold-primary)",
             }}
           >
-            Kapcsolat
+            Contact
           </span>
         </div>
 
@@ -153,9 +153,9 @@ export default function ContactSection() {
             opacity: 0,
           }}
         >
-          Kezdje el az{" "}
+          Begin Your{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            álomutazását
+            Dream Journey
           </em>
         </h2>
 
@@ -238,13 +238,13 @@ export default function ContactSection() {
                   transition: "color 0.3s ease",
                 }}
               >
-                Mesélje el álmait
+                Tell us your dream
               </label>
               <textarea
                 id="alomutazas"
                 name="alomutazas"
                 rows={5}
-                placeholder="Hová vágyik? Mire emlékezne egy életen át?..."
+                placeholder="Where do you dream of going? What would you carry with you for a lifetime?..."
                 value={formData.alomutazas}
                 onChange={(e) =>
                   setFormData({ ...formData, alomutazas: e.target.value })
@@ -300,7 +300,7 @@ export default function ContactSection() {
                     "var(--gold-primary)";
                 }}
               >
-                Kapcsolatfelvétel
+                GET IN TOUCH
               </motion.button>
             </motion.div>
           </form>
@@ -334,7 +334,7 @@ export default function ContactSection() {
                 margin: "0 0 1rem 0",
               }}
             >
-              Köszönjük megkeresését
+              Thank you for reaching out
             </h3>
             <p
               style={{
@@ -345,7 +345,7 @@ export default function ContactSection() {
                 fontWeight: 300,
               }}
             >
-              Hamarosan felvesszük Önnel a kapcsolatot, és közösen megalkotjuk álomutazásának tervét.
+              We will be in touch shortly to begin crafting the journey of your dreams.
             </p>
           </motion.div>
         )}

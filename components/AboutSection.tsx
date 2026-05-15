@@ -150,7 +150,7 @@ export default function AboutSection() {
                 lineHeight: 1.2,
               }}
             >
-              Nem utazást szervezünk.
+              We don't organize trips.
             </h2>
           </div>
 
@@ -169,7 +169,7 @@ export default function AboutSection() {
                 lineHeight: 1.2,
               }}
             >
-              Emlékeket tervezünk.
+              We design memories.
             </h2>
           </div>
 
@@ -185,10 +185,10 @@ export default function AboutSection() {
               opacity: 0,
             }}
           >
-            Párommal együtt, saját tapasztalatainkra építve szervezünk személyre
-            szabott élményutazásokat a világ legkülönlegesebb helyszíneire. Minden
-            utazás egy különleges fejezet — tele gondosan válogatott élményekkel,
-            érintetlen tájakkal és olyan pillanatokkal, amelyeket soha nem felejtünk el.
+            Together with my partner, drawing on our own experiences, we craft
+            bespoke journeys to the world's most extraordinary destinations. Every
+            journey is a singular chapter — filled with carefully curated experiences,
+            untouched landscapes, and moments we will never forget.
           </p>
         </div>
       </div>
