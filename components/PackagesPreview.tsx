@@ -141,8 +141,8 @@ export default function PackagesPreview() {
           }}
         >
           {packages.map((pkg) => (
+            <Link key={pkg.name} href="/packages" style={{ textDecoration: "none", display: "block" }}>
             <motion.div
-              key={pkg.name}
               whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
               style={{
                 background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-primary)",
@@ -152,6 +152,8 @@ export default function PackagesPreview() {
                 borderRadius: "2px",
                 padding: "2rem",
                 position: "relative",
+                cursor: "pointer",
+                height: "100%",
               }}
               >
                 {/* Top accent */}
@@ -217,21 +219,19 @@ export default function PackagesPreview() {
                 />
 
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Link
-                    href="/packages"
+                  <span
                     style={{
                       fontSize: "0.7rem",
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       color: "var(--muted)",
-                      textDecoration: "none",
-                      transition: "color 0.3s ease",
                     }}
                   >
                     {t("learnMore")}
-                  </Link>
+                  </span>
                 </div>
               </motion.div>
+            </Link>
             ))}
         </div>
       </div>

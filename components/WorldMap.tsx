@@ -50,7 +50,7 @@ export default function WorldMap() {
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>We know the way.</em>
         </h2>
         <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)", opacity: 0.5 }}>
-          23 destinations across 4 continents
+          22+ countries · 4 continents
         </p>
       </div>
 
