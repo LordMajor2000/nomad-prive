@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import BlogPostClient from "@/components/BlogPostClient";
 import { blogPosts } from "@/data/blog-posts";
 
 interface Props {
@@ -41,108 +42,8 @@ export default async function BlogPostPage({ params }: Props) {
     <main style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
       <Navigation />
 
-      {/* Hero */}
-      <div
-        style={{
-          background: post.gradient,
-          paddingTop: "8rem",
-          paddingBottom: "5rem",
-          paddingLeft: "clamp(1.5rem, 5vw, 4rem)",
-          paddingRight: "clamp(1.5rem, 5vw, 4rem)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Hero background image */}
-        <Image
-          src={post.image}
-          alt={post.location}
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectFit: "cover", opacity: 0.35 }}
-        />
-        {/* Bottom fade */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "50%",
-            background: "linear-gradient(to bottom, transparent, var(--bg-primary))",
-          }}
-        />
-
-        <div
-          style={{
-            maxWidth: "860px",
-            margin: "0 auto",
-            position: "relative",
-          }}
-        >
-          {/* Back link */}
-          <Link
-            href="/journal"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              fontSize: "0.7rem",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "var(--gold-primary)",
-              textDecoration: "none",
-              marginBottom: "2.5rem",
-              opacity: 0.75,
-              transition: "opacity 0.3s ease",
-            }}
-          >
-            ← Back to Journal
-          </Link>
-
-          {/* Location */}
-          <div
-            style={{
-              fontSize: "0.7rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "var(--gold-primary)",
-              marginBottom: "1rem",
-            }}
-          >
-            {post.location} · {post.country}
-          </div>
-
-          <h1
-            style={{
-              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-              fontSize: "clamp(1.8rem, 5vw, 3.2rem)",
-              fontWeight: 700,
-              color: "var(--cream)",
-              margin: "0 0 1.5rem 0",
-              lineHeight: 1.2,
-            }}
-          >
-            {post.title}
-          </h1>
-
-          <div
-            style={{
-              display: "flex",
-              gap: "1.5rem",
-              fontSize: "0.7rem",
-              letterSpacing: "0.1em",
-              color: "var(--muted)",
-              textTransform: "uppercase",
-            }}
-          >
-            <span>{post.date}</span>
-            <span>·</span>
-            <span>{post.readTime}</span>
-          </div>
-        </div>
-      </div>
+      {/* Client component handles parallax hero + BestTimeBar */}
+      <BlogPostClient post={post} />
 
       {/* Body */}
       <div

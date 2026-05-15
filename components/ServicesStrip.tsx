@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Plane, Anchor, Car, Home, Map, Helicopter, Ship, Truck } from "lucide-react";
 
 const services = [
@@ -16,127 +13,150 @@ const services = [
   { icon: <Truck size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Vehicle Transport" },
 ];
 
+// Duplicate list so the seamless loop works (we show 2 copies, animate -50%)
+const row1Items = [...services, ...services];
+const row2Items = [...services, ...services];
+
 export default function ServicesStrip() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      itemsRef.current.forEach((item, i) => {
-        if (!item) return;
-        gsap.fromTo(
-          item,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power3.out",
-            delay: i * 0.07,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div
-      ref={sectionRef}
-      style={{
-        background: "#0a0a0a",
-        borderTop: "1px solid rgba(201,169,110,0.1)",
-        borderBottom: "1px solid rgba(201,169,110,0.1)",
-        padding: "3rem 0",
-        overflowX: "auto",
-        WebkitOverflowScrolling: "touch",
-      }}
-    >
+    <>
+      <style>{`
+        @keyframes marquee-left {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .marquee-track-left {
+          animation: marquee-left 35s linear infinite;
+          display: flex;
+          align-items: center;
+          width: max-content;
+        }
+        .marquee-track-right {
+          animation: marquee-right 50s linear infinite;
+          display: flex;
+          align-items: center;
+          width: max-content;
+        }
+        .marquee-row:hover .marquee-track-left,
+        .marquee-row:hover .marquee-track-right {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       <div
         style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
+          background: "#0a0a0a",
+          borderTop: "1px solid rgba(201,169,110,0.1)",
+          borderBottom: "1px solid rgba(201,169,110,0.1)",
+          padding: "2.5rem 0",
+          overflow: "hidden",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "0",
-          minWidth: "max-content",
-          padding: "0 clamp(1.5rem, 5vw, 4rem)",
+          flexDirection: "column",
+          gap: "1rem",
         }}
       >
-        {services.map((service, i) => (
-          <div
-            key={service.label}
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <div
-              ref={(el) => { itemsRef.current[i] = el; }}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "0.75rem",
-                padding: "0 clamp(1.5rem, 3vw, 2.5rem)",
-                cursor: "default",
-                opacity: 0,
-                transition: "transform 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-              }}
-            >
+        {/* Row 1 — left scroll, icons + labels */}
+        <div className="marquee-row" style={{ overflow: "hidden" }}>
+          <div className="marquee-track-left">
+            {row1Items.map((service, i) => (
               <div
+                key={i}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  width: "32px",
-                  height: "32px",
+                  gap: "0.75rem",
+                  paddingRight: "0",
+                  opacity: 1,
                   flexShrink: 0,
                 }}
               >
-                {service.icon}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "32px",
+                    height: "32px",
+                    flexShrink: 0,
+                  }}
+                >
+                  {service.icon}
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    fontVariant: "small-caps",
+                    color: "#C9A96E",
+                    whiteSpace: "nowrap",
+                    fontWeight: 400,
+                  }}
+                >
+                  {service.label}
+                </span>
+                {/* Diamond separator */}
+                <span
+                  style={{
+                    color: "rgba(201,169,110,0.3)",
+                    fontSize: "0.5rem",
+                    margin: "0 1.5rem",
+                    flexShrink: 0,
+                  }}
+                >
+                  ◆
+                </span>
               </div>
-              <span
-                style={{
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#C9A96E",
-                  whiteSpace: "nowrap",
-                  fontWeight: 400,
-                  fontVariant: "small-caps",
-                }}
-              >
-                {service.label}
-              </span>
-            </div>
+            ))}
+          </div>
+        </div>
 
-            {/* Separator */}
-            {i < services.length - 1 && (
+        {/* Row 2 — right scroll, labels only, no icons, reduced opacity */}
+        <div className="marquee-row" style={{ overflow: "hidden" }}>
+          <div className="marquee-track-right">
+            {row2Items.map((service, i) => (
               <div
+                key={i}
                 style={{
-                  width: "1px",
-                  height: "40px",
-                  background: "rgba(201,169,110,0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  opacity: 0.4,
                   flexShrink: 0,
                 }}
-              />
-            )}
+              >
+                <span
+                  style={{
+                    fontSize: "0.5rem",
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    fontVariant: "small-caps",
+                    color: "#C9A96E",
+                    whiteSpace: "nowrap",
+                    fontWeight: 300,
+                  }}
+                >
+                  {service.label}
+                </span>
+                {/* Diamond separator */}
+                <span
+                  style={{
+                    color: "rgba(201,169,110,0.25)",
+                    fontSize: "0.4rem",
+                    margin: "0 2rem",
+                    flexShrink: 0,
+                  }}
+                >
+                  ◆
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

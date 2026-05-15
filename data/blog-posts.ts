@@ -10,6 +10,10 @@ export interface BlogPost {
   gradient: string;
   featured: boolean;
   image: string;
+  bestTime?: {
+    month: string;
+    rating: "best" | "good" | "avoid" | "shoulder";
+  }[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -25,6 +29,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #0a0800 0%, #1a1200 30%, rgba(201,169,110,0.15) 100%)",
     featured: true,
     image: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "best" }, { month: "Feb", rating: "best" },
+      { month: "Mar", rating: "good" }, { month: "Apr", rating: "shoulder" },
+      { month: "May", rating: "avoid" }, { month: "Jun", rating: "avoid" },
+      { month: "Jul", rating: "avoid" }, { month: "Aug", rating: "avoid" },
+      { month: "Sep", rating: "shoulder" }, { month: "Oct", rating: "good" },
+      { month: "Nov", rating: "best" }, { month: "Dec", rating: "best" },
+    ],
   },
   {
     slug: "bali-vs-lombok",
@@ -38,6 +50,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #000d0a 0%, #001a10 30%, rgba(100,180,140,0.15) 100%)",
     featured: true,
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "avoid" }, { month: "Feb", rating: "avoid" },
+      { month: "Mar", rating: "shoulder" }, { month: "Apr", rating: "good" },
+      { month: "May", rating: "best" }, { month: "Jun", rating: "best" },
+      { month: "Jul", rating: "best" }, { month: "Aug", rating: "best" },
+      { month: "Sep", rating: "good" }, { month: "Oct", rating: "shoulder" },
+      { month: "Nov", rating: "avoid" }, { month: "Dec", rating: "avoid" },
+    ],
   },
   {
     slug: "morocco",
@@ -51,6 +71,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #0d0500 0%, #1a0a00 30%, rgba(201,100,50,0.15) 100%)",
     featured: true,
     image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "shoulder" }, { month: "Feb", rating: "good" },
+      { month: "Mar", rating: "best" }, { month: "Apr", rating: "best" },
+      { month: "May", rating: "good" }, { month: "Jun", rating: "shoulder" },
+      { month: "Jul", rating: "avoid" }, { month: "Aug", rating: "avoid" },
+      { month: "Sep", rating: "shoulder" }, { month: "Oct", rating: "best" },
+      { month: "Nov", rating: "best" }, { month: "Dec", rating: "good" },
+    ],
   },
   {
     slug: "miami",
@@ -64,6 +92,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #000510 0%, #000a1a 30%, rgba(100,150,220,0.2) 100%)",
     featured: true,
     image: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "best" }, { month: "Feb", rating: "best" },
+      { month: "Mar", rating: "best" }, { month: "Apr", rating: "best" },
+      { month: "May", rating: "good" }, { month: "Jun", rating: "shoulder" },
+      { month: "Jul", rating: "avoid" }, { month: "Aug", rating: "avoid" },
+      { month: "Sep", rating: "avoid" }, { month: "Oct", rating: "shoulder" },
+      { month: "Nov", rating: "good" }, { month: "Dec", rating: "best" },
+    ],
   },
   {
     slug: "mykonos",
@@ -77,6 +113,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #00050d 0%, #000a18 30%, rgba(180,200,240,0.15) 100%)",
     featured: false,
     image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "avoid" }, { month: "Feb", rating: "avoid" },
+      { month: "Mar", rating: "shoulder" }, { month: "Apr", rating: "good" },
+      { month: "May", rating: "best" }, { month: "Jun", rating: "best" },
+      { month: "Jul", rating: "best" }, { month: "Aug", rating: "best" },
+      { month: "Sep", rating: "best" }, { month: "Oct", rating: "good" },
+      { month: "Nov", rating: "avoid" }, { month: "Dec", rating: "avoid" },
+    ],
   },
   {
     slug: "amalfi-coast",
@@ -90,6 +134,14 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #1a0a00 0%, #2d1500 30%, rgba(201,169,110,0.2) 100%)",
     featured: false,
     image: "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "avoid" }, { month: "Feb", rating: "avoid" },
+      { month: "Mar", rating: "shoulder" }, { month: "Apr", rating: "good" },
+      { month: "May", rating: "best" }, { month: "Jun", rating: "best" },
+      { month: "Jul", rating: "avoid" }, { month: "Aug", rating: "avoid" },
+      { month: "Sep", rating: "best" }, { month: "Oct", rating: "good" },
+      { month: "Nov", rating: "shoulder" }, { month: "Dec", rating: "avoid" },
+    ],
   },
   {
     slug: "dubrovnik",
@@ -103,5 +155,13 @@ export const blogPosts: BlogPost[] = [
     gradient: "linear-gradient(135deg, #000d1a 0%, #001a2e 30%, rgba(100,140,180,0.2) 100%)",
     featured: false,
     image: "https://images.unsplash.com/photo-1555990538-c4d68e0f4a36?w=800&q=80",
+    bestTime: [
+      { month: "Jan", rating: "avoid" }, { month: "Feb", rating: "avoid" },
+      { month: "Mar", rating: "shoulder" }, { month: "Apr", rating: "best" },
+      { month: "May", rating: "best" }, { month: "Jun", rating: "good" },
+      { month: "Jul", rating: "avoid" }, { month: "Aug", rating: "avoid" },
+      { month: "Sep", rating: "best" }, { month: "Oct", rating: "best" },
+      { month: "Nov", rating: "shoulder" }, { month: "Dec", rating: "avoid" },
+    ],
   }
 ];

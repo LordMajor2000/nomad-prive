@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import Preloader from "@/components/Preloader";
 import HeroSection from "@/components/HeroSection";
 import ServicesStrip from "@/components/ServicesStrip";
+import WorldMap from "@/components/WorldMap";
 import AboutSection from "@/components/AboutSection";
 import DestinationsPreview from "@/components/DestinationsPreview";
 import PackagesPreview from "@/components/PackagesPreview";
@@ -24,6 +25,7 @@ export default function Home() {
         <Navigation />
         <HeroSection />
         <ServicesStrip />
+        <WorldMap />
         <AboutSection />
         <DestinationsPreview />
         <PackagesPreview />
