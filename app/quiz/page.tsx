@@ -4,71 +4,226 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Compass, Sun, UtensilsCrossed, Music, Check } from "lucide-react";
-import { blogPosts } from "@/data/blog-posts";
-import Navigation from "@/components/Navigation";
+import { Check } from "lucide-react";
+
+// ---------------------------------------------------------------------------
+// Data
+// ---------------------------------------------------------------------------
 
 const questions = [
   {
-    question: "What kind of escape are you looking for?",
+    question: "When you imagine your ideal trip, what feeling comes first?",
     options: [
-      { label: "Adventure & Discovery", icon: <Compass size={22} /> },
-      { label: "Pure Relaxation", icon: <Sun size={22} /> },
-      { label: "Culture & Gastronomy", icon: <UtensilsCrossed size={22} /> },
-      { label: "Party & Nightlife", icon: <Music size={22} /> },
+      "Freedom — open roads, no plan, just go",
+      "Escape — total disconnection from everyday life",
+      "Discovery — something I've never seen or felt before",
+      "Indulgence — the best of everything, nothing ordinary",
     ],
   },
   {
-    question: "What's your ideal landscape?",
+    question: "Your perfect day abroad looks like:",
     options: [
-      { label: "Tropical beach & jungle", icon: null },
-      { label: "Mediterranean coast", icon: null },
-      { label: "Desert & ancient medina", icon: null },
-      { label: "City energy & architecture", icon: null },
+      "Renting a car and driving somewhere with no destination",
+      "A private beach, a good book, absolute silence",
+      "Getting lost in a local market, eating something I can't name",
+      "A rooftop dinner at a Michelin-starred restaurant, then a nightclub",
     ],
   },
   {
-    question: "How do you prefer to travel?",
+    question: "How do you feel about other tourists?",
     options: [
-      { label: "Just us two — completely private", icon: null },
-      { label: "Small group of close friends", icon: null },
-      { label: "Family with children", icon: null },
-      { label: "Solo, fully independent", icon: null },
+      "I avoid them — I want to feel like I discovered this place myself",
+      "I don't mind, as long as my hotel is peaceful",
+      "I embrace it — travel is social, I love meeting people",
+      "I prefer a scene — being around people with taste and style",
     ],
   },
   {
-    question: "What matters most?",
+    question: "What do you bring home?",
     options: [
-      { label: "Undiscovered, authentic", icon: null },
-      { label: "Luxury comfort above all", icon: null },
-      { label: "The best food & wine", icon: null },
-      { label: "Non-stop sun & warm sea", icon: null },
+      "Stories nobody believes",
+      "A completely recharged mind and body",
+      "A deeper understanding of how other people live",
+      "Memories of the finest food, art, and experiences money can buy",
+    ],
+  },
+  {
+    question: "Travel for you is fundamentally about:",
+    options: [
+      "Testing your limits and finding new ones",
+      "Recovering the version of yourself that got lost in routine",
+      "Understanding the world is bigger and stranger than you thought",
+      "Living at a level that everyday life doesn't allow",
     ],
   },
 ];
 
-const destinationNames: Record<string, string> = {
-  "sri-lanka": "Sri Lanka",
-  "bali-vs-lombok": "Bali & Lombok",
-  morocco: "Morocco",
-  miami: "Miami",
-  mykonos: "Mykonos",
-  "amalfi-coast": "Amalfi Coast",
-  dubrovnik: "Dubrovnik",
+interface ResultType {
+  type: string;
+  description: string;
+  destination: string;
+  detail: string;
+  image: string;
+  slug: string | null;
+}
+
+const results: Record<string, ResultType> = {
+  "free-spirit": {
+    type: "The Free Spirit",
+    description:
+      "You travel to escape structure, not to find it. The best trips you've had were the ones with no plan that somehow became the ones you still talk about years later.",
+    destination: "Road Trip: Alentejo, Portugal",
+    detail:
+      "Empty roads, ancient cork forests, wine from the producer's terrace. No itinerary. No crowds. Just forward.",
+    image:
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80",
+    slug: null,
+  },
+  "sanctuary-seeker": {
+    type: "The Sanctuary Seeker",
+    description:
+      "You don't want activities. You want to stop. The best travel for you is the kind where you return home feeling like a different person — not because of what you saw, but because of how fully you rested.",
+    destination: "Maldives or Seychelles",
+    detail:
+      "Overwater bungalow. No shoes. A horizon that's just water and sky. Completely private.",
+    image:
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+    slug: null,
+  },
+  "deep-explorer": {
+    type: "The Deep Explorer",
+    description:
+      "Based on Plog's allocentric traveler profile: you seek novelty, cultural immersion and authentic contact with local life. You're most satisfied when you're the only foreigner in the room.",
+    destination: "Sri Lanka or Morocco",
+    detail:
+      "Markets that haven't been sanitized for tourists. Temples that still hold meaning. Conversations that change your perspective.",
+    image:
+      "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&q=80",
+    slug: "sri-lanka",
+  },
+  "luxury-hedonist": {
+    type: "The Luxury Hedonist",
+    description:
+      "Booking.com's 2023 research identifies this as the fastest-growing travel profile: travelers who measure a trip's success entirely by the quality of its pleasures. You don't feel guilty about it — you just want the best.",
+    destination: "Mykonos or St. Tropez",
+    detail:
+      "The beach club where the music is right. The restaurant that requires three months notice. The suite with a private pool.",
+    image:
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+    slug: "mykonos",
+  },
+  "culture-hunter": {
+    type: "The Culture Hunter",
+    description:
+      "Cohen's 'experiential tourist' type: you travel to collect meaning, not just sights. Food, art, architecture, and local ritual are your primary currency.",
+    destination: "Kyoto, Japan or Lisbon, Portugal",
+    detail:
+      "A temple that's been there for 1,200 years. A restaurant with no English menu. A neighborhood the guidebooks missed.",
+    image:
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+    slug: null,
+  },
+  "social-explorer": {
+    type: "The Social Explorer",
+    description:
+      "Skyscanner's Horizon Report 2023 identifies 'social travel' as a key emerging trend — travelers who see destinations as backdrops for connection rather than the main event.",
+    destination: "Ibiza or Mykonos",
+    detail:
+      "A sunset session at a world-class beach club. Dinners that start at 10pm. Friendships made on a rooftop at 3am.",
+    image:
+      "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
+    slug: null,
+  },
+  "conscious-wanderer": {
+    type: "The Conscious Wanderer",
+    description:
+      "You travel thoughtfully. You want to contribute to places you visit, not extract from them. Booking.com's 2023 Sustainable Travel Report found 76% of travelers want to travel more sustainably — you're already there.",
+    destination: "Costa Rica or Azores, Portugal",
+    detail:
+      "A lodge that runs on solar power, surrounded by cloud forest. Diving on a reef that's recovering. Leaving lighter than you arrived.",
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    slug: null,
+  },
+  "romantic-escapist": {
+    type: "The Romantic Escapist",
+    description:
+      "Travel for you is fundamentally about intimacy — with a person, with a place, with a moment. The trips that matter most are the ones where the world shrank to just two people.",
+    destination: "Amalfi Coast or Santorini",
+    detail:
+      "A table for two at the edge of a cliff. A room with no television. The kind of evening that becomes a reference point for everything after.",
+    image:
+      "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?w=800&q=80",
+    slug: "amalfi-coast",
+  },
 };
 
+// ---------------------------------------------------------------------------
+// Scoring
+// ---------------------------------------------------------------------------
+
 function getResult(answers: number[]): string {
-  const [q1, q2, , q4] = answers;
-  if (q1 === 0 && q2 === 0) return q4 === 0 ? "sri-lanka" : "bali-vs-lombok";
-  if (q1 === 1 && q2 === 1) return q4 === 1 ? "mykonos" : "amalfi-coast";
-  if (q1 === 2 && q2 === 2) return "morocco";
-  if (q1 === 3) return q2 === 3 ? "miami" : "mykonos";
-  if (q2 === 1 && q4 === 1) return "amalfi-coast";
-  if (q4 === 0 && q2 === 0) return "sri-lanka";
-  if (q1 === 2 && q2 === 3) return "dubrovnik";
-  const byLandscape = ["sri-lanka", "amalfi-coast", "morocco", "miami"];
-  return byLandscape[q2] || "morocco";
+  const scores: Record<string, number> = {
+    "free-spirit": 0,
+    "sanctuary-seeker": 0,
+    "deep-explorer": 0,
+    "luxury-hedonist": 0,
+    "culture-hunter": 0,
+    "social-explorer": 0,
+    "conscious-wanderer": 0,
+    "romantic-escapist": 0,
+  };
+
+  // [type, points] tuples per answer option (A=0,B=1,C=2,D=3)
+  const matrix: Array<Array<[string, number]>> = [
+    // Q1: A=free-spirit, B=sanctuary-seeker, C=deep-explorer, D=luxury-hedonist
+    [
+      ["free-spirit", 2],
+      ["sanctuary-seeker", 2],
+      ["deep-explorer", 2],
+      ["luxury-hedonist", 2],
+    ],
+    // Q2: A=free-spirit, B=sanctuary-seeker, C=culture-hunter, D=luxury-hedonist
+    [
+      ["free-spirit", 2],
+      ["sanctuary-seeker", 2],
+      ["culture-hunter", 2],
+      ["luxury-hedonist", 2],
+    ],
+    // Q3: A=conscious-wanderer, B=sanctuary-seeker, C=social-explorer, D=luxury-hedonist
+    [
+      ["conscious-wanderer", 2],
+      ["sanctuary-seeker", 1],
+      ["social-explorer", 2],
+      ["luxury-hedonist", 1],
+    ],
+    // Q4: A=free-spirit, B=sanctuary-seeker, C=culture-hunter, D=luxury-hedonist
+    [
+      ["free-spirit", 1],
+      ["sanctuary-seeker", 2],
+      ["culture-hunter", 2],
+      ["luxury-hedonist", 2],
+    ],
+    // Q5: A=deep-explorer, B=romantic-escapist, C=conscious-wanderer, D=luxury-hedonist
+    [
+      ["deep-explorer", 2],
+      ["romantic-escapist", 2],
+      ["conscious-wanderer", 2],
+      ["luxury-hedonist", 2],
+    ],
+  ];
+
+  answers.forEach((ans, qi) => {
+    const [type, pts] = matrix[qi][ans];
+    scores[type] += pts;
+  });
+
+  return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 }
+
+// ---------------------------------------------------------------------------
+// Animation
+// ---------------------------------------------------------------------------
 
 const slideVariants = {
   enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
@@ -76,10 +231,17 @@ const slideVariants = {
   exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
 };
 
-const transition = { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] };
+const transition = {
+  duration: 0.35,
+  ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+};
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
 
 export default function QuizPage() {
-  const [step, setStep] = useState(0); // 0–3 = questions, 4 = result
+  const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
@@ -87,13 +249,11 @@ export default function QuizPage() {
   const totalSteps = questions.length;
   const progress = step < totalSteps ? (step / totalSteps) * 100 : 100;
 
-  const result = step === totalSteps ? getResult(answers) : null;
-  const resultPost = result ? blogPosts.find((p) => p.slug === result) : null;
-  const resultName = result ? destinationNames[result] ?? result : "";
+  const resultKey = step === totalSteps ? getResult(answers) : null;
+  const result = resultKey ? results[resultKey] : null;
 
   const handleSelect = (idx: number) => {
     setSelected(idx);
-    // Auto-advance after brief delay
     setTimeout(() => {
       const newAnswers = [...answers];
       newAnswers[step] = idx;
@@ -101,7 +261,7 @@ export default function QuizPage() {
       setDirection(1);
       setStep((s) => s + 1);
       setSelected(null);
-    }, 320);
+    }, 400);
   };
 
   const handleRetake = () => {
@@ -120,30 +280,59 @@ export default function QuizPage() {
         fontFamily: "var(--font-inter), Inter, sans-serif",
       }}
     >
-      <Navigation />
-
-      {/* Progress bar */}
+      {/* Top bar */}
       <div
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          height: "2px",
-          background: "rgba(201,169,110,0.12)",
           zIndex: 200,
         }}
       >
-        <motion.div
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+        {/* Gold progress bar */}
+        <div
           style={{
-            height: "100%",
-            background: "linear-gradient(90deg, #C9A96E, #E8D5B0)",
+            height: "2px",
+            background: "rgba(201,169,110,0.12)",
           }}
-        />
+        >
+          <motion.div
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{
+              height: "100%",
+              background: "linear-gradient(90deg, #C9A96E, #E8D5B0)",
+            }}
+          />
+        </div>
+
+        {/* Back link */}
+        <div style={{ padding: "1rem 1.5rem" }}>
+          <Link
+            href="/"
+            style={{
+              fontSize: "0.7rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "rgba(201,169,110,0.55)",
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color = "#C9A96E";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color =
+                "rgba(201,169,110,0.55)";
+            }}
+          >
+            ← Nomad Privé
+          </Link>
+        </div>
       </div>
 
+      {/* Main content */}
       <div
         style={{
           minHeight: "100vh",
@@ -151,11 +340,11 @@ export default function QuizPage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "6rem 1.5rem 4rem",
+          padding: "7rem 1.5rem 4rem",
         }}
       >
         <AnimatePresence custom={direction} mode="wait">
-          {/* Questions */}
+          {/* ---- Questions ---- */}
           {step < totalSteps && (
             <motion.div
               key={`q${step}`}
@@ -165,9 +354,9 @@ export default function QuizPage() {
               animate="center"
               exit="exit"
               transition={transition}
-              style={{ width: "100%", maxWidth: "680px" }}
+              style={{ width: "100%", maxWidth: "720px" }}
             >
-              {/* Step indicator */}
+              {/* Step counter */}
               <p
                 style={{
                   fontSize: "0.6rem",
@@ -189,20 +378,21 @@ export default function QuizPage() {
                   fontWeight: 700,
                   color: "var(--cream)",
                   textAlign: "center",
-                  marginBottom: "3rem",
-                  lineHeight: 1.2,
+                  marginBottom: "2.5rem",
+                  lineHeight: 1.25,
                 }}
               >
                 {questions[step].question}
               </h1>
 
+              {/* 2×2 answer grid */}
               <div
+                className="quiz-grid"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(2, 1fr)",
                   gap: "1rem",
                 }}
-                className="quiz-grid"
               >
                 {questions[step].options.map((opt, idx) => {
                   const isSelected = selected === idx;
@@ -213,44 +403,53 @@ export default function QuizPage() {
                       style={{
                         position: "relative",
                         padding: "1.5rem 1.25rem",
-                        background: isSelected ? "rgba(201,169,110,0.1)" : "#111",
-                        border: `1px solid ${isSelected ? "#C9A96E" : "rgba(201,169,110,0.15)"}`,
+                        background: isSelected
+                          ? "rgba(201,169,110,0.1)"
+                          : "#111",
+                        border: `1px solid ${
+                          isSelected ? "#C9A96E" : "rgba(201,169,110,0.15)"
+                        }`,
                         borderRadius: "2px",
-                        color: isSelected ? "#C9A96E" : "rgba(255,255,255,0.7)",
+                        color: isSelected
+                          ? "#C9A96E"
+                          : "rgba(255,255,255,0.7)",
                         cursor: "pointer",
                         textAlign: "left",
                         transition: "all 0.2s ease",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.75rem",
                       }}
                       onMouseEnter={(e) => {
                         if (!isSelected) {
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C9A96E";
-                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.05)";
+                          (
+                            e.currentTarget as HTMLButtonElement
+                          ).style.borderColor = "#C9A96E";
+                          (
+                            e.currentTarget as HTMLButtonElement
+                          ).style.background = "rgba(201,169,110,0.05)";
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (!isSelected) {
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.15)";
-                          (e.currentTarget as HTMLButtonElement).style.background = "#111";
+                          (
+                            e.currentTarget as HTMLButtonElement
+                          ).style.borderColor = "rgba(201,169,110,0.15)";
+                          (
+                            e.currentTarget as HTMLButtonElement
+                          ).style.background = "#111";
                         }
                       }}
                     >
-                      {opt.icon && (
-                        <span style={{ opacity: isSelected ? 1 : 0.6, flexShrink: 0 }}>
-                          {opt.icon}
-                        </span>
-                      )}
                       <span
                         style={{
-                          fontSize: "0.9rem",
-                          letterSpacing: "0.03em",
-                          lineHeight: 1.4,
-                          fontFamily: "var(--font-inter), Inter, sans-serif",
+                          display: "block",
+                          fontSize: "0.88rem",
+                          letterSpacing: "0.02em",
+                          lineHeight: 1.5,
+                          fontFamily:
+                            "var(--font-inter), Inter, sans-serif",
+                          paddingRight: isSelected ? "1.5rem" : "0",
                         }}
                       >
-                        {opt.label}
+                        {opt}
                       </span>
                       {isSelected && (
                         <span
@@ -268,11 +467,24 @@ export default function QuizPage() {
                   );
                 })}
               </div>
+
+              {/* Research attribution */}
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.1em",
+                  color: "rgba(255,255,255,0.2)",
+                  marginTop: "2.5rem",
+                }}
+              >
+                Inspired by travel psychology research
+              </p>
             </motion.div>
           )}
 
-          {/* Result */}
-          {step === totalSteps && (
+          {/* ---- Result ---- */}
+          {step === totalSteps && result && (
             <motion.div
               key="result"
               initial={{ opacity: 0, y: 30 }}
@@ -280,106 +492,191 @@ export default function QuizPage() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 width: "100%",
-                maxWidth: "720px",
-                textAlign: "center",
+                maxWidth: "760px",
               }}
             >
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
+              {/* Hero image with overlay */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1, duration: 0.8 }}
                 style={{
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.35em",
-                  textTransform: "uppercase",
-                  color: "#C9A96E",
-                  marginBottom: "1.5rem",
-                  opacity: 0.7,
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "16/9",
+                  borderRadius: "3px",
+                  overflow: "hidden",
+                  marginBottom: "2.5rem",
+                  border: "1px solid rgba(201,169,110,0.15)",
                 }}
               >
-                Your Perfect Journey
-              </motion.p>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "clamp(2.5rem, 8vw, 5rem)",
-                  fontWeight: 700,
-                  color: "#C9A96E",
-                  marginBottom: "2rem",
-                  lineHeight: 1.1,
-                }}
-              >
-                {resultName}
-              </motion.h1>
-
-              {resultPost?.image && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
+                <Image
+                  src={result.image}
+                  alt={result.destination}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+                <div
                   style={{
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "16/9",
-                    marginBottom: "2.5rem",
-                    borderRadius: "2px",
-                    overflow: "hidden",
-                    border: "1px solid rgba(201,169,110,0.15)",
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(8,8,8,0.75) 0%, rgba(8,8,8,0.25) 60%, transparent 100%)",
+                  }}
+                />
+
+                {/* Personality type overlaid on image bottom */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "1.5rem",
+                    left: "1.5rem",
                   }}
                 >
-                  <Image
-                    src={resultPost.image}
-                    alt={resultName}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div
+                  <p
                     style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(to top, rgba(8,8,8,0.6) 0%, transparent 60%)",
+                      fontSize: "0.6rem",
+                      letterSpacing: "0.3em",
+                      textTransform: "uppercase",
+                      color: "#C9A96E",
+                      margin: "0 0 0.3rem",
+                      fontVariant: "small-caps",
                     }}
-                  />
-                </motion.div>
-              )}
+                  >
+                    You are:
+                  </p>
+                  <h2
+                    style={{
+                      fontFamily:
+                        "var(--font-playfair), 'Playfair Display', serif",
+                      fontSize: "clamp(1.5rem, 4vw, 2.4rem)",
+                      fontWeight: 700,
+                      color: "#C9A96E",
+                      margin: 0,
+                      letterSpacing: "0.05em",
+                      textTransform: "uppercase",
+                      fontVariant: "small-caps",
+                    }}
+                  >
+                    {result.type}
+                  </h2>
+                </div>
+              </motion.div>
 
+              {/* Description */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.35 }}
                 style={{
-                  fontSize: "1rem",
+                  fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)",
+                  lineHeight: 1.8,
+                  color: "rgba(255,255,255,0.75)",
+                  marginBottom: "2rem",
+                  fontFamily:
+                    "var(--font-playfair), 'Playfair Display', serif",
                   fontStyle: "italic",
-                  color: "rgba(255,255,255,0.65)",
-                  marginBottom: "3rem",
-                  lineHeight: 1.7,
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
                 }}
               >
-                Based on your answers, this is your perfect journey.
+                {result.description}
               </motion.p>
 
+              {/* Destination card */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.5 }}
+                style={{
+                  background: "#0d0d0d",
+                  border: "1px solid #C9A96E",
+                  borderRadius: "3px",
+                  padding: "2rem",
+                  marginBottom: "2.5rem",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "rgba(201,169,110,0.6)",
+                    margin: "0 0 0.5rem",
+                  }}
+                >
+                  Your Destination
+                </p>
+                <h3
+                  style={{
+                    fontFamily:
+                      "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "clamp(1.3rem, 3vw, 1.9rem)",
+                    fontWeight: 700,
+                    color: "#C9A96E",
+                    margin: "0 0 1rem",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {result.destination}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    lineHeight: 1.75,
+                    color: "rgba(255,255,255,0.55)",
+                    margin: "0 0 1.25rem",
+                    fontWeight: 300,
+                  }}
+                >
+                  {result.detail}
+                </p>
+                {result.slug && (
+                  <Link
+                    href={`/journal/${result.slug}`}
+                    style={{
+                      fontSize: "0.68rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "#C9A96E",
+                      textDecoration: "none",
+                      borderBottom: "1px solid rgba(201,169,110,0.35)",
+                      paddingBottom: "2px",
+                      transition: "border-color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      (
+                        e.currentTarget as HTMLAnchorElement
+                      ).style.borderColor = "#C9A96E";
+                    }}
+                    onMouseLeave={(e) => {
+                      (
+                        e.currentTarget as HTMLAnchorElement
+                      ).style.borderColor = "rgba(201,169,110,0.35)";
+                    }}
+                  >
+                    Read more →
+                  </Link>
+                )}
+              </motion.div>
+
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65 }}
                 style={{
                   display: "flex",
                   gap: "1rem",
                   justifyContent: "center",
                   flexWrap: "wrap",
-                  marginBottom: "2.5rem",
+                  marginBottom: "2rem",
                 }}
               >
                 <Link
-                  href={`/journal/${result}`}
+                  href="/contact"
                   style={{
                     display: "inline-block",
                     padding: "0.9rem 2.5rem",
+                    background: "transparent",
                     border: "1px solid #C9A96E",
                     color: "#C9A96E",
                     textDecoration: "none",
@@ -387,70 +684,67 @@ export default function QuizPage() {
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
                     transition: "all 0.3s ease",
-                    background: "transparent",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(201,169,110,0.1)";
+                    (e.currentTarget as HTMLAnchorElement).style.background =
+                      "rgba(201,169,110,0.1)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                    (e.currentTarget as HTMLAnchorElement).style.background =
+                      "transparent";
                   }}
                 >
-                  Read about {resultName} →
+                  Plan this trip with us →
                 </Link>
-                <Link
-                  href="/contact"
+
+                <button
+                  onClick={handleRetake}
                   style={{
                     display: "inline-block",
                     padding: "0.9rem 2.5rem",
-                    border: "1px solid rgba(201,169,110,0.35)",
-                    color: "rgba(201,169,110,0.7)",
-                    textDecoration: "none",
+                    background: "transparent",
+                    border: "1px solid rgba(201,169,110,0.3)",
+                    color: "rgba(201,169,110,0.6)",
                     fontSize: "0.7rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
+                    cursor: "pointer",
                     transition: "all 0.3s ease",
-                    background: "transparent",
+                    fontFamily: "var(--font-inter), Inter, sans-serif",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "#C9A96E";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "#C9A96E";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor =
+                      "#C9A96E";
+                    (e.currentTarget as HTMLButtonElement).style.color =
+                      "#C9A96E";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,169,110,0.35)";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.7)";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor =
+                      "rgba(201,169,110,0.3)";
+                    (e.currentTarget as HTMLButtonElement).style.color =
+                      "rgba(201,169,110,0.6)";
                   }}
                 >
-                  Start Planning
-                </Link>
+                  Retake quiz
+                </button>
               </motion.div>
 
-              <motion.button
+              {/* Research footnote */}
+              <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                onClick={handleRetake}
+                transition={{ delay: 0.8 }}
                 style={{
-                  background: "none",
-                  border: "none",
-                  color: "rgba(255,255,255,0.35)",
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.1em",
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                  textUnderlineOffset: "3px",
-                  fontFamily: "var(--font-inter), Inter, sans-serif",
-                  transition: "color 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.6)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.35)";
+                  textAlign: "center",
+                  fontSize: "0.58rem",
+                  letterSpacing: "0.08em",
+                  color: "rgba(255,255,255,0.18)",
+                  lineHeight: 1.6,
                 }}
               >
-                Retake quiz
-              </motion.button>
+                Inspired by Plog (1974), Cohen (1972) &amp; Booking.com
+                Sustainable Travel Report 2023
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>

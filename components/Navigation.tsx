@@ -9,7 +9,6 @@ import { Compass, Lock } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const navLinks = [
-  { label: "Destinations", href: "/destinations" },
   { label: "Packages", href: "/packages" },
   { label: "Journal", href: "/journal" },
   { label: "About", href: "/about" },

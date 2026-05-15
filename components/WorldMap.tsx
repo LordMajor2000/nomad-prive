@@ -3,33 +3,34 @@
 import { useState } from "react";
 import Link from "next/link";
 
+// x = (lon + 180) / 360 * 100  |  y = (90 - lat) / 180 * 55
 const featured = [
-  { name: "Sri Lanka", slug: "sri-lanka", x: 72.5, y: 57.8, tagline: "The exotic adventure Bali used to be." },
-  { name: "Bali & Lombok", slug: "bali-vs-lombok", x: 79.5, y: 60.2, tagline: "Beautiful. Less crowded. More real." },
-  { name: "Morocco", slug: "morocco", x: 46.5, y: 40.5, tagline: "Taghazout surf & Marrakesh medina." },
-  { name: "Miami", slug: "miami", x: 22.2, y: 43.5, tagline: "Hidden gems, Key West, open roads." },
-  { name: "Mykonos", slug: "mykonos", x: 54.1, y: 35.5, tagline: "Unapologetic luxury." },
-  { name: "Amalfi Coast", slug: "amalfi-coast", x: 52.0, y: 33.8, tagline: "Where the road ends, the dream begins." },
-  { name: "Dubrovnik", slug: "dubrovnik", x: 52.8, y: 32.0, tagline: "The city tourists never see." },
+  { name: "Sri Lanka", slug: "sri-lanka", x: 72.4, y: 25.1, tagline: "The exotic adventure Bali used to be." },
+  { name: "Bali & Lombok", slug: "bali-vs-lombok", x: 82.0, y: 30.1, tagline: "Beautiful. Less crowded. More real." },
+  { name: "Morocco", slug: "morocco", x: 47.8, y: 17.8, tagline: "Taghazout surf & Marrakesh medina." },
+  { name: "Miami", slug: "miami", x: 27.7, y: 19.6, tagline: "Hidden gems, Key West, open roads." },
+  { name: "Mykonos", slug: "mykonos", x: 57.1, y: 16.1, tagline: "Unapologetic luxury." },
+  { name: "Amalfi Coast", slug: "amalfi-coast", x: 54.1, y: 15.1, tagline: "Where the road ends, the dream begins." },
+  { name: "Dubrovnik", slug: "dubrovnik", x: 55.0, y: 14.5, tagline: "The city tourists never see." },
 ];
 
 const visited = [
-  { name: "Dubai", x: 63.5, y: 43.5 },
-  { name: "Moscow", x: 57.6, y: 22.2 },
-  { name: "St. Petersburg", x: 56.4, y: 19.5 },
-  { name: "Goa, India", x: 68.3, y: 47.5 },
-  { name: "Malaga", x: 46.0, y: 37.0 },
-  { name: "Fuerteventura", x: 43.6, y: 42.2 },
-  { name: "Tenerife", x: 43.0, y: 42.8 },
-  { name: "Tarifa", x: 45.8, y: 37.5 },
-  { name: "Paris", x: 49.3, y: 28.0 },
-  { name: "London", x: 48.3, y: 24.5 },
-  { name: "Rome", x: 52.5, y: 33.0 },
-  { name: "Berlin", x: 52.3, y: 23.5 },
-  { name: "Vienna", x: 53.4, y: 25.5 },
-  { name: "Marbella", x: 46.2, y: 37.2 },
-  { name: "Madeira", x: 42.8, y: 40.5 },
-  { name: "Gibraltar", x: 45.9, y: 37.6 },
+  { name: "Dubai", x: 65.4, y: 19.8 },
+  { name: "Moscow", x: 60.4, y: 10.4 },
+  { name: "St. Petersburg", x: 58.4, y: 9.2 },
+  { name: "Goa, India", x: 70.5, y: 22.8 },
+  { name: "Malaga", x: 48.8, y: 16.3 },
+  { name: "Fuerteventura", x: 46.1, y: 18.9 },
+  { name: "Tenerife", x: 45.4, y: 18.9 },
+  { name: "Tarifa", x: 48.4, y: 16.5 },
+  { name: "Paris", x: 50.6, y: 12.5 },
+  { name: "London", x: 50.0, y: 11.8 },
+  { name: "Rome", x: 53.5, y: 14.7 },
+  { name: "Berlin", x: 53.7, y: 11.4 },
+  { name: "Vienna", x: 54.6, y: 12.7 },
+  { name: "Marbella", x: 48.6, y: 16.4 },
+  { name: "Madeira", x: 45.3, y: 17.5 },
+  { name: "Gibraltar", x: 48.5, y: 16.5 },
 ];
 
 export default function WorldMap() {

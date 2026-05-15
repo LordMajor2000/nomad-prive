@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import WorldMap from "@/components/WorldMap";
 
 
 const howWeWork = [
@@ -328,6 +329,9 @@ export default function AboutPage() {
             }
           `}</style>
         </section>
+
+        {/* WorldMap */}
+        <WorldMap />
 
         {/* Section 5 — CTA */}
         <section
