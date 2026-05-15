@@ -13,7 +13,6 @@ export default function PackagesPage() {
   const t = useTranslations("packagesPage");
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const calloutRef = useRef<HTMLDivElement>(null);
 
   const packages = [
     {
@@ -21,16 +20,7 @@ export default function PackagesPage() {
       name: "SIGNATURE",
       tagline: t("signature.tagline"),
       description: t("signature.description"),
-      includes: [
-        t("signature.includes.0"),
-        t("signature.includes.1"),
-        t("signature.includes.2"),
-        t("signature.includes.3"),
-        t("signature.includes.4"),
-        t("signature.includes.5"),
-      ],
-      travelStyle: t("signature.travelStyle"),
-      note: undefined as string | undefined,
+      href: "/packages/signature",
       featured: false,
     },
     {
@@ -38,17 +28,7 @@ export default function PackagesPage() {
       name: "PRIVÉ",
       tagline: t("prive.tagline"),
       description: t("prive.description"),
-      includes: [
-        t("prive.includes.0"),
-        t("prive.includes.1"),
-        t("prive.includes.2"),
-        t("prive.includes.3"),
-        t("prive.includes.4"),
-        t("prive.includes.5"),
-        t("prive.includes.6"),
-      ],
-      travelStyle: t("prive.travelStyle"),
-      note: t("prive.note") as string | undefined,
+      href: "/packages/prive",
       featured: true,
     },
     {
@@ -56,17 +36,7 @@ export default function PackagesPage() {
       name: "GRAND PRIVÉ",
       tagline: t("grandPrive.tagline"),
       description: t("grandPrive.description"),
-      includes: [
-        t("grandPrive.includes.0"),
-        t("grandPrive.includes.1"),
-        t("grandPrive.includes.2"),
-        t("grandPrive.includes.3"),
-        t("grandPrive.includes.4"),
-        t("grandPrive.includes.5"),
-        t("grandPrive.includes.6"),
-      ],
-      travelStyle: t("grandPrive.travelStyle"),
-      note: undefined as string | undefined,
+      href: "/packages/grand-prive",
       featured: false,
     },
   ];
@@ -100,24 +70,6 @@ export default function PackagesPage() {
           }
         );
       });
-
-      if (calloutRef.current) {
-        gsap.fromTo(
-          calloutRef.current,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: calloutRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
     });
 
     return () => ctx.revert();
@@ -188,7 +140,7 @@ export default function PackagesPage() {
       {/* Packages grid */}
       <div
         style={{
-          padding: "0 clamp(1.5rem, 5vw, 4rem) clamp(5rem, 10vw, 8rem)",
+          padding: "0 clamp(1.5rem, 5vw, 4rem) clamp(6rem, 12vw, 10rem)",
           maxWidth: "1400px",
           margin: "0 auto",
         }}
@@ -201,372 +153,144 @@ export default function PackagesPage() {
           }}
         >
           {packages.map((pkg, i) => (
-            <motion.div
+            <Link
               key={pkg.name}
-              ref={(el) => { cardsRef.current[i] = el; }}
-              whileHover={{ y: -6, transition: { duration: 0.3 } }}
-              style={{
-                background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-surface)",
-                border: pkg.featured
-                  ? "1px solid rgba(201,169,110,0.35)"
-                  : "1px solid rgba(201,169,110,0.1)",
-                borderRadius: "2px",
-                padding: "clamp(2rem, 4vw, 3rem)",
-                position: "relative",
-                opacity: 0,
-                display: "flex",
-                flexDirection: "column",
-              }}
+              href={pkg.href}
+              style={{ textDecoration: "none", display: "block", height: "100%" }}
             >
-              {/* Top accent */}
-              <div
+              <motion.div
+                ref={(el) => { cardsRef.current[i] = el; }}
+                whileHover={{ y: -6, transition: { duration: 0.3 } }}
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "2px",
-                  background: pkg.featured
-                    ? "linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary))"
-                    : "linear-gradient(90deg, transparent, var(--gold-primary), transparent)",
+                  background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-surface)",
+                  border: pkg.featured
+                    ? "1px solid rgba(201,169,110,0.35)"
+                    : "1px solid rgba(201,169,110,0.1)",
+                  borderRadius: "2px",
+                  padding: "clamp(2.5rem, 4vw, 3.5rem)",
+                  position: "relative",
+                  opacity: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  cursor: "pointer",
                 }}
-              />
-
-              {pkg.featured && (
+              >
+                {/* Top accent */}
                 <div
                   style={{
                     position: "absolute",
-                    inset: 0,
-                    background: "radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.06) 0%, transparent 70%)",
-                    pointerEvents: "none",
-                    borderRadius: "2px",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "2px",
+                    background: pkg.featured
+                      ? "linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary))"
+                      : "linear-gradient(90deg, transparent, var(--gold-primary), transparent)",
                   }}
                 />
-              )}
 
-              {/* Number */}
-              <div
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.2em",
-                  color: "var(--gold-primary)",
-                  marginBottom: "1.5rem",
-                  opacity: 0.6,
-                }}
-              >
-                {pkg.number}
-              </div>
-
-              <h2
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  color: "var(--cream)",
-                  margin: "0 0 0.5rem 0",
-                }}
-              >
-                {pkg.name}
-              </h2>
-
-              <p
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "0.95rem",
-                  fontStyle: "italic",
-                  color: "var(--gold-primary)",
-                  margin: "0 0 1.5rem 0",
-                }}
-              >
-                {pkg.tagline}
-              </p>
-
-              <div
-                style={{
-                  width: "40px",
-                  height: "1px",
-                  background: "rgba(201,169,110,0.3)",
-                  marginBottom: "1.5rem",
-                }}
-              />
-
-              <p
-                style={{
-                  fontSize: "0.9rem",
-                  lineHeight: 1.85,
-                  color: "var(--muted)",
-                  margin: "0 0 2rem 0",
-                  fontWeight: 300,
-                }}
-              >
-                {pkg.description}
-              </p>
-
-              {/* Includes */}
-              <ul
-                style={{
-                  listStyle: "none",
-                  padding: 0,
-                  margin: "0 0 2rem 0",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.6rem",
-                  flex: 1,
-                }}
-              >
-                {pkg.includes.map((item) => (
-                  <li
-                    key={item}
+                {pkg.featured && (
+                  <div
                     style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.75rem",
-                      fontSize: "0.85rem",
-                      color: "var(--cream)",
-                      opacity: 0.8,
-                      lineHeight: 1.5,
+                      position: "absolute",
+                      inset: 0,
+                      background: "radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.06) 0%, transparent 70%)",
+                      pointerEvents: "none",
+                      borderRadius: "2px",
                     }}
-                  >
-                    <span
-                      style={{
-                        color: "var(--gold-primary)",
-                        flexShrink: 0,
-                        marginTop: "1px",
-                        fontSize: "0.9rem",
-                      }}
-                    >
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                  />
+                )}
 
-              {/* Travel style */}
-              <div
-                style={{
-                  padding: "1rem 1.25rem",
-                  background: "rgba(201,169,110,0.05)",
-                  border: "1px solid rgba(201,169,110,0.1)",
-                  borderRadius: "1px",
-                  marginBottom: "1.5rem",
-                }}
-              >
+                {/* Number */}
                 <div
                   style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "var(--gold-primary)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  {t("travelStyleLabel")}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.85rem",
-                    color: "var(--cream)",
-                    opacity: 0.7,
-                    fontStyle: "italic",
                     fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.2em",
+                    color: "var(--gold-primary)",
+                    marginBottom: "1.5rem",
+                    opacity: 0.5,
                   }}
                 >
-                  {pkg.travelStyle}
+                  {pkg.number}
                 </div>
-              </div>
 
-              {/* Note */}
-              {pkg.note && (
+                <h2
+                  style={{
+                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "clamp(1.6rem, 3vw, 2.1rem)",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    color: "var(--cream)",
+                    margin: "0 0 0.6rem 0",
+                  }}
+                >
+                  {pkg.name}
+                </h2>
+
                 <p
                   style={{
-                    fontSize: "0.75rem",
-                    color: "var(--muted)",
-                    margin: "0 0 1.5rem 0",
+                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                    fontSize: "0.95rem",
                     fontStyle: "italic",
-                    lineHeight: 1.6,
+                    color: "var(--gold-primary)",
+                    margin: "0 0 2rem 0",
                   }}
                 >
-                  {pkg.note}
+                  {pkg.tagline}
                 </p>
-              )}
 
-              {/* Price & CTA */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  borderTop: "1px solid rgba(201,169,110,0.1)",
-                  paddingTop: "1.5rem",
-                  flexWrap: "wrap",
-                  gap: "1rem",
-                }}
-              >
-                <Link
-                  href="/contact"
+                <div
                   style={{
-                    fontSize: "0.75rem",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--cream)",
-                    textDecoration: "none",
+                    width: "40px",
+                    height: "1px",
+                    background: "rgba(201,169,110,0.3)",
+                    marginBottom: "1.5rem",
+                  }}
+                />
+
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    lineHeight: 1.85,
+                    color: "var(--muted)",
+                    margin: "0",
+                    fontWeight: 300,
+                    flex: 1,
+                  }}
+                >
+                  {pkg.description}
+                </p>
+
+                {/* CTA row */}
+                <div
+                  style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.5rem",
-                    opacity: 0.6,
-                    transition: "opacity 0.3s ease, color 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold-primary)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.opacity = "0.6";
-                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--cream)";
+                    justifyContent: "flex-end",
+                    borderTop: "1px solid rgba(201,169,110,0.1)",
+                    paddingTop: "1.5rem",
+                    marginTop: "2.5rem",
                   }}
                 >
-                  {t("enquire")}
-                </Link>
-              </div>
-            </motion.div>
+                  <span
+                    style={{
+                      fontSize: "0.7rem",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "var(--gold-primary)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    {t("learnMore")}
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
           ))}
-        </div>
-      </div>
-
-      {/* Sports Car Callout */}
-      <div
-        style={{
-          padding: "0 clamp(1.5rem, 5vw, 4rem) clamp(5rem, 10vw, 8rem)",
-          maxWidth: "1400px",
-          margin: "0 auto",
-        }}
-      >
-        <div
-          ref={calloutRef}
-          style={{
-            background: "var(--bg-surface)",
-            border: "1px solid rgba(201,169,110,0.3)",
-            borderRadius: "2px",
-            padding: "clamp(2.5rem, 5vw, 4rem)",
-            position: "relative",
-            overflow: "hidden",
-            opacity: 0,
-          }}
-        >
-          {/* Gold corner accents */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: "2px",
-              background: "linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary))",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 60%)",
-              pointerEvents: "none",
-            }}
-          />
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr auto",
-              gap: "2rem",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-            className="block md:grid"
-          >
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  marginBottom: "1.25rem",
-                }}
-              >
-                <span style={{ fontSize: "1.5rem" }}>🏎</span>
-                <span
-                  style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "var(--gold-primary)",
-                  }}
-                >
-                  {t("exclusiveFeatureLabel")}
-                </span>
-              </div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-                  fontWeight: 700,
-                  color: "var(--cream)",
-                  margin: "0 0 1rem 0",
-                  lineHeight: 1.2,
-                }}
-              >
-                {t("calloutHeading")}
-              </h3>
-              <p
-                style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
-                  lineHeight: 1.8,
-                  color: "var(--muted)",
-                  margin: 0,
-                  maxWidth: "600px",
-                  fontWeight: 300,
-                }}
-              >
-                {t("calloutBody")}
-              </p>
-            </div>
-            <div className="hidden md:block">
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "1.5rem",
-                  border: "1px solid rgba(201,169,110,0.15)",
-                  borderRadius: "2px",
-                  minWidth: "160px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize: "2.5rem",
-                    lineHeight: 1,
-                    marginBottom: "0.5rem",
-                    filter: "sepia(1) saturate(2) hue-rotate(10deg)",
-                  }}
-                >
-                  🏎
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--gold-primary)",
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {t("calloutBadge")}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

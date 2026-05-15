@@ -114,13 +114,13 @@ export default function AboutPage() {
                 {t("storyHeading")}
               </h2>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", marginBottom: "1.5rem", fontWeight: 300 }}>
-                My partner built her expertise in lecture halls and five-star internships across Europe — learning the architecture of hospitality, the logistics of luxury, the language of service. I built mine differently: by going. By staying somewhere long enough to understand it.
+                {t("storyBody1")}
               </p>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", marginBottom: "1.5rem", fontWeight: 300 }}>
-                We met. We traveled together. We started noticing the gap.
+                {t("storyBody2")}
               </p>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", fontWeight: 300 }}>
-                The travel industry offers two things: mass-market packages that treat you like a seat number, and so-called &quot;luxury&quot; agencies run by people who haven&apos;t left their desk in three years. Nobody was offering what we wanted: deeply personal, actually experienced, genuinely bespoke. So we built it ourselves.
+                {t("storyBody3")}
               </p>
             </motion.div>
           </div>

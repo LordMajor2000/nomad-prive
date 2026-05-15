@@ -5,58 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 // ---------------------------------------------------------------------------
 // Data
 // ---------------------------------------------------------------------------
-
-const questions = [
-  {
-    question: "When you imagine your ideal trip, what feeling comes first?",
-    options: [
-      "Freedom — open roads, no plan, just go",
-      "Escape — total disconnection from everyday life",
-      "Discovery — something I've never seen or felt before",
-      "Indulgence — the best of everything, nothing ordinary",
-    ],
-  },
-  {
-    question: "Your perfect day abroad looks like:",
-    options: [
-      "Renting a car and driving somewhere with no destination",
-      "A private beach, a good book, absolute silence",
-      "Getting lost in a local market, eating something I can't name",
-      "A rooftop dinner at a Michelin-starred restaurant, then a nightclub",
-    ],
-  },
-  {
-    question: "How do you feel about other tourists?",
-    options: [
-      "I avoid them — I want to feel like I discovered this place myself",
-      "I don't mind, as long as my hotel is peaceful",
-      "I embrace it — travel is social, I love meeting people",
-      "I prefer a scene — being around people with taste and style",
-    ],
-  },
-  {
-    question: "What do you bring home?",
-    options: [
-      "Stories nobody believes",
-      "A completely recharged mind and body",
-      "A deeper understanding of how other people live",
-      "Memories of the finest food, art, and experiences money can buy",
-    ],
-  },
-  {
-    question: "Travel for you is fundamentally about:",
-    options: [
-      "Testing your limits and finding new ones",
-      "Recovering the version of yourself that got lost in routine",
-      "Understanding the world is bigger and stranger than you thought",
-      "Living at a level that everyday life doesn't allow",
-    ],
-  },
-];
 
 interface Alternative {
   name: string;
@@ -73,9 +26,8 @@ interface ResultType {
   alternatives: Alternative[];
 }
 
-const results: Record<string, ResultType> = {
+const resultsData: Record<string, Omit<ResultType, "type">> = {
   "free-spirit": {
-    type: "The Free Spirit",
     description:
       "You travel to escape structure, not to find it. The best trips you've had were the ones with no plan that somehow became the ones you still talk about years later.",
     destination: "Road Trip: Alentejo, Portugal",
@@ -94,7 +46,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "sanctuary-seeker": {
-    type: "The Sanctuary Seeker",
     description:
       "You don't want activities. You want to stop. The best travel for you is the kind where you return home feeling like a different person — not because of what you saw, but because of how fully you rested.",
     destination: "Maldives or Seychelles",
@@ -113,7 +64,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "deep-explorer": {
-    type: "The Deep Explorer",
     description:
       "Based on Plog's allocentric traveler profile: you seek novelty, cultural immersion and authentic contact with local life. You're most satisfied when you're the only foreigner in the room.",
     destination: "Sri Lanka or Morocco",
@@ -132,7 +82,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "luxury-hedonist": {
-    type: "The Luxury Hedonist",
     description:
       "Booking.com's 2023 research identifies this as the fastest-growing travel profile: travelers who measure a trip's success entirely by the quality of its pleasures. You don't feel guilty about it — you just want the best.",
     destination: "Mykonos or St. Tropez",
@@ -151,7 +100,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "culture-hunter": {
-    type: "The Culture Hunter",
     description:
       "Cohen's 'experiential tourist' type: you travel to collect meaning, not just sights. Food, art, architecture, and local ritual are your primary currency.",
     destination: "Kyoto, Japan or Lisbon, Portugal",
@@ -170,7 +118,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "social-explorer": {
-    type: "The Social Explorer",
     description:
       "Skyscanner's Horizon Report 2023 identifies 'social travel' as a key emerging trend — travelers who see destinations as backdrops for connection rather than the main event.",
     destination: "Ibiza or Mykonos",
@@ -189,7 +136,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "conscious-wanderer": {
-    type: "The Conscious Wanderer",
     description:
       "You travel thoughtfully. You want to contribute to places you visit, not extract from them. Booking.com's 2023 Sustainable Travel Report found 76% of travelers want to travel more sustainably — you're already there.",
     destination: "Costa Rica or Azores, Portugal",
@@ -208,7 +154,6 @@ const results: Record<string, ResultType> = {
     ],
   },
   "romantic-escapist": {
-    type: "The Romantic Escapist",
     description:
       "Travel for you is fundamentally about intimacy — with a person, with a place, with a moment. The trips that matter most are the ones where the world shrank to just two people.",
     destination: "Amalfi Coast or Santorini",
@@ -281,6 +226,50 @@ const transition = {
 // ---------------------------------------------------------------------------
 
 export default function QuizPage() {
+  const tQ = useTranslations("quizQuestions");
+  const tR = useTranslations("quizResultNames");
+
+  const questions = [
+    {
+      question: tQ("q1"),
+      options: [tQ("q1o0"), tQ("q1o1"), tQ("q1o2"), tQ("q1o3")],
+    },
+    {
+      question: tQ("q2"),
+      options: [tQ("q2o0"), tQ("q2o1"), tQ("q2o2"), tQ("q2o3")],
+    },
+    {
+      question: tQ("q3"),
+      options: [tQ("q3o0"), tQ("q3o1"), tQ("q3o2"), tQ("q3o3")],
+    },
+    {
+      question: tQ("q4"),
+      options: [tQ("q4o0"), tQ("q4o1"), tQ("q4o2"), tQ("q4o3")],
+    },
+    {
+      question: tQ("q5"),
+      options: [tQ("q5o0"), tQ("q5o1"), tQ("q5o2"), tQ("q5o3")],
+    },
+  ];
+
+  const resultTypeNames: Record<string, string> = {
+    "free-spirit": tR("freeSpirit"),
+    "sanctuary-seeker": tR("sanctuarySeeker"),
+    "deep-explorer": tR("deepExplorer"),
+    "luxury-hedonist": tR("luxuryHedonist"),
+    "culture-hunter": tR("cultureHunter"),
+    "social-explorer": tR("socialExplorer"),
+    "conscious-wanderer": tR("adventureSeeker"),
+    "romantic-escapist": tR("wellnessNomad"),
+  };
+
+  const results: Record<string, ResultType> = Object.fromEntries(
+    Object.entries(resultsData).map(([key, val]) => [
+      key,
+      { ...val, type: resultTypeNames[key] ?? key },
+    ])
+  );
+
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<number[]>([]);
