@@ -11,6 +11,8 @@ import PackagesPreview from "@/components/PackagesPreview";
 import BlogPreview from "@/components/BlogPreview";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import AmbientBackground from "@/components/AmbientBackground";
+import DestinationTicker from "@/components/DestinationTicker";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +20,8 @@ export default function Home() {
   return (
     <>
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-      <main style={{ visibility: isLoading ? "hidden" : "visible" }}>
+      <AmbientBackground />
+      <main style={{ visibility: isLoading ? "hidden" : "visible", position: "relative", zIndex: 1 }}>
         <Navigation />
         <HeroSection />
         <ServicesStrip />
@@ -27,6 +30,7 @@ export default function Home() {
         <PackagesPreview />
         <BlogPreview />
         <ContactSection />
+        <DestinationTicker />
         <Footer />
       </main>
     </>

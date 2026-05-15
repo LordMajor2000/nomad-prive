@@ -3,60 +3,64 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import Link from "next/link";
+
+const stats = [
+  { value: "8+", label: "Destinations" },
+  { value: "100%", label: "Bespoke" },
+  { value: "24/7", label: "Support" },
+  { value: "2", label: "Founders" },
+];
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const numberRef = useRef<HTMLDivElement>(null);
-  const line1Ref = useRef<HTMLDivElement>(null);
-  const line2Ref = useRef<HTMLDivElement>(null);
-  const subtextRef = useRef<HTMLParagraphElement>(null);
-  const decorLineRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const textBlockRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      tl.fromTo(
-        numberRef.current,
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 1, ease: "power3.out" }
+      // Image slides in from left
+      gsap.fromTo(
+        imageRef.current,
+        { opacity: 0, x: -60 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+        }
       );
 
-      tl.fromTo(
-        decorLineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "expo.out" },
-        "-=0.5"
-      );
-
-      tl.fromTo(
-        line1Ref.current,
-        { opacity: 0, y: 30, clipPath: "inset(0 100% 0 0)" },
-        { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power3.out" },
-        "-=0.3"
-      );
-
-      tl.fromTo(
-        line2Ref.current,
-        { opacity: 0, y: 20, clipPath: "inset(0 100% 0 0)" },
-        { opacity: 1, y: 0, clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power3.out" },
-        "-=0.6"
-      );
-
-      tl.fromTo(
-        subtextRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
-      );
+      // Text lines reveal one by one
+      if (textBlockRef.current) {
+        const lines = textBlockRef.current.querySelectorAll("[data-reveal]");
+        lines.forEach((line, i) => {
+          gsap.fromTo(
+            line,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              delay: i * 0.1,
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 75%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -64,7 +68,7 @@ export default function AboutSection() {
 
   return (
     <section
-      id="rolunk"
+      id="about"
       ref={sectionRef}
       style={{
         padding: "clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)",
@@ -73,125 +77,243 @@ export default function AboutSection() {
         overflow: "hidden",
       }}
     >
-      {/* Background texture */}
+      {/* Section number watermark */}
       <div
         style={{
           position: "absolute",
-          top: 0,
-          right: 0,
-          width: "40%",
-          height: "100%",
-          background:
-            "radial-gradient(ellipse at 80% 50%, rgba(201,169,110,0.03) 0%, transparent 70%)",
+          top: "2rem",
+          right: "2rem",
+          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+          fontSize: "clamp(6rem, 15vw, 12rem)",
+          fontWeight: 700,
+          color: "transparent",
+          WebkitTextStroke: "1px rgba(201,169,110,0.1)",
+          lineHeight: 1,
+          userSelect: "none",
           pointerEvents: "none",
         }}
-      />
+      >
+        02
+      </div>
 
       <div
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2.5fr)",
-          gap: "clamp(2rem, 6vw, 6rem)",
-          alignItems: "center",
         }}
-        className="block md:grid"
       >
-        {/* Left — Large number */}
+        {/* Decorative line */}
         <div
-          ref={numberRef}
           style={{
-            opacity: 0,
+            width: "60px",
+            height: "1px",
+            background: "var(--gold-primary)",
+            marginBottom: "2rem",
           }}
-          className="hidden md:block"
+        />
+
+        {/* Two-column layout */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr",
+            gap: "clamp(3rem, 6vw, 6rem)",
+            alignItems: "center",
+          }}
+          className="about-grid"
         >
-          <span
-            style={{
-              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-              fontSize: "clamp(6rem, 15vw, 12rem)",
-              fontWeight: 700,
-              color: "transparent",
-              WebkitTextStroke: "1px rgba(201,169,110,0.2)",
-              lineHeight: 1,
-              display: "block",
-              userSelect: "none",
-            }}
-          >
-            01
-          </span>
-        </div>
-
-        {/* Right — Text */}
-        <div>
+          {/* Left — image */}
           <div
-            ref={decorLineRef}
+            ref={imageRef}
             style={{
-              width: "60px",
-              height: "1px",
-              background: "var(--gold-primary)",
-              marginBottom: "2rem",
-              transformOrigin: "left center",
-              transform: "scaleX(0)",
-            }}
-          />
-
-          <div
-            ref={line1Ref}
-            style={{ overflow: "hidden", marginBottom: "0.5rem", opacity: 0 }}
-          >
-            <h2
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "clamp(1.6rem, 4vw, 2.8rem)",
-                fontWeight: 700,
-                color: "var(--cream)",
-                margin: 0,
-                lineHeight: 1.2,
-              }}
-            >
-              We don't organize trips.
-            </h2>
-          </div>
-
-          <div
-            ref={line2Ref}
-            style={{ overflow: "hidden", marginBottom: "2rem", opacity: 0 }}
-          >
-            <h2
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "clamp(1.6rem, 4vw, 2.8rem)",
-                fontWeight: 700,
-                fontStyle: "italic",
-                color: "var(--gold-primary)",
-                margin: 0,
-                lineHeight: 1.2,
-              }}
-            >
-              We design memories.
-            </h2>
-          </div>
-
-          <p
-            ref={subtextRef}
-            style={{
-              fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
-              lineHeight: 1.85,
-              color: "var(--muted)",
-              margin: 0,
-              maxWidth: "540px",
-              fontWeight: 300,
               opacity: 0,
+              position: "relative",
+              aspectRatio: "3/4",
+              borderRadius: "4px",
+              overflow: "hidden",
+              border: "1px solid rgba(201,169,110,0.2)",
             }}
           >
-            Together with my partner, drawing on our own experiences, we craft
-            bespoke journeys to the world's most extraordinary destinations. Every
-            journey is a singular chapter — filled with carefully curated experiences,
-            untouched landscapes, and moments we will never forget.
-          </p>
+            <Image
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80"
+              alt="Travel landscape"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 40vw"
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5) 100%)",
+              }}
+            />
+          </div>
+
+          {/* Right — text */}
+          <div ref={textBlockRef}>
+            <div data-reveal>
+              <h2
+                style={{
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                  fontWeight: 700,
+                  color: "var(--cream)",
+                  margin: "0 0 0.5rem",
+                  lineHeight: 1.2,
+                }}
+              >
+                Two People. One Obsession.
+              </h2>
+            </div>
+            <div data-reveal>
+              <p
+                style={{
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontSize: "clamp(1rem, 2vw, 1.2rem)",
+                  fontStyle: "italic",
+                  color: "var(--gold-primary)",
+                  margin: "0 0 2rem",
+                }}
+              >
+                We started Nomad Privé because the trips we wanted didn&apos;t exist.
+              </p>
+            </div>
+
+            <div data-reveal>
+              <p
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                  lineHeight: 1.85,
+                  color: "var(--muted)",
+                  margin: "0 0 1.2rem",
+                  fontWeight: 300,
+                }}
+              >
+                My partner studied Tourism &amp; Hospitality at university. I spent years
+                traveling with one rule: go where the tourists don&apos;t.
+              </p>
+            </div>
+            <div data-reveal>
+              <p
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                  lineHeight: 1.85,
+                  color: "var(--muted)",
+                  margin: "0 0 1.2rem",
+                  fontWeight: 300,
+                }}
+              >
+                Between us, we&apos;ve built something neither of us could have alone — the
+                academic foundation of hospitality and destination management, combined with
+                the instinct of someone who has eaten street food at 2am in a Marrakesh
+                medina and found the best surf break in Lombok before it had a name.
+              </p>
+            </div>
+            <div data-reveal>
+              <p
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                  lineHeight: 1.85,
+                  color: "var(--muted)",
+                  margin: "0 0 1.2rem",
+                  fontWeight: 300,
+                }}
+              >
+                We&apos;ve been to 8+ countries across four continents. We know the difference
+                between a hotel that looks beautiful on Instagram and one that actually
+                changes how you feel. We have contacts — real ones, built over years — at
+                boutique hotels, private villas, charter operators, and restaurants that
+                don&apos;t take walk-ins.
+              </p>
+            </div>
+            <div data-reveal>
+              <p
+                style={{
+                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                  lineHeight: 1.85,
+                  color: "var(--muted)",
+                  margin: "0 0 2rem",
+                  fontWeight: 300,
+                }}
+              >
+                When something goes wrong on a trip (and something always does), we solve
+                it before our clients notice it was a problem.
+              </p>
+            </div>
+
+            <div data-reveal>
+              <Link
+                href="/about"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "var(--gold-primary)",
+                  textDecoration: "none",
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  borderBottom: "1px solid rgba(201,169,110,0.4)",
+                  paddingBottom: "2px",
+                  transition: "gap 0.3s ease",
+                  marginBottom: "3rem",
+                }}
+              >
+                Read our full story →
+              </Link>
+            </div>
+
+            {/* Stats row */}
+            <div
+              data-reveal
+              style={{
+                display: "flex",
+                gap: "clamp(1.5rem, 4vw, 3rem)",
+                flexWrap: "wrap",
+                paddingTop: "2rem",
+                borderTop: "1px solid rgba(201,169,110,0.1)",
+              }}
+            >
+              {stats.map((stat) => (
+                <div key={stat.label} style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                      fontSize: "clamp(1.4rem, 3vw, 2rem)",
+                      fontWeight: 700,
+                      color: "var(--gold-primary)",
+                      lineHeight: 1,
+                      marginBottom: "0.4rem",
+                    }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      color: "var(--muted)",
+                      fontVariant: "small-caps",
+                    }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

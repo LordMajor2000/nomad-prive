@@ -1,9 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [logoExists, setLogoExists] = useState(false);
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.onload = () => setLogoExists(true);
+    img.onerror = () => setLogoExists(false);
+    img.src = "/logo.png";
+  }, []);
 
   return (
     <footer
@@ -19,6 +29,54 @@ export default function Footer() {
           margin: "0 auto",
         }}
       >
+        {/* Logo centered at top */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            paddingTop: "1rem",
+            marginBottom: "2.5rem",
+          }}
+        >
+          {logoExists ? (
+            <Image
+              src="/logo.png"
+              alt="Nomad Privé"
+              width={200}
+              height={50}
+              style={{ objectFit: "contain", marginBottom: "1rem" }}
+            />
+          ) : (
+            <div
+              style={{
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontSize: "1.4rem",
+                fontWeight: 700,
+                letterSpacing: "0.25em",
+                color: "var(--gold-primary)",
+                textTransform: "uppercase",
+                marginBottom: "1rem",
+              }}
+            >
+              Nomad Privé
+            </div>
+          )}
+          <p
+            style={{
+              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+              fontSize: "0.9rem",
+              fontStyle: "italic",
+              color: "var(--gold-primary)",
+              margin: 0,
+              textAlign: "center",
+              opacity: 0.8,
+            }}
+          >
+            Every journey is a masterpiece.
+          </p>
+        </div>
+
         {/* Top section */}
         <div
           style={{
@@ -30,21 +88,8 @@ export default function Footer() {
             gap: "2rem",
           }}
         >
-          {/* Logo & tagline */}
+          {/* Tagline */}
           <div>
-            <div
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "1.1rem",
-                fontWeight: 700,
-                letterSpacing: "0.25em",
-                color: "var(--gold-primary)",
-                textTransform: "uppercase",
-                marginBottom: "0.75rem",
-              }}
-            >
-              Nomad Privé
-            </div>
             <p
               style={{
                 fontFamily: "var(--font-playfair), 'Playfair Display', serif",
@@ -85,7 +130,6 @@ export default function Footer() {
               }}
               aria-label="Instagram"
             >
-              {/* Instagram icon */}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                 <circle cx="12" cy="12" r="4"/>
@@ -119,7 +163,6 @@ export default function Footer() {
               }}
               aria-label="Facebook"
             >
-              {/* Facebook icon */}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
               </svg>
@@ -202,7 +245,7 @@ export default function Footer() {
                 (e.target as HTMLAnchorElement).style.opacity = "0.5";
               }}
             >
-              Terms & Conditions
+              Terms &amp; Conditions
             </a>
           </div>
         </div>
