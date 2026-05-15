@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { blogPosts } from "@/data/blog-posts";
 
 export default function BlogSection() {
@@ -242,10 +243,8 @@ export default function BlogSection() {
                 {post.excerpt}
               </p>
 
-              <motion.a
-                href="#"
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
+              <Link
+                href={`/journal/${post.slug}`}
                 style={{
                   fontSize: "0.75rem",
                   letterSpacing: "0.15em",
@@ -258,21 +257,10 @@ export default function BlogSection() {
                   fontWeight: 500,
                   borderBottom: "1px solid rgba(201,169,110,0.3)",
                   paddingBottom: "2px",
-                  transition: "border-color 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (
-                    e.currentTarget as HTMLAnchorElement
-                  ).style.borderColor = "var(--gold-primary)";
-                }}
-                onMouseLeave={(e) => {
-                  (
-                    e.currentTarget as HTMLAnchorElement
-                  ).style.borderColor = "rgba(201,169,110,0.3)";
                 }}
               >
-                Read more <span>→</span>
-              </motion.a>
+                Read more →
+              </Link>
             </div>
           </motion.div>
         ))}

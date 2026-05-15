@@ -1,216 +1,309 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Packages", href: "#csomagok" },
-  { label: "Journal", href: "#blog" },
-  { label: "About", href: "#rolunk" },
-  { label: "Contact", href: "#kapcsolat" },
+  { label: "Destinations", href: "/destinations" },
+  { label: "Packages", href: "/packages" },
+  { label: "Journal", href: "/journal" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 60);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLinkClick = (href: string) => {
+  // Close menu on route change
+  useEffect(() => {
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  }, [pathname]);
+
+  // Lock body scroll when menu open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const isActive = (href: string) => {
+    if (href.startsWith("/#")) return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
   };
 
   return (
-    <motion.nav
-      ref={navRef}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 2, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        padding: "1.5rem 2rem",
-        transition: "background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease",
-        background: scrolled ? "rgba(8,8,8,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(201,169,110,0.1)" : "none",
-      }}
-    >
-      <div
+    <>
+      <motion.nav
+        ref={navRef}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: "1.5rem 2rem",
+          transition: "background 0.4s ease, backdrop-filter 0.4s ease",
+          background: scrolled ? "rgba(8,8,8,0.95)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(201,169,110,0.1)" : "none",
         }}
       >
-        {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
+        <div
           style={{
-            fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-            fontSize: "1rem",
-            fontWeight: 700,
-            letterSpacing: "0.25em",
-            color: "var(--gold-primary)",
-            textTransform: "uppercase",
-            textDecoration: "none",
-          }}
-        >
-          Nomad Privé
-        </a>
-
-        {/* Desktop Links */}
-        <ul
-          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
             display: "flex",
-            gap: "2.5rem",
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
-          className="hidden md:flex"
         >
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
+          {/* Logo */}
+          <Link
+            href="/"
+            style={{
+              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+              fontSize: "1rem",
+              fontWeight: 700,
+              letterSpacing: "0.25em",
+              color: "var(--gold-primary)",
+              textTransform: "uppercase",
+              textDecoration: "none",
+            }}
+          >
+            Nomad Privé
+          </Link>
+
+          {/* Desktop Links */}
+          <ul
+            className="hidden md:flex"
+            style={{
+              display: "flex",
+              gap: "2.5rem",
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    style={{
+                      color: active ? "var(--gold-primary)" : "var(--cream)",
+                      textDecoration: "none",
+                      fontSize: "0.8rem",
+                      letterSpacing: "0.15em",
+                      textTransform: "uppercase",
+                      fontWeight: 400,
+                      opacity: active ? 1 : 0.75,
+                      transition: "opacity 0.3s ease, color 0.3s ease",
+                      position: "relative",
+                      paddingBottom: "4px",
+                      borderBottom: active
+                        ? "1px solid var(--gold-primary)"
+                        : "1px solid transparent",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!active) {
+                        (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold-primary)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!active) {
+                        (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
+                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--cream)";
+                      }
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "0.5rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+              zIndex: 110,
+              position: "relative",
+            }}
+            aria-label="Menu"
+          >
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "1px",
+                background: "var(--gold-primary)",
+                transition: "transform 0.3s ease, opacity 0.3s ease",
+                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "1px",
+                background: "var(--gold-primary)",
+                opacity: menuOpen ? 0 : 1,
+                transition: "opacity 0.3s ease",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "24px",
+                height: "1px",
+                background: "var(--gold-primary)",
+                transition: "transform 0.3s ease",
+                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
+              }}
+            />
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile fullscreen overlay — slides in from RIGHT */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: "100%",
+              maxWidth: "420px",
+              background: "rgba(8,8,8,0.98)",
+              backdropFilter: "blur(20px)",
+              zIndex: 105,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "4rem 3rem",
+              borderLeft: "1px solid rgba(201,169,110,0.1)",
+            }}
+          >
+            {/* Decorative line */}
+            <div
+              style={{
+                width: "40px",
+                height: "1px",
+                background: "var(--gold-primary)",
+                marginBottom: "3rem",
+              }}
+            />
+
+            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "2rem" }}>
+              {navLinks.map((link, i) => {
+                const active = isActive(link.href);
+                return (
+                  <motion.li
+                    key={link.href}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.07 + 0.1, duration: 0.4 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      style={{
+                        fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                        fontSize: "1.8rem",
+                        fontWeight: 700,
+                        color: active ? "var(--gold-primary)" : "var(--cream)",
+                        textDecoration: "none",
+                        letterSpacing: "0.05em",
+                        display: "block",
+                        transition: "color 0.3s ease",
+                        borderBottom: active ? "1px solid rgba(201,169,110,0.4)" : "none",
+                        paddingBottom: active ? "4px" : "0",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                );
+              })}
+            </ul>
+
+            <div
+              style={{
+                marginTop: "3rem",
+                paddingTop: "2rem",
+                borderTop: "1px solid rgba(201,169,110,0.1)",
+              }}
+            >
+              <p
                 style={{
-                  color: "var(--cream)",
-                  textDecoration: "none",
-                  fontSize: "0.8rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  fontWeight: 400,
-                  opacity: 0.75,
-                  transition: "opacity 0.3s ease, color 0.3s ease",
-                }}
-                onMouseEnter={(e) => {
-                  (e.target as HTMLAnchorElement).style.opacity = "1";
-                  (e.target as HTMLAnchorElement).style.color =
-                    "var(--gold-primary)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.target as HTMLAnchorElement).style.opacity = "0.75";
-                  (e.target as HTMLAnchorElement).style.color = "var(--cream)";
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontSize: "0.85rem",
+                  fontStyle: "italic",
+                  color: "var(--muted)",
+                  margin: 0,
                 }}
               >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+                Every journey is a masterpiece.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "0.5rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-          }}
-          aria-label="Menu"
-        >
-          <span
+      {/* Backdrop overlay */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setMenuOpen(false)}
             style={{
-              display: "block",
-              width: "24px",
-              height: "1px",
-              background: "var(--gold-primary)",
-              transition: "transform 0.3s ease, opacity 0.3s ease",
-              transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.6)",
+              zIndex: 104,
             }}
           />
-          <span
-            style={{
-              display: "block",
-              width: "24px",
-              height: "1px",
-              background: "var(--gold-primary)",
-              opacity: menuOpen ? 0 : 1,
-              transition: "opacity 0.3s ease",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "24px",
-              height: "1px",
-              background: "var(--gold-primary)",
-              transition: "transform 0.3s ease",
-              transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
-            }}
-          />
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          style={{
-            background: "rgba(8,8,8,0.98)",
-            borderTop: "1px solid rgba(201,169,110,0.1)",
-            marginTop: "1.5rem",
-            padding: "1.5rem 2rem",
-          }}
-        >
-          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick(link.href);
-                  }}
-                  style={{
-                    color: "var(--cream)",
-                    textDecoration: "none",
-                    fontSize: "1rem",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    fontWeight: 400,
-                  }}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
-    </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
