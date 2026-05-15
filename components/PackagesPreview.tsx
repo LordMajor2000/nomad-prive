@@ -7,29 +7,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-const packages = [
-  {
-    number: "01",
-    name: "SIGNATURE",
-    tagline: "Your journey, perfectly curated.",
-    featured: false,
-  },
-  {
-    number: "02",
-    name: "PRIVÉ",
-    tagline: "No limits. No compromises.",
-    featured: true,
-  },
-  {
-    number: "03",
-    name: "GRAND PRIVÉ",
-    tagline: "By referral only. For those who want the impossible.",
-    featured: false,
-  },
+const packageDefs = [
+  { number: "01", name: "SIGNATURE", taglineKey: "tagline1" as const, featured: false },
+  { number: "02", name: "PRIVÉ", taglineKey: "tagline2" as const, featured: true },
+  { number: "03", name: "GRAND PRIVÉ", taglineKey: "tagline3" as const, featured: false },
 ];
 
 export default function PackagesPreview() {
   const t = useTranslations("packages");
+  const packages = packageDefs.map((p) => ({ ...p, tagline: t(p.taglineKey) }));
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -242,7 +228,7 @@ export default function PackagesPreview() {
                       transition: "color 0.3s ease",
                     }}
                   >
-                    Learn more →
+                    {t("learnMore")}
                   </Link>
                 </div>
               </motion.div>

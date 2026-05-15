@@ -17,14 +17,22 @@
     "label": "Our Story",
     "heading": "Two People. One Obsession.",
     "subheading": "We started Nomad Privé because the trips we wanted didn't exist.",
-    "readMore": "Read our full story →"
+    "readMore": "Read our full story →",
+    "body1": "My partner studied Tourism & Hospitality at university. I spent years traveling with one rule: go where the tourists don't.",
+    "body2": "Between us, we've built something neither of us could have alone — the academic foundation of hospitality and destination management, combined with the instinct of someone who has eaten street food at 2am in a Marrakesh medina and found the best surf break in Lombok before it had a name.",
+    "body3": "We've been to 8+ countries across four continents. We know the difference between a hotel that looks beautiful on Instagram and one that actually changes how you feel. We have contacts — real ones, built over years — at boutique hotels, private villas, charter operators, and restaurants that don't take walk-ins.",
+    "body4": "When something goes wrong on a trip (and something always does), we solve it before our clients notice it was a problem."
   },
   "packages": {
     "label": "Packages",
     "heading": "The Experience Made for You",
     "headingPre": "The Experience",
     "headingEm": "Made for You",
-    "viewAll": "Compare all packages →"
+    "viewAll": "Compare all packages →",
+    "tagline1": "Your journey, perfectly curated.",
+    "tagline2": "No limits. No compromises.",
+    "tagline3": "By referral only. For those who want the impossible.",
+    "learnMore": "Learn more →"
   },
   "contact": {
     "label": "Get in touch",
@@ -38,7 +46,11 @@
     "getInTouch": "Get in touch",
     "navigate": "Navigate",
     "contact": "Contact",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "description": "Hyper-personalized luxury travel for those who refuse the ordinary. Built on firsthand experience, run on real relationships.",
+    "byReferralOnly": "By referral only",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   },
   "quiz": {
     "title": "Find Your Perfect Destination",
@@ -47,5 +59,54 @@
     "retake": "Retake quiz",
     "readMore": "Read about",
     "startPlanning": "Start Planning"
+  },
+  "quizCTA": {
+    "eyebrow": "Not sure where to go?",
+    "headingPre": "Let us find your",
+    "headingEm": "perfect destination.",
+    "cta": "Take the Quiz →"
+  },
+  "services": {
+    "privateJet": "Private Jet",
+    "yacht": "Yacht & Sailing",
+    "sportsCar": "Sports Car",
+    "villas": "Exclusive Villas",
+    "itineraries": "Bespoke Itineraries",
+    "helicopter": "Helicopter Transfers",
+    "cruise": "Cruise & Expedition",
+    "vehicleTransport": "Vehicle Transport"
+  },
+  "worldMap": {
+    "stood": "We've stood here."
+  },
+  "form": {
+    "step1Heading": "Where do you dream of going?",
+    "step1Placeholder": "Santorini, Bali, anywhere...",
+    "step2Heading": "When are you thinking?",
+    "timing1": "Next 3 months",
+    "timing2": "3–6 months",
+    "timing3": "6–12 months",
+    "timing4": "Just exploring for now",
+    "step3Heading": "How many travelers?",
+    "adults": "Adults",
+    "children": "Children",
+    "couple": "Couple / Solo",
+    "group": "Private Group",
+    "surpriseMe": "Surprise me",
+    "labelName": "Name *",
+    "labelEmail": "Email *",
+    "labelPhone": "Phone (optional)",
+    "labelReferral": "Who referred you to us? *",
+    "labelMessage": "Tell us more about your dream trip (optional)",
+    "placeholderName": "Your name",
+    "placeholderEmail": "your@email.com",
+    "placeholderPhone": "+1 212 555 0100",
+    "placeholderReferral": "Name of the person who recommended us",
+    "placeholderMessage": "Any details, preferences, or special requests...",
+    "back": "← Back",
+    "next": "Next →",
+    "send": "Send My Request",
+    "successTitle": "Request received.",
+    "successBody": "We'll be in touch within 24 hours."
   }
 }

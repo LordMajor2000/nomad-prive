@@ -17,14 +17,22 @@
     "label": "Náš príbeh",
     "heading": "Dvaja ľudia. Jedna vášeň.",
     "subheading": "Nomad Privé sme založili preto, že cesty, o ktorých sme snívali, neexistovali.",
-    "readMore": "Prečítajte si náš príbeh →"
+    "readMore": "Prečítajte si náš príbeh →",
+    "body1": "Môj partner študoval cestovný ruch a hotelierstvo na univerzite. Strávil som roky cestovaním s jedným pravidlom: choď tam, kde nie sú turisti.",
+    "body2": "Spolu sme vytvorili niečo, čo by ani jeden z nás nedokázal sám — akademické základy pohostinstva a manažmentu destinácií, kombinované s inštinktom niekoho, kto jedol pouličné jedlo o 2. hodine ráno v marockom medine a objavil najlepšie surfovacie miesto na Lomboku, skôr než malo meno.",
+    "body3": "Navštívili sme viac ako 8 krajín na štyroch kontinentoch. Poznáme rozdiel medzi hotelom, ktorý vyzerá krásne na Instagrame, a tým, ktorý skutočne zmení vaše pocity. Máme kontakty — skutočné, budované roky — v butikových hoteloch, súkromných vilách, charterových operátoroch a reštauráciách, ktoré neprijímajú zákazníkov bez rezervácie.",
+    "body4": "Keď sa na ceste niečo pokazí (a vždy sa niečo pokazí), vyriešime to skôr, ako si naši klienti všimnú, že bol problém."
   },
   "packages": {
     "label": "Balíky",
     "heading": "Zážitok vytvorený pre vás",
     "headingPre": "Zážitok",
     "headingEm": "vytvorený pre vás",
-    "viewAll": "Porovnať všetky balíky →"
+    "viewAll": "Porovnať všetky balíky →",
+    "tagline1": "Vaša cesta, dokonale zostavená.",
+    "tagline2": "Žiadne hranice. Žiadne kompromisy.",
+    "tagline3": "Len na odporúčanie. Pre tých, čo chcú nemožné.",
+    "learnMore": "Zistiť viac →"
   },
   "contact": {
     "label": "Kontaktujte nás",
@@ -38,7 +46,11 @@
     "getInTouch": "Kontaktujte nás",
     "navigate": "Navigácia",
     "contact": "Kontakt",
-    "rights": "Všetky práva vyhradené."
+    "rights": "Všetky práva vyhradené.",
+    "description": "Hyperpersonalizované luxusné cestovanie pre tých, čo odmietajú bežné. Postavené na priamej skúsenosti, vedené skutočnými vzťahmi.",
+    "byReferralOnly": "Len na odporúčanie",
+    "privacy": "Zásady ochrany súkromia",
+    "terms": "Obchodné podmienky"
   },
   "quiz": {
     "title": "Nájdite svoju dokonalú destináciu",
@@ -47,5 +59,54 @@
     "retake": "Zopakovať kvíz",
     "readMore": "Čítajte viac o",
     "startPlanning": "Začať plánovať"
+  },
+  "quizCTA": {
+    "eyebrow": "Neviete, kam ísť?",
+    "headingPre": "Pomôžeme vám nájsť vašu",
+    "headingEm": "ideálnu destináciu.",
+    "cta": "Spustiť kvíz →"
+  },
+  "services": {
+    "privateJet": "Súkromné lietadlo",
+    "yacht": "Jachta a plachtenie",
+    "sportsCar": "Športové auto",
+    "villas": "Exkluzívne vily",
+    "itineraries": "Cestovné plány na mieru",
+    "helicopter": "Helikoptérové transfery",
+    "cruise": "Plavba a expedícia",
+    "vehicleTransport": "Preprava vozidiel"
+  },
+  "worldMap": {
+    "stood": "Boli sme tu."
+  },
+  "form": {
+    "step1Heading": "Kam sa túžite dostať?",
+    "step1Placeholder": "Santorini, Bali, kdekoľvek...",
+    "step2Heading": "Kedy uvažujete?",
+    "timing1": "Najbližšie 3 mesiace",
+    "timing2": "3–6 mesiacov",
+    "timing3": "6–12 mesiacov",
+    "timing4": "Zatiaľ len prezerám",
+    "step3Heading": "Koľko cestujúcich?",
+    "adults": "Dospelí",
+    "children": "Deti",
+    "couple": "Pár / Jednotlivec",
+    "group": "Súkromná skupina",
+    "surpriseMe": "Prekvap ma",
+    "labelName": "Meno *",
+    "labelEmail": "Email *",
+    "labelPhone": "Telefón (voliteľné)",
+    "labelReferral": "Kto vás odporučil? *",
+    "labelMessage": "Povedzte nám viac o vašej vysnívanej ceste (voliteľné)",
+    "placeholderName": "Vaše meno",
+    "placeholderEmail": "vas@email.sk",
+    "placeholderPhone": "+421 903 123 456",
+    "placeholderReferral": "Meno osoby, ktorá vás odporučila",
+    "placeholderMessage": "Podrobnosti, preferencie, špeciálne požiadavky...",
+    "back": "← Späť",
+    "next": "Ďalej →",
+    "send": "Odoslať žiadosť",
+    "successTitle": "Žiadosť prijatá.",
+    "successBody": "Ozveme sa do 24 hodín."
   }
 }

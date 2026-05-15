@@ -48,7 +48,7 @@ export default function Footer() {
             opacity: 0.7,
           }}
         >
-          By referral only
+          {t("byReferralOnly")}
         </p>
         <h2
           style={{
@@ -138,7 +138,7 @@ export default function Footer() {
               fontWeight: 300,
             }}
           >
-            Hyper-personalized luxury travel for those who refuse the ordinary. Built on firsthand experience, run on real relationships.
+            {t("description")}
           </p>
           <div style={{ display: "flex", gap: "1rem" }}>
             {[
@@ -291,7 +291,7 @@ export default function Footer() {
           © {currentYear} Nomad Privé. {t("rights")}
         </p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Privacy Policy", "Terms & Conditions"].map((label) => (
+          {[t("privacy"), t("terms")].map((label) => (
             <a
               key={label}
               href="#"

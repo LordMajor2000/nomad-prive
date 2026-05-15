@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 // x = (lon + 180) / 360 * 100  |  y = (90 - lat) / 180 * 55
 const featured = [
@@ -34,6 +35,7 @@ const visited = [
 ];
 
 export default function WorldMap() {
+  const t = useTranslations("worldMap");
   const [hovered, setHovered] = useState<string | null>(null);
   const [hoveredVisited, setHoveredVisited] = useState<string | null>(null);
 
@@ -44,7 +46,7 @@ export default function WorldMap() {
           Our footprint
         </div>
         <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 0.75rem", lineHeight: 1.2 }}>
-          {"We've stood here. "}
+          {t("stood")}{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>We know the way.</em>
         </h2>
         <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)", opacity: 0.5 }}>

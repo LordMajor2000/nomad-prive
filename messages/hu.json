@@ -17,14 +17,22 @@
     "label": "A mi sztorink",
     "heading": "Két ember. Egy szenvedély.",
     "subheading": "Azért alapítottuk a Nomad Privé-t, mert az utazások, amiket akartunk, nem léteztek.",
-    "readMore": "Olvasd el a teljes történetünket →"
+    "readMore": "Olvasd el a teljes történetünket →",
+    "body1": "Partnerem Turizmus és Vendéglátás szakot végzett az egyetemen. Én éveket töltöttem utazással egyetlen szabállyal: menj oda, ahol nincsenek turisták.",
+    "body2": "Együtt valami olyat hoztunk létre, amit egyikünk sem tudott volna egyedül — a vendéglátás és a célpontmenedzsment akadémiai alapjait kombinálva annak ösztöneivel, aki hajnali 2-kor ette az utcai ételt egy marrákesi medina mélyén, és felfedezte Lombok legjobb szörfhullámát, mielőtt neve lett volna.",
+    "body3": "Több mint 8 országban jártunk négy kontinensen. Tudjuk a különbséget egy Instagramon gyönyörűnek tűnő hotel és egy olyan között, ami tényleg megváltoztatja az érzéseidet. Valódi kapcsolataink vannak — évek alatt kiépítve — boutique hotelekben, privát villákban, charter üzemeltetőknél és olyan éttermekben, amelyek nem fogadnak be sétáló vendégeket.",
+    "body4": "Ha valami rosszul sül el egy utazáson (és mindig van valami), megoldjuk, mielőtt az ügyfeleink észrevennék, hogy probléma volt."
   },
   "packages": {
     "label": "Csomagok",
     "heading": "A neked szóló élmény",
     "headingPre": "A neked szóló",
     "headingEm": "élmény",
-    "viewAll": "Összes csomag összehasonlítása →"
+    "viewAll": "Összes csomag összehasonlítása →",
+    "tagline1": "Az utazásod, tökéletesen összeállítva.",
+    "tagline2": "Nincs határ. Nincs kompromisszum.",
+    "tagline3": "Csak ajánlással. Azoknak, akik a lehetetlent akarják.",
+    "learnMore": "Tudj meg többet →"
   },
   "contact": {
     "label": "Kapcsolatfelvétel",
@@ -38,7 +46,11 @@
     "getInTouch": "Kapcsolatfelvétel",
     "navigate": "Navigáció",
     "contact": "Kapcsolat",
-    "rights": "Minden jog fenntartva."
+    "rights": "Minden jog fenntartva.",
+    "description": "Hiperszemélyesített luxusutazás azoknak, akik visszautasítják a megszokottat. Elsőkézből szerzett tapasztalatokon alapul, valódi kapcsolatokon működik.",
+    "byReferralOnly": "Csak ajánlással",
+    "privacy": "Adatvédelmi nyilatkozat",
+    "terms": "Általános szerződési feltételek"
   },
   "quiz": {
     "title": "Találd meg a tökéletes úticéled",
@@ -47,5 +59,54 @@
     "retake": "Újra kitöltöm",
     "readMore": "Olvass többet:",
     "startPlanning": "Tervezés indítása"
+  },
+  "quizCTA": {
+    "eyebrow": "Nem tudod, hova menj?",
+    "headingPre": "Segítünk megtalálni a",
+    "headingEm": "tökéletes úticéled.",
+    "cta": "Indítsd el a quizt →"
+  },
+  "services": {
+    "privateJet": "Magánrepülő",
+    "yacht": "Jacht és vitorlázás",
+    "sportsCar": "Sportautó",
+    "villas": "Exkluzív villák",
+    "itineraries": "Egyedi útvonaltervek",
+    "helicopter": "Helikopteres transzfer",
+    "cruise": "Körutazás és expedíció",
+    "vehicleTransport": "Járműszállítás"
+  },
+  "worldMap": {
+    "stood": "Mi is álltunk itt."
+  },
+  "form": {
+    "step1Heading": "Hova álmodod magad?",
+    "step1Placeholder": "Santorini, Bali, bárhova...",
+    "step2Heading": "Mikor gondolkozol?",
+    "timing1": "Következő 3 hónapban",
+    "timing2": "3–6 hónapon belül",
+    "timing3": "6–12 hónapon belül",
+    "timing4": "Egyelőre csak nézegetek",
+    "step3Heading": "Hány utazó?",
+    "adults": "Felnőtt",
+    "children": "Gyermek",
+    "couple": "Pár / Egyéni",
+    "group": "Privát csoport",
+    "surpriseMe": "Lepj meg",
+    "labelName": "Név *",
+    "labelEmail": "Email *",
+    "labelPhone": "Telefon (opcionális)",
+    "labelReferral": "Ki ajánlott minket? *",
+    "labelMessage": "Mondj el többet az álomutazásodról (opcionális)",
+    "placeholderName": "A neved",
+    "placeholderEmail": "a_te@emailed.hu",
+    "placeholderPhone": "+36 30 123 4567",
+    "placeholderReferral": "Az ajánló neve",
+    "placeholderMessage": "Részletek, preferenciák, különleges kérések...",
+    "back": "← Vissza",
+    "next": "Következő →",
+    "send": "Küldöm a kérést",
+    "successTitle": "Kérés megérkezett.",
+    "successBody": "24 órán belül felvesszük a kapcsolatot."
   }
 }

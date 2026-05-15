@@ -17,14 +17,22 @@
     "label": "Unsere Geschichte",
     "heading": "Zwei Menschen. Eine Leidenschaft.",
     "subheading": "Wir gründeten Nomad Privé, weil die Reisen, die wir uns vorstellten, nicht existierten.",
-    "readMore": "Lesen Sie unsere vollständige Geschichte →"
+    "readMore": "Lesen Sie unsere vollständige Geschichte →",
+    "body1": "Mein Partner hat Tourismus und Gastgewerbe studiert. Ich habe jahrelang mit einer Regel gereist: Geh dorthin, wo keine Touristen sind.",
+    "body2": "Gemeinsam haben wir etwas erschaffen, das keiner von uns allein hätte erreichen können — das akademische Fundament der Gastlichkeit und des Destinationsmanagements, kombiniert mit dem Instinkt von jemandem, der um 2 Uhr morgens Straßenessen in einer Marrakecher Medina gegessen und den besten Surfspot in Lombok gefunden hat, bevor er einen Namen hatte.",
+    "body3": "Wir waren in mehr als 8 Ländern auf vier Kontinenten. Wir kennen den Unterschied zwischen einem Hotel, das auf Instagram schön aussieht, und einem, das tatsächlich verändert, wie man sich fühlt. Wir haben Kontakte — echte, über Jahre aufgebaut — in Boutique-Hotels, Privatvillen, Charter-Betreibern und Restaurants, die keine Laufkundschaft annehmen.",
+    "body4": "Wenn auf einer Reise etwas schiefgeht (und etwas geht immer schief), lösen wir es, bevor unsere Kunden bemerken, dass es ein Problem war."
   },
   "packages": {
     "label": "Pakete",
     "heading": "Das Erlebnis, das für Sie gemacht wurde",
     "headingPre": "Das Erlebnis",
     "headingEm": "für Sie gemacht",
-    "viewAll": "Alle Pakete vergleichen →"
+    "viewAll": "Alle Pakete vergleichen →",
+    "tagline1": "Ihre Reise, perfekt kuratiert.",
+    "tagline2": "Keine Grenzen. Keine Kompromisse.",
+    "tagline3": "Nur auf Empfehlung. Für jene, die das Unmögliche wollen.",
+    "learnMore": "Mehr erfahren →"
   },
   "contact": {
     "label": "Kontakt aufnehmen",
@@ -38,7 +46,11 @@
     "getInTouch": "Kontakt aufnehmen",
     "navigate": "Navigation",
     "contact": "Kontakt",
-    "rights": "Alle Rechte vorbehalten."
+    "rights": "Alle Rechte vorbehalten.",
+    "description": "Hyperpersonalisierte Luxusreisen für jene, die das Gewöhnliche ablehnen. Aufgebaut auf persönlicher Erfahrung, getragen von echten Beziehungen.",
+    "byReferralOnly": "Nur auf Empfehlung",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen"
   },
   "quiz": {
     "title": "Finden Sie Ihr perfektes Reiseziel",
@@ -47,5 +59,54 @@
     "retake": "Quiz wiederholen",
     "readMore": "Mehr lesen über",
     "startPlanning": "Reise planen"
+  },
+  "quizCTA": {
+    "eyebrow": "Nicht sicher, wohin Sie reisen möchten?",
+    "headingPre": "Wir finden Ihr",
+    "headingEm": "perfektes Reiseziel.",
+    "cta": "Quiz starten →"
+  },
+  "services": {
+    "privateJet": "Privatjet",
+    "yacht": "Yacht & Segeln",
+    "sportsCar": "Sportwagen",
+    "villas": "Exklusive Villen",
+    "itineraries": "Maßgeschneiderte Reiserouten",
+    "helicopter": "Hubschraubertransfer",
+    "cruise": "Kreuzfahrt & Expedition",
+    "vehicleTransport": "Fahrzeugtransport"
+  },
+  "worldMap": {
+    "stood": "Wir waren hier."
+  },
+  "form": {
+    "step1Heading": "Wohin träumen Sie?",
+    "step1Placeholder": "Santorini, Bali, irgendwo...",
+    "step2Heading": "Wann planen Sie?",
+    "timing1": "Nächste 3 Monate",
+    "timing2": "3–6 Monate",
+    "timing3": "6–12 Monate",
+    "timing4": "Ich schaue mich erst um",
+    "step3Heading": "Wie viele Reisende?",
+    "adults": "Erwachsene",
+    "children": "Kinder",
+    "couple": "Paar / Allein",
+    "group": "Privatgruppe",
+    "surpriseMe": "Überrasch mich",
+    "labelName": "Name *",
+    "labelEmail": "E-Mail *",
+    "labelPhone": "Telefon (optional)",
+    "labelReferral": "Wer hat uns Ihnen empfohlen? *",
+    "labelMessage": "Erzählen Sie uns mehr über Ihre Traumreise (optional)",
+    "placeholderName": "Ihr Name",
+    "placeholderEmail": "ihre@email.de",
+    "placeholderPhone": "+49 30 1234567",
+    "placeholderReferral": "Name der empfehlenden Person",
+    "placeholderMessage": "Details, Vorlieben, besondere Wünsche...",
+    "back": "← Zurück",
+    "next": "Weiter →",
+    "send": "Anfrage senden",
+    "successTitle": "Anfrage eingegangen.",
+    "successBody": "Wir melden uns innerhalb von 24 Stunden."
   }
 }

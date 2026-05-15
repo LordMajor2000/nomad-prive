@@ -1,23 +1,25 @@
 "use client";
 
 import { Plane, Anchor, Car, Home, Map, Helicopter, Ship, Truck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-const services = [
-  { icon: <Plane size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Private Jet" },
-  { icon: <Anchor size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Yacht & Sailing" },
-  { icon: <Car size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Sports Car" },
-  { icon: <Home size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Exclusive Villas" },
-  { icon: <Map size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Bespoke Itineraries" },
-  { icon: <Helicopter size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Helicopter Transfers" },
-  { icon: <Ship size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Cruise & Expedition" },
-  { icon: <Truck size={28} strokeWidth={1.2} color="#C9A96E" />, label: "Vehicle Transport" },
-];
-
-// Duplicate list so the seamless loop works (we show 2 copies, animate -50%)
-const row1Items = [...services, ...services];
-const row2Items = [...services, ...services];
+const serviceIcons = [
+  { icon: <Plane size={28} strokeWidth={1.2} color="#C9A96E" />, key: "privateJet" },
+  { icon: <Anchor size={28} strokeWidth={1.2} color="#C9A96E" />, key: "yacht" },
+  { icon: <Car size={28} strokeWidth={1.2} color="#C9A96E" />, key: "sportsCar" },
+  { icon: <Home size={28} strokeWidth={1.2} color="#C9A96E" />, key: "villas" },
+  { icon: <Map size={28} strokeWidth={1.2} color="#C9A96E" />, key: "itineraries" },
+  { icon: <Helicopter size={28} strokeWidth={1.2} color="#C9A96E" />, key: "helicopter" },
+  { icon: <Ship size={28} strokeWidth={1.2} color="#C9A96E" />, key: "cruise" },
+  { icon: <Truck size={28} strokeWidth={1.2} color="#C9A96E" />, key: "vehicleTransport" },
+] as const;
 
 export default function ServicesStrip() {
+  const t = useTranslations("services");
+  const services = serviceIcons.map((s) => ({ ...s, label: t(s.key) }));
+  const row1Items = [...services, ...services];
+  const row2Items = [...services, ...services];
+
   return (
     <>
       <style>{`
@@ -99,7 +101,6 @@ export default function ServicesStrip() {
                 >
                   {service.label}
                 </span>
-                {/* Diamond separator */}
                 <span
                   style={{
                     color: "rgba(201,169,110,0.3)",
@@ -115,7 +116,7 @@ export default function ServicesStrip() {
           </div>
         </div>
 
-        {/* Row 2 — right scroll, labels only, no icons, reduced opacity */}
+        {/* Row 2 — right scroll, labels only, reduced opacity */}
         <div className="marquee-row" style={{ overflow: "hidden" }}>
           <div className="marquee-track-right">
             {row2Items.map((service, i) => (
@@ -141,7 +142,6 @@ export default function ServicesStrip() {
                 >
                   {service.label}
                 </span>
-                {/* Diamond separator */}
                 <span
                   style={{
                     color: "rgba(201,169,110,0.25)",

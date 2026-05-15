@@ -176,53 +176,21 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div data-reveal>
-              <p
-                style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
-                  lineHeight: 1.85,
-                  color: "var(--muted)",
-                  margin: "0 0 1.2rem",
-                  fontWeight: 300,
-                }}
-              >
-                My partner studied Tourism &amp; Hospitality at university. I spent years
-                traveling with one rule: go where the tourists don&apos;t.
-              </p>
-            </div>
-            <div data-reveal>
-              <p
-                style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
-                  lineHeight: 1.85,
-                  color: "var(--muted)",
-                  margin: "0 0 1.2rem",
-                  fontWeight: 300,
-                }}
-              >
-                Between us, we&apos;ve built something neither of us could have alone — the
-                academic foundation of hospitality and destination management, combined with
-                the instinct of someone who has eaten street food at 2am in a Marrakesh
-                medina and found the best surf break in Lombok before it had a name.
-              </p>
-            </div>
-            <div data-reveal>
-              <p
-                style={{
-                  fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
-                  lineHeight: 1.85,
-                  color: "var(--muted)",
-                  margin: "0 0 1.2rem",
-                  fontWeight: 300,
-                }}
-              >
-                We&apos;ve been to 8+ countries across four continents. We know the difference
-                between a hotel that looks beautiful on Instagram and one that actually
-                changes how you feel. We have contacts — real ones, built over years — at
-                boutique hotels, private villas, charter operators, and restaurants that
-                don&apos;t take walk-ins.
-              </p>
-            </div>
+            {(["body1", "body2", "body3"] as const).map((key) => (
+              <div key={key} data-reveal>
+                <p
+                  style={{
+                    fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                    lineHeight: 1.85,
+                    color: "var(--muted)",
+                    margin: "0 0 1.2rem",
+                    fontWeight: 300,
+                  }}
+                >
+                  {t(key)}
+                </p>
+              </div>
+            ))}
             <div data-reveal>
               <p
                 style={{
@@ -233,8 +201,7 @@ export default function AboutSection() {
                   fontWeight: 300,
                 }}
               >
-                When something goes wrong on a trip (and something always does), we solve
-                it before our clients notice it was a problem.
+                {t("body4")}
               </p>
             </div>
 

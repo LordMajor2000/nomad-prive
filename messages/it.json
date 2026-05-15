@@ -17,14 +17,22 @@
     "label": "La nostra storia",
     "heading": "Due persone. Un'ossessione.",
     "subheading": "Abbiamo fondato Nomad Privé perché i viaggi che volevamo non esistevano.",
-    "readMore": "Leggi la nostra storia completa →"
+    "readMore": "Leggi la nostra storia completa →",
+    "body1": "Il mio partner ha studiato Turismo e Ospitalità all'università. Ho trascorso anni a viaggiare con una regola: vai dove non ci sono turisti.",
+    "body2": "Insieme abbiamo creato qualcosa che nessuno di noi avrebbe potuto fare da solo — le basi accademiche dell'ospitalità e della gestione delle destinazioni, combinate con l'istinto di qualcuno che ha mangiato cibo di strada alle 2 di notte in una medina di Marrakech e ha trovato il miglior spot di surf a Lombok prima che avesse un nome.",
+    "body3": "Siamo stati in più di 8 paesi su quattro continenti. Conosciamo la differenza tra un hotel che sembra bello su Instagram e uno che cambia davvero come ci si sente. Abbiamo contatti — veri, costruiti negli anni — in boutique hotel, ville private, operatori charter e ristoranti che non accettano clienti senza prenotazione.",
+    "body4": "Quando qualcosa va storto in un viaggio (e succede sempre), lo risolviamo prima che i nostri clienti si accorgano che c'era un problema."
   },
   "packages": {
     "label": "Pacchetti",
     "heading": "L'esperienza pensata per te",
     "headingPre": "L'esperienza",
     "headingEm": "fatta per te",
-    "viewAll": "Confronta tutti i pacchetti →"
+    "viewAll": "Confronta tutti i pacchetti →",
+    "tagline1": "Il tuo viaggio, perfettamente curato.",
+    "tagline2": "Nessun limite. Nessun compromesso.",
+    "tagline3": "Solo su riferimento. Per chi vuole l'impossibile.",
+    "learnMore": "Scopri di più →"
   },
   "contact": {
     "label": "Contattaci",
@@ -38,7 +46,11 @@
     "getInTouch": "Contattaci",
     "navigate": "Naviga",
     "contact": "Contatti",
-    "rights": "Tutti i diritti riservati."
+    "rights": "Tutti i diritti riservati.",
+    "description": "Viaggi di lusso iperpersonalizzati per chi rifiuta l'ordinario. Fondati sull'esperienza diretta, sostenuti da relazioni reali.",
+    "byReferralOnly": "Solo su riferimento",
+    "privacy": "Informativa sulla privacy",
+    "terms": "Termini e condizioni"
   },
   "quiz": {
     "title": "Trova la tua destinazione perfetta",
@@ -47,5 +59,54 @@
     "retake": "Rifai il quiz",
     "readMore": "Leggi di più su",
     "startPlanning": "Inizia a pianificare"
+  },
+  "quizCTA": {
+    "eyebrow": "Non sai dove andare?",
+    "headingPre": "Lasciaci trovare la tua",
+    "headingEm": "destinazione perfetta.",
+    "cta": "Fai il quiz →"
+  },
+  "services": {
+    "privateJet": "Jet privato",
+    "yacht": "Yacht & Vela",
+    "sportsCar": "Auto sportiva",
+    "villas": "Ville esclusive",
+    "itineraries": "Itinerari su misura",
+    "helicopter": "Trasferimenti in elicottero",
+    "cruise": "Crociera & Spedizione",
+    "vehicleTransport": "Trasporto veicoli"
+  },
+  "worldMap": {
+    "stood": "Ci siamo stati."
+  },
+  "form": {
+    "step1Heading": "Dove sogni di andare?",
+    "step1Placeholder": "Santorini, Bali, ovunque...",
+    "step2Heading": "Quando stai pensando?",
+    "timing1": "Nei prossimi 3 mesi",
+    "timing2": "3–6 mesi",
+    "timing3": "6–12 mesi",
+    "timing4": "Sto solo esplorando",
+    "step3Heading": "Quanti viaggiatori?",
+    "adults": "Adulti",
+    "children": "Bambini",
+    "couple": "Coppia / Solo",
+    "group": "Gruppo privato",
+    "surpriseMe": "Sorprendimi",
+    "labelName": "Nome *",
+    "labelEmail": "Email *",
+    "labelPhone": "Telefono (opzionale)",
+    "labelReferral": "Chi ti ha consigliato? *",
+    "labelMessage": "Raccontaci di più sul tuo viaggio dei sogni (opzionale)",
+    "placeholderName": "Il tuo nome",
+    "placeholderEmail": "tuo@email.it",
+    "placeholderPhone": "+39 02 1234567",
+    "placeholderReferral": "Nome della persona che ti ha raccomandato",
+    "placeholderMessage": "Dettagli, preferenze, richieste speciali...",
+    "back": "← Indietro",
+    "next": "Avanti →",
+    "send": "Invia la mia richiesta",
+    "successTitle": "Richiesta ricevuta.",
+    "successBody": "Ti contatteremo entro 24 ore."
   }
 }

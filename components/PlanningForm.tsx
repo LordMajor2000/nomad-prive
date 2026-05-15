@@ -2,24 +2,9 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-const destinationChips = [
-  "Sri Lanka",
-  "Morocco",
-  "Miami",
-  "Mykonos",
-  "Bali",
-  "Amalfi",
-  "Dubrovnik",
-  "Surprise me",
-];
-
-const timingOptions = [
-  "Next 3 months",
-  "3–6 months",
-  "6–12 months",
-  "Just exploring for now",
-];
+const destinationChipsBase = ["Sri Lanka", "Morocco", "Miami", "Mykonos", "Bali", "Amalfi", "Dubrovnik"];
 
 type Rating = "best" | "good" | "avoid" | "shoulder";
 
@@ -66,6 +51,9 @@ const slideVariants = {
 const stepTransition = { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] };
 
 export default function PlanningForm() {
+  const t = useTranslations("form");
+  const destinationChips = [...destinationChipsBase, t("surpriseMe")];
+  const timingOptions = [t("timing1"), t("timing2"), t("timing3"), t("timing4")];
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialForm);
@@ -182,12 +170,12 @@ export default function PlanningForm() {
                   marginBottom: "1.75rem",
                 }}
               >
-                Where do you dream of going?
+                {t("step1Heading")}
               </h3>
 
               <input
                 type="text"
-                placeholder="Santorini, Bali, anywhere..."
+                placeholder={t("step1Placeholder")}
                 value={formData.destination}
                 onChange={(e) =>
                   setFormData({ ...formData, destination: e.target.value })
@@ -251,7 +239,7 @@ export default function PlanningForm() {
                   marginBottom: "1.75rem",
                 }}
               >
-                When are you thinking?
+                {t("step2Heading")}
               </h3>
 
               <div
@@ -310,7 +298,7 @@ export default function PlanningForm() {
                   marginBottom: "1.75rem",
                 }}
               >
-                How many travelers?
+                {t("step3Heading")}
               </h3>
 
               {/* Adults stepper */}
@@ -324,7 +312,7 @@ export default function PlanningForm() {
                   marginBottom: "1rem",
                 }}
               >
-                <span style={{ color: "var(--cream)", fontSize: "0.95rem" }}>Adults</span>
+                <span style={{ color: "var(--cream)", fontSize: "0.95rem" }}>{t("adults")}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
                   <button
                     type="button"
@@ -385,7 +373,7 @@ export default function PlanningForm() {
                   marginBottom: "1.5rem",
                 }}
               >
-                <span style={{ color: "var(--cream)", fontSize: "0.95rem" }}>Children</span>
+                <span style={{ color: "var(--cream)", fontSize: "0.95rem" }}>{t("children")}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
                   <button
                     type="button"
@@ -457,7 +445,7 @@ export default function PlanningForm() {
                       fontFamily: "var(--font-inter), Inter, sans-serif",
                     }}
                   >
-                    {type === "couple" ? "Couple / Solo" : "Private Group"}
+                    {type === "couple" ? t("couple") : t("group")}
                   </button>
                 ))}
               </div>
@@ -489,10 +477,10 @@ export default function PlanningForm() {
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
                 <div>
-                  <label style={labelStyle}>Name *</label>
+                  <label style={labelStyle}>{t("labelName")}</label>
                   <input
                     type="text"
-                    placeholder="Your name"
+                    placeholder={t("placeholderName")}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     style={inputStyle}
@@ -500,10 +488,10 @@ export default function PlanningForm() {
                   />
                 </div>
                 <div>
-                  <label style={labelStyle}>Email *</label>
+                  <label style={labelStyle}>{t("labelEmail")}</label>
                   <input
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder={t("placeholderEmail")}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     style={inputStyle}
@@ -511,30 +499,30 @@ export default function PlanningForm() {
                   />
                 </div>
                 <div>
-                  <label style={labelStyle}>Phone (optional)</label>
+                  <label style={labelStyle}>{t("labelPhone")}</label>
                   <input
                     type="tel"
-                    placeholder="+1 212 555 0100"
+                    placeholder={t("placeholderPhone")}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     style={inputStyle}
                   />
                 </div>
                 <div>
-                  <label style={labelStyle}>Who referred you to us? *</label>
+                  <label style={labelStyle}>{t("labelReferral")}</label>
                   <input
                     type="text"
-                    placeholder="Name of the person who recommended us"
+                    placeholder={t("placeholderReferral")}
                     value={formData.referral}
                     onChange={(e) => setFormData({ ...formData, referral: e.target.value })}
                     style={inputStyle}
                   />
                 </div>
                 <div>
-                  <label style={labelStyle}>Tell us more about your dream trip (optional)</label>
+                  <label style={labelStyle}>{t("labelMessage")}</label>
                   <textarea
                     rows={4}
-                    placeholder="Any details, preferences, or special requests..."
+                    placeholder={t("placeholderMessage")}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     style={{
@@ -602,10 +590,10 @@ export default function PlanningForm() {
                   marginBottom: "0.75rem",
                 }}
               >
-                Request received.
+                {t("successTitle")}
               </h3>
               <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.9rem", lineHeight: 1.7 }}>
-                We&apos;ll be in touch within 24 hours.
+                {t("successBody")}
               </p>
             </motion.div>
           )}
@@ -638,7 +626,7 @@ export default function PlanningForm() {
                 fontFamily: "var(--font-inter), Inter, sans-serif",
               }}
             >
-              ← Back
+              {t("back")}
             </button>
           )}
 
@@ -668,7 +656,7 @@ export default function PlanningForm() {
                 fontFamily: "var(--font-inter), Inter, sans-serif",
               }}
             >
-              Next →
+              {t("next")}
             </button>
           ) : (
             <button
@@ -691,7 +679,7 @@ export default function PlanningForm() {
                 fontFamily: "var(--font-inter), Inter, sans-serif",
               }}
             >
-              Send My Request
+              {t("send")}
             </button>
           )}
         </div>

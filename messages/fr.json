@@ -17,14 +17,22 @@
     "label": "Notre histoire",
     "heading": "Deux personnes. Une obsession.",
     "subheading": "Nous avons fondé Nomad Privé parce que les voyages dont nous rêvions n'existaient pas.",
-    "readMore": "Lire notre histoire complète →"
+    "readMore": "Lire notre histoire complète →",
+    "body1": "Mon partenaire a étudié le tourisme et l'hôtellerie à l'université. J'ai passé des années à voyager avec une seule règle : aller là où les touristes ne vont pas.",
+    "body2": "Ensemble, nous avons créé quelque chose qu'aucun de nous n'aurait pu faire seul — les bases académiques de l'hôtellerie et de la gestion des destinations, combinées à l'instinct de quelqu'un qui a mangé des plats de rue à 2h du matin dans une médina de Marrakech et trouvé le meilleur spot de surf à Lombok avant qu'il n'ait un nom.",
+    "body3": "Nous avons visité plus de 8 pays sur quatre continents. Nous connaissons la différence entre un hôtel qui est beau sur Instagram et celui qui change réellement ce que l'on ressent. Nous avons des contacts — de vrais, bâtis sur des années — dans des hôtels boutiques, des villas privées, des opérateurs charter et des restaurants qui n'acceptent pas les clients sans réservation.",
+    "body4": "Quand quelque chose se passe mal lors d'un voyage (et il y a toujours quelque chose), nous le résolvons avant que nos clients ne s'en aperçoivent."
   },
   "packages": {
     "label": "Formules",
     "heading": "L'expérience taillée pour vous",
     "headingPre": "L'expérience",
     "headingEm": "faite pour vous",
-    "viewAll": "Comparer toutes les formules →"
+    "viewAll": "Comparer toutes les formules →",
+    "tagline1": "Votre voyage, parfaitement pensé.",
+    "tagline2": "Aucune limite. Aucun compromis.",
+    "tagline3": "Sur recommandation uniquement. Pour ceux qui veulent l'impossible.",
+    "learnMore": "En savoir plus →"
   },
   "contact": {
     "label": "Nous contacter",
@@ -38,7 +46,11 @@
     "getInTouch": "Nous contacter",
     "navigate": "Navigation",
     "contact": "Contact",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "description": "Voyages de luxe hyperpersonnalisés pour ceux qui refusent l'ordinaire. Fondés sur une expérience directe, portés par de vraies relations.",
+    "byReferralOnly": "Sur recommandation uniquement",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions générales"
   },
   "quiz": {
     "title": "Trouvez votre destination parfaite",
@@ -47,5 +59,54 @@
     "retake": "Recommencer le quiz",
     "readMore": "En savoir plus sur",
     "startPlanning": "Commencer à planifier"
+  },
+  "quizCTA": {
+    "eyebrow": "Vous ne savez pas où aller ?",
+    "headingPre": "Laissez-nous trouver votre",
+    "headingEm": "destination parfaite.",
+    "cta": "Faire le quiz →"
+  },
+  "services": {
+    "privateJet": "Jet privé",
+    "yacht": "Yacht & Voile",
+    "sportsCar": "Voiture de sport",
+    "villas": "Villas exclusives",
+    "itineraries": "Itinéraires sur mesure",
+    "helicopter": "Transferts en hélicoptère",
+    "cruise": "Croisière & Expédition",
+    "vehicleTransport": "Transport de véhicules"
+  },
+  "worldMap": {
+    "stood": "Nous y avons été."
+  },
+  "form": {
+    "step1Heading": "Où rêvez-vous d'aller ?",
+    "step1Placeholder": "Santorin, Bali, n'importe où...",
+    "step2Heading": "À quel moment ?",
+    "timing1": "Dans les 3 prochains mois",
+    "timing2": "Dans 3 à 6 mois",
+    "timing3": "Dans 6 à 12 mois",
+    "timing4": "Je cherche juste des idées",
+    "step3Heading": "Combien de voyageurs ?",
+    "adults": "Adultes",
+    "children": "Enfants",
+    "couple": "Couple / Solo",
+    "group": "Groupe privé",
+    "surpriseMe": "Surprenez-moi",
+    "labelName": "Nom *",
+    "labelEmail": "E-mail *",
+    "labelPhone": "Téléphone (optionnel)",
+    "labelReferral": "Qui vous a recommandé ? *",
+    "labelMessage": "Dites-nous en plus sur votre voyage de rêve (optionnel)",
+    "placeholderName": "Votre nom",
+    "placeholderEmail": "votre@email.fr",
+    "placeholderPhone": "+33 1 23 45 67 89",
+    "placeholderReferral": "Nom de la personne qui vous a recommandé",
+    "placeholderMessage": "Détails, préférences, demandes spéciales...",
+    "back": "← Retour",
+    "next": "Suivant →",
+    "send": "Envoyer ma demande",
+    "successTitle": "Demande reçue.",
+    "successBody": "Nous vous contacterons dans les 24 heures."
   }
 }

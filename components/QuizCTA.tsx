@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function QuizCTA() {
+  const t = useTranslations("quizCTA");
+
   return (
     <section
       style={{
@@ -25,12 +28,12 @@ export default function QuizCTA() {
             fontSize: "0.6rem",
             letterSpacing: "0.35em",
             textTransform: "uppercase",
-            color: "#C9A96E",
+            color: "var(--gold-primary)",
             marginBottom: "1.25rem",
             opacity: 0.7,
           }}
         >
-          Not sure where to go?
+          {t("eyebrow")}
         </p>
 
         <h2
@@ -43,8 +46,8 @@ export default function QuizCTA() {
             lineHeight: 1.2,
           }}
         >
-          Let us find your<br />
-          <em style={{ color: "#C9A96E", fontStyle: "italic" }}>perfect destination.</em>
+          {t("headingPre")}<br />
+          <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>{t("headingEm")}</em>
         </h2>
 
         <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
@@ -55,7 +58,7 @@ export default function QuizCTA() {
               padding: "1rem 3rem",
               background: "transparent",
               border: "1px solid rgba(201,169,110,0.5)",
-              color: "#C9A96E",
+              color: "var(--gold-primary)",
               textDecoration: "none",
               fontSize: "0.7rem",
               letterSpacing: "0.25em",
@@ -65,14 +68,14 @@ export default function QuizCTA() {
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "rgba(201,169,110,0.08)";
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "#C9A96E";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--gold-primary)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
               (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,169,110,0.5)";
             }}
           >
-            Take the Quiz →
+            {t("cta")}
           </Link>
         </motion.div>
       </motion.div>
