@@ -34,6 +34,7 @@ interface FormData {
   email: string;
   phone: string;
   message: string;
+  referral: string;
 }
 
 const initialForm: FormData = {
@@ -47,6 +48,7 @@ const initialForm: FormData = {
   email: "",
   phone: "",
   message: "",
+  referral: "",
 };
 
 const slideVariants = {
@@ -515,6 +517,16 @@ export default function PlanningForm() {
                     placeholder="+1 212 555 0100"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    style={inputStyle}
+                  />
+                </div>
+                <div>
+                  <label style={labelStyle}>Who referred you to us? *</label>
+                  <input
+                    type="text"
+                    placeholder="Name of the person who recommended us"
+                    value={formData.referral}
+                    onChange={(e) => setFormData({ ...formData, referral: e.target.value })}
                     style={inputStyle}
                   />
                 </div>

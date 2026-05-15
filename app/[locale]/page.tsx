@@ -5,11 +5,8 @@ import Navigation from "@/components/Navigation";
 import Preloader from "@/components/Preloader";
 import HeroSection from "@/components/HeroSection";
 import ServicesStrip from "@/components/ServicesStrip";
-import WorldMap from "@/components/WorldMap";
-import AboutSection from "@/components/AboutSection";
-import DestinationsPreview from "@/components/DestinationsPreview";
 import PackagesPreview from "@/components/PackagesPreview";
-import BlogPreview from "@/components/BlogPreview";
+import AboutSection from "@/components/AboutSection";
 import QuizCTA from "@/components/QuizCTA";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -26,11 +23,8 @@ export default function LocaleHome() {
         <Navigation />
         <HeroSection />
         <ServicesStrip />
-        <WorldMap />
-        <AboutSection />
-        <DestinationsPreview />
         <PackagesPreview />
-        <BlogPreview />
+        <AboutSection />
         <QuizCTA />
         <ContactSection />
         <Footer />

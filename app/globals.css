@@ -4,11 +4,11 @@
   --bg-primary: #080808;
   --bg-surface: #111111;
   --bg-surface-2: #161616;
-  --gold-primary: #C9A96E;
-  --gold-light: #E8D5B0;
+  --gold-primary: #DBD4CE;
+  --gold-light: #EDEAE3;
   --cream: #F5F0E8;
   --muted: #888880;
-  --border: rgba(201, 169, 110, 0.2);
+  --border: rgba(219, 212, 206, 0.2);
 }
 
 @theme inline {
