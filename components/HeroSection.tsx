@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useTranslations } from "next-intl";
 
 export default function HeroSection() {
+  const t = useTranslations("hero");
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -12,7 +14,7 @@ export default function HeroSection() {
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
 
-  const titleLines = ["THE WORLD,", "ON YOUR TERMS."];
+  const titleLines = [t("title1"), t("title2")];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -254,7 +256,7 @@ export default function HeroSection() {
             opacity: 0,
           }}
         >
-          Hyper-personalized luxury travel, crafted for the few.
+          {t("tagline")}
         </p>
       </div>
 

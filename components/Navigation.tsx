@@ -7,20 +7,23 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Compass, Lock } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
-const navLinks = [
-  { label: "Packages", href: "/packages" },
-  { label: "Journal", href: "/journal" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Navigation() {
+  const t = useTranslations("nav");
+  const tFooter = useTranslations("footer");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoExists, setLogoExists] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+
+  const navLinks = [
+    { label: t("packages"), href: "/packages" },
+    { label: t("journal"), href: "/journal" },
+    { label: t("about"), href: "/about" },
+    { label: t("contact"), href: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -259,7 +262,7 @@ export default function Navigation() {
                   }}
                 >
                   <Compass size={20} />
-                  Find My Destination
+                  {t("quiz")}
                 </Link>
               </motion.li>
             </ul>
@@ -294,7 +297,7 @@ export default function Navigation() {
                 }}
               >
                 <Lock size={13} />
-                Client Login
+                {t("client")}
               </Link>
             </motion.div>
 
@@ -314,7 +317,7 @@ export default function Navigation() {
                   margin: 0,
                 }}
               >
-                Every journey is a masterpiece.
+                {tFooter("tagline")}
               </p>
             </div>
           </motion.div>

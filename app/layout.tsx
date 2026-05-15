@@ -3,6 +3,8 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/CustomCursor";
+import { NextIntlClientProvider } from "next-intl";
+import enMessages from "@/messages/en.json";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -49,10 +51,12 @@ export default function RootLayout({
           fontFamily: "var(--font-inter), Inter, sans-serif",
         }}
       >
-        <LenisProvider>
-          <CustomCursor />
-          {children}
-        </LenisProvider>
+        <NextIntlClientProvider locale="en" messages={enMessages}>
+          <LenisProvider>
+            <CustomCursor />
+            {children}
+          </LenisProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

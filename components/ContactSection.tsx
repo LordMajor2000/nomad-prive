@@ -4,8 +4,10 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PlanningForm from "@/components/PlanningForm";
+import { useTranslations } from "next-intl";
 
 export default function ContactSection() {
+  const t = useTranslations("contact");
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -89,7 +91,7 @@ export default function ContactSection() {
               color: "var(--gold-primary)",
             }}
           >
-            Start Planning
+            {t("label")}
           </span>
         </div>
 
@@ -106,10 +108,7 @@ export default function ContactSection() {
             opacity: 0,
           }}
         >
-          Begin Your{" "}
-          <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            Dream Journey
-          </em>
+          {t("heading")}
         </h2>
 
         <PlanningForm />

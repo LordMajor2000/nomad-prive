@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 
 const localeLabels: Record<string, string> = {
@@ -26,21 +27,10 @@ const localeNames: Record<string, string> = {
 
 export default function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
-  const [currentLocale, setCurrentLocale] = useState("en");
+  const currentLocale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Detect current locale from pathname
-  useEffect(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    const first = segments[0];
-    if (first && routing.locales.includes(first as (typeof routing.locales)[number])) {
-      setCurrentLocale(first);
-    } else {
-      setCurrentLocale(routing.defaultLocale);
-    }
-  }, [pathname]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -55,27 +45,7 @@ export default function LanguageSwitcher() {
 
   const handleLocaleChange = (locale: string) => {
     setOpen(false);
-    setCurrentLocale(locale);
-
-    // Reconstruct path with new locale
-    const segments = pathname.split("/").filter(Boolean);
-    const hasLocale = routing.locales.includes(segments[0] as (typeof routing.locales)[number]);
-
-    let newPath: string;
-    if (hasLocale) {
-      // Replace existing locale
-      segments[0] = locale;
-      newPath = "/" + segments.join("/");
-    } else {
-      // Prepend locale (unless it's the default and we want clean URLs)
-      if (locale === routing.defaultLocale) {
-        newPath = pathname;
-      } else {
-        newPath = "/" + locale + pathname;
-      }
-    }
-
-    router.push(newPath);
+    router.replace(pathname, { locale });
   };
 
   return (

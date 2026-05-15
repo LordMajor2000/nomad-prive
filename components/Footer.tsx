@@ -4,17 +4,20 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
-const navLinks = [
-  { label: "Packages", href: "/packages" },
-  { label: "Journal", href: "/journal" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav");
   const currentYear = new Date().getFullYear();
   const [logoExists, setLogoExists] = useState(false);
+
+  const navLinks = [
+    { label: tNav("packages"), href: "/packages" },
+    { label: tNav("journal"), href: "/journal" },
+    { label: tNav("about"), href: "/about" },
+    { label: tNav("contact"), href: "/contact" },
+  ];
 
   useEffect(() => {
     const img = new window.Image();
@@ -57,8 +60,7 @@ export default function Footer() {
             lineHeight: 1.15,
           }}
         >
-          Your next journey<br />
-          <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>begins with a conversation.</em>
+          {t("cta")}
         </h2>
         <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
           <Link
@@ -84,7 +86,7 @@ export default function Footer() {
               (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,169,110,0.5)";
             }}
           >
-            Get in touch
+            {t("getInTouch")}
           </Link>
         </motion.div>
       </div>
@@ -197,7 +199,7 @@ export default function Footer() {
               opacity: 0.7,
             }}
           >
-            Navigate
+            {t("navigate")}
           </div>
           <nav style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
             {navLinks.map((link) => (
@@ -237,7 +239,7 @@ export default function Footer() {
               opacity: 0.7,
             }}
           >
-            Contact
+            {t("contact")}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             <a
@@ -265,7 +267,7 @@ export default function Footer() {
                 fontStyle: "italic",
               }}
             >
-              We accept new clients exclusively through personal referrals.
+              {t("referral")}
             </p>
           </div>
         </div>
@@ -286,7 +288,7 @@ export default function Footer() {
         }}
       >
         <p style={{ fontSize: "0.65rem", color: "var(--muted)", margin: 0, opacity: 0.4, letterSpacing: "0.05em" }}>
-          © {currentYear} Nomad Privé. All rights reserved.
+          © {currentYear} Nomad Privé. {t("rights")}
         </p>
         <div style={{ display: "flex", gap: "2rem" }}>
           {["Privacy Policy", "Terms & Conditions"].map((label) => (

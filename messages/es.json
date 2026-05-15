@@ -22,6 +22,8 @@
   "packages": {
     "label": "Paquetes",
     "heading": "La experiencia hecha para ti",
+    "headingPre": "La experiencia",
+    "headingEm": "hecha para ti",
     "viewAll": "Comparar todos los paquetes →"
   },
   "contact": {

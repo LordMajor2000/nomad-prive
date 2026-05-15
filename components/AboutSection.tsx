@@ -5,9 +5,11 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 
 export default function AboutSection() {
+  const t = useTranslations("about");
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const textBlockRef = useRef<HTMLDivElement>(null);
@@ -157,7 +159,7 @@ export default function AboutSection() {
                   lineHeight: 1.2,
                 }}
               >
-                Two People. One Obsession.
+                {t("heading")}
               </h2>
             </div>
             <div data-reveal>
@@ -170,7 +172,7 @@ export default function AboutSection() {
                   margin: "0 0 2rem",
                 }}
               >
-                We started Nomad Privé because the trips we wanted didn&apos;t exist.
+                {t("subheading")}
               </p>
             </div>
 
@@ -254,7 +256,7 @@ export default function AboutSection() {
                   marginBottom: "3rem",
                 }}
               >
-                Read our full story →
+                {t("readMore")}
               </Link>
             </div>
 

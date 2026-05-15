@@ -22,7 +22,9 @@
   "packages": {
     "label": "Csomagok",
     "heading": "A neked szóló élmény",
-    "viewAll": "Összes csomag →"
+    "headingPre": "A neked szóló",
+    "headingEm": "élmény",
+    "viewAll": "Összes csomag összehasonlítása →"
   },
   "contact": {
     "label": "Kapcsolatfelvétel",

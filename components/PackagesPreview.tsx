@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const packages = [
   {
@@ -28,6 +29,7 @@ const packages = [
 ];
 
 export default function PackagesPreview() {
+  const t = useTranslations("packages");
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -95,7 +97,7 @@ export default function PackagesPreview() {
                   color: "var(--gold-primary)",
                 }}
               >
-                Packages
+                {t("label")}
               </span>
             </div>
             <h2
@@ -109,9 +111,9 @@ export default function PackagesPreview() {
                 opacity: 0,
               }}
             >
-              The Experience{" "}
+              {t("headingPre")}{" "}
               <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-                Made for You
+                {t("headingEm")}
               </em>
             </h2>
           </div>
@@ -132,7 +134,7 @@ export default function PackagesPreview() {
               whiteSpace: "nowrap",
             }}
           >
-            Compare all packages →
+            {t("viewAll")}
           </Link>
         </div>
       </div>
