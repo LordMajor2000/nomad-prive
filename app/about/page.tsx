@@ -9,34 +9,36 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WorldMap from "@/components/WorldMap";
-
-const stats = [
-  { number: "22+", label: "Countries" },
-  { number: "4", label: "Continents" },
-  { number: "100%", label: "Firsthand" },
-  { number: "0", label: "Compromises" },
-];
-
-const howWeWork = [
-  {
-    number: "01",
-    title: "We've been there",
-    body: "Every destination we recommend is one we've personally experienced. We don't sell anywhere we haven't stood.",
-  },
-  {
-    number: "02",
-    title: "We know people",
-    body: "Our network is built trip by trip. The villa manager in Positano. The riad owner in Marrakesh. The charter captain in the Aegean. Real relationships, not commission agreements.",
-  },
-  {
-    number: "03",
-    title: "We fix things",
-    body: "Travel has variables. Weather, strikes, overbooked hotels, missed connections. We solve problems before you know they exist — because we've already had them ourselves.",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function AboutPage() {
+  const t = useTranslations("aboutPage");
   const heroRef = useRef<HTMLElement>(null);
+
+  const stats = [
+    { number: "22+", label: t("stat1Label") },
+    { number: "4", label: t("stat2Label") },
+    { number: "100%", label: t("stat3Label") },
+    { number: "0", label: t("stat4Label") },
+  ];
+
+  const howWeWork = [
+    {
+      number: "01",
+      title: t("card1Title"),
+      body: t("card1Body"),
+    },
+    {
+      number: "02",
+      title: t("card2Title"),
+      body: t("card2Body"),
+    },
+    {
+      number: "03",
+      title: t("card3Title"),
+      body: t("card3Body"),
+    },
+  ];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -69,14 +71,14 @@ export default function AboutPage() {
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 60% 40%, rgba(201,169,110,0.04) 0%, transparent 60%)", pointerEvents: "none" }} />
           <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
             <div data-hero style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold-primary)", marginBottom: "2rem", opacity: 0 }}>
-              About Nomad Privé
+              {t("heroLabel")}
             </div>
             <h1 data-hero style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(2.5rem, 7vw, 5.5rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 1.5rem", lineHeight: 1.1, opacity: 0 }}>
-              We Travel Because<br />
-              <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>We Have To.</em>
+              {t("heroHeadingPre")}<br />
+              <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>{t("heroHeadingEm")}</em>
             </h1>
             <p data-hero style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)", lineHeight: 1.8, color: "var(--muted)", maxWidth: "640px", fontWeight: 300, opacity: 0 }}>
-              Nomad Privé is the answer to a question we kept asking: why doesn&apos;t a travel company exist that actually travels?
+              {t("heroSubheading")}
             </p>
           </div>
         </section>
@@ -109,7 +111,7 @@ export default function AboutPage() {
             >
               <div style={{ width: "40px", height: "1px", background: "var(--gold-primary)", marginBottom: "2rem" }} />
               <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 2rem", lineHeight: 1.2 }}>
-                How It Started
+                {t("storyHeading")}
               </h2>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", marginBottom: "1.5rem", fontWeight: 300 }}>
                 My partner built her expertise in lecture halls and five-star internships across Europe — learning the architecture of hospitality, the logistics of luxury, the language of service. I built mine differently: by going. By staying somewhere long enough to understand it.
@@ -162,7 +164,7 @@ export default function AboutPage() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, #060606 0%, transparent 20%, transparent 80%, var(--bg-primary) 100%)" }} />
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <blockquote style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.2rem, 3vw, 2rem)", fontStyle: "italic", color: "rgba(255,255,255,0.9)", textAlign: "center", maxWidth: "700px", padding: "0 2rem", lineHeight: 1.5, textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}>
-              &ldquo;We don&apos;t sell trips. We recreate moments we&apos;ve already lived.&rdquo;
+              &ldquo;{t("quote")}&rdquo;
             </blockquote>
           </div>
         </div>
@@ -178,7 +180,7 @@ export default function AboutPage() {
             >
               <div style={{ width: "50px", height: "1px", background: "var(--gold-primary)", marginBottom: "1rem" }} />
               <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 clamp(2.5rem, 5vw, 4rem)" }}>
-                How We Work
+                {t("howWeWorkHeading")}
               </h2>
             </motion.div>
 
@@ -230,19 +232,19 @@ export default function AboutPage() {
             >
               <div style={{ width: "40px", height: "1px", background: "var(--gold-primary)", marginBottom: "2rem" }} />
               <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 2rem", lineHeight: 1.2 }}>
-                By Referral Only.
+                {t("referralHeading")}
               </h2>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", marginBottom: "1.5rem", fontWeight: 300 }}>
-                We don&apos;t advertise. We don&apos;t have a walk-in office. Every client we work with was introduced to us by someone we already trust.
+                {t("referralBody1")}
               </p>
               <p style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)", lineHeight: 1.9, color: "var(--muted)", marginBottom: "2.5rem", fontWeight: 300 }}>
-                This isn&apos;t gatekeeping — it&apos;s quality control. The trips we build take time, attention, and genuine care. We can only do that properly for a small number of clients at a time.
+                {t("referralBody2")}
               </p>
               <Link
                 href="/contact"
                 style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", color: "var(--gold-primary)", textDecoration: "none", fontSize: "0.8rem", letterSpacing: "0.15em", textTransform: "uppercase", borderBottom: "1px solid rgba(201,169,110,0.4)", paddingBottom: "2px", width: "fit-content" }}
               >
-                Get in touch →
+                {t("getInTouch")}
               </Link>
             </motion.div>
 
@@ -273,10 +275,10 @@ export default function AboutPage() {
             viewport={{ once: true }}
           >
             <p style={{ fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "var(--gold-primary)", marginBottom: "1.5rem", opacity: 0.7 }}>
-              By referral only
+              {t("ctaLabel")}
             </p>
             <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.6rem, 4vw, 3rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 2.5rem", lineHeight: 1.2 }}>
-              Ready to go somewhere extraordinary?
+              {t("ctaHeading")}
             </h2>
             <Link
               href="/contact"
@@ -284,7 +286,7 @@ export default function AboutPage() {
               onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(201,169,110,0.08)"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--gold-primary)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,169,110,0.5)"; }}
             >
-              Start Planning
+              {t("ctaButton")}
             </Link>
           </motion.div>
         </section>

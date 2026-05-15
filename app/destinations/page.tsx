@@ -8,8 +8,10 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog-posts";
+import { useTranslations } from "next-intl";
 
 export default function DestinationsPage() {
+  const t = useTranslations("destinationsPage");
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -78,7 +80,7 @@ export default function DestinationsPage() {
               color: "var(--gold-primary)",
             }}
           >
-            Destinations
+            {t("heroLabel")}
           </span>
         </div>
         <h1
@@ -91,9 +93,9 @@ export default function DestinationsPage() {
             lineHeight: 1.1,
           }}
         >
-          Where We{" "}
+          {t("heroHeadingPre")}{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            Take You
+            {t("heroHeadingEm")}
           </em>
         </h1>
         <p
@@ -105,7 +107,7 @@ export default function DestinationsPage() {
             fontWeight: 300,
           }}
         >
-          Every destination we recommend is one we know personally. No lists, no aggregated rankings — only places we've been and believe in.
+          {t("heroSubheading")}
         </p>
       </div>
 
@@ -192,7 +194,7 @@ export default function DestinationsPage() {
                           border: "1px solid rgba(201,169,110,0.2)",
                         }}
                       >
-                        Featured
+                        {t("featuredLabel")}
                       </div>
                     )}
 
@@ -268,7 +270,7 @@ export default function DestinationsPage() {
                       }}
                     >
                       <span>{post.date} · {post.readTime}</span>
-                      <span style={{ color: "var(--gold-primary)" }}>Read →</span>
+                      <span style={{ color: "var(--gold-primary)" }}>{t("readLabel")}</span>
                     </div>
                   </div>
                 </div>

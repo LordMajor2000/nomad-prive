@@ -20,6 +20,7 @@ export default function Navigation() {
 
   const navLinks = [
     { label: t("packages"), href: "/packages" },
+    { label: t("experiences"), href: "/experiences" },
     { label: t("journal"), href: "/journal" },
     { label: t("about"), href: "/about" },
     { label: t("contact"), href: "/contact" },

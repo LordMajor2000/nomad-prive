@@ -7,68 +7,69 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-
-const packages = [
-  {
-    number: "01",
-    name: "SIGNATURE",
-    tagline: "Your journey, perfectly curated.",
-    description:
-      "For travelers who want every detail arranged without lifting a finger. We handle hotels, transfers, dining reservations and local experiences — all hand-selected.",
-    includes: [
-      "Bespoke itinerary planning",
-      "Hand-picked 5-star hotels & villas",
-      "Private airport transfers",
-      "Restaurant & experience reservations",
-      "24/7 travel concierge",
-      "On-trip support line",
-    ],
-    travelStyle: "Business class flights, private ground transfers",
-    featured: false,
-  },
-  {
-    number: "02",
-    name: "PRIVÉ",
-    tagline: "No limits. No compromises.",
-    description:
-      "Everything in Signature, elevated. Private jet options, yacht charters, exclusive villa estates and a dedicated travel designer who becomes your personal expert for every trip.",
-    includes: [
-      "Everything in Signature",
-      "Private jet coordination",
-      "Yacht & sailing charter options",
-      "Exclusive villa & estate access",
-      "Dedicated personal travel designer",
-      "VIP destination experiences",
-      "Sports car transport service*",
-    ],
-    travelStyle: "Private jet, yacht, helicopter transfers",
-    note: "*We arrange transport of your own luxury vehicle to the destination",
-    featured: true,
-  },
-  {
-    number: "03",
-    name: "GRAND PRIVÉ",
-    tagline: "By referral only. For those who want the impossible.",
-    description:
-      "There are no packages at this level — only possibilities. Reserved for clients referred by existing members. If you have to ask the price, this isn't for you.",
-    includes: [
-      "Everything in Privé",
-      "Island buyouts & private resort access",
-      "Your own sports car on the Stelvio Pass",
-      "Custom expedition design",
-      "Multi-destination private jet itineraries",
-      "Vetted security & logistics",
-      "Zero digital footprint option",
-    ],
-    travelStyle: "Fully private, fully bespoke",
-    featured: false,
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function PackagesPage() {
+  const t = useTranslations("packagesPage");
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const calloutRef = useRef<HTMLDivElement>(null);
+
+  const packages = [
+    {
+      number: "01",
+      name: "SIGNATURE",
+      tagline: t("signature.tagline"),
+      description: t("signature.description"),
+      includes: [
+        t("signature.includes.0"),
+        t("signature.includes.1"),
+        t("signature.includes.2"),
+        t("signature.includes.3"),
+        t("signature.includes.4"),
+        t("signature.includes.5"),
+      ],
+      travelStyle: t("signature.travelStyle"),
+      note: undefined as string | undefined,
+      featured: false,
+    },
+    {
+      number: "02",
+      name: "PRIVÉ",
+      tagline: t("prive.tagline"),
+      description: t("prive.description"),
+      includes: [
+        t("prive.includes.0"),
+        t("prive.includes.1"),
+        t("prive.includes.2"),
+        t("prive.includes.3"),
+        t("prive.includes.4"),
+        t("prive.includes.5"),
+        t("prive.includes.6"),
+      ],
+      travelStyle: t("prive.travelStyle"),
+      note: t("prive.note") as string | undefined,
+      featured: true,
+    },
+    {
+      number: "03",
+      name: "GRAND PRIVÉ",
+      tagline: t("grandPrive.tagline"),
+      description: t("grandPrive.description"),
+      includes: [
+        t("grandPrive.includes.0"),
+        t("grandPrive.includes.1"),
+        t("grandPrive.includes.2"),
+        t("grandPrive.includes.3"),
+        t("grandPrive.includes.4"),
+        t("grandPrive.includes.5"),
+        t("grandPrive.includes.6"),
+      ],
+      travelStyle: t("grandPrive.travelStyle"),
+      note: undefined as string | undefined,
+      featured: false,
+    },
+  ];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -153,7 +154,7 @@ export default function PackagesPage() {
               color: "var(--gold-primary)",
             }}
           >
-            Packages
+            {t("heroLabel")}
           </span>
         </div>
         <h1
@@ -166,9 +167,9 @@ export default function PackagesPage() {
             lineHeight: 1.1,
           }}
         >
-          Choose the Experience{" "}
+          {t("heroHeadingPre")}{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            Made for You
+            {t("heroHeadingEm")}
           </em>
         </h1>
         <p
@@ -180,7 +181,7 @@ export default function PackagesPage() {
             fontWeight: 300,
           }}
         >
-          Three levels of service. One standard of excellence. Each package is a complete service — we handle every detail so you never have to.
+          {t("heroSubheading")}
         </p>
       </div>
 
@@ -362,7 +363,7 @@ export default function PackagesPage() {
                     marginBottom: "0.4rem",
                   }}
                 >
-                  Travel Style
+                  {t("travelStyleLabel")}
                 </div>
                 <div
                   style={{
@@ -427,7 +428,7 @@ export default function PackagesPage() {
                     (e.currentTarget as HTMLAnchorElement).style.color = "var(--cream)";
                   }}
                 >
-                  Enquire →
+                  {t("enquire")}
                 </Link>
               </div>
             </motion.div>
@@ -503,7 +504,7 @@ export default function PackagesPage() {
                     color: "var(--gold-primary)",
                   }}
                 >
-                  Exclusive Feature
+                  {t("exclusiveFeatureLabel")}
                 </span>
               </div>
               <h3
@@ -516,7 +517,7 @@ export default function PackagesPage() {
                   lineHeight: 1.2,
                 }}
               >
-                Drive the Road You've Always Dreamed Of
+                {t("calloutHeading")}
               </h3>
               <p
                 style={{
@@ -528,7 +529,7 @@ export default function PackagesPage() {
                   fontWeight: 300,
                 }}
               >
-                We ship your own luxury or sports car to any destination in Europe. Imagine your Ferrari on the Stelvio Pass. Your Porsche through the Swiss Alps. We handle the logistics — you handle the drive.
+                {t("calloutBody")}
               </p>
             </div>
             <div className="hidden md:block">
@@ -558,9 +559,10 @@ export default function PackagesPage() {
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
                     color: "var(--gold-primary)",
+                    whiteSpace: "pre-line",
                   }}
                 >
-                  Your car.<br />Any road.
+                  {t("calloutBadge")}
                 </div>
               </div>
             </div>

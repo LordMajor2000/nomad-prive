@@ -5,6 +5,7 @@
     "journal": "Denník",
     "about": "O nás",
     "contact": "Kontakt",
+    "experiences": "Zážitky",
     "quiz": "Nájsť moju destináciu",
     "client": "Klientska zóna"
   },
@@ -78,6 +79,103 @@
   },
   "worldMap": {
     "stood": "Boli sme tu."
+  },
+  "packagesPage": {
+    "heroLabel": "Balíky",
+    "heroHeadingPre": "Vyberte si zážitok",
+    "heroHeadingEm": "vytvorený pre vás",
+    "heroSubheading": "Tri úrovne služieb. Jeden štandard kvality. Každý balík je kompletná služba — staráme sa o každý detail, aby ste sa o nič nemuseli starať.",
+    "travelStyleLabel": "Štýl cestovania",
+    "enquire": "Informovať sa →",
+    "exclusiveFeatureLabel": "Exkluzívna funkcia",
+    "calloutHeading": "Jazdite cestou, o ktorej ste vždy snívali",
+    "calloutBody": "Prepravíme vaše vlastné luxusné alebo športové auto na akékoľvek miesto v Európe. Predstavte si svoje Ferrari na Stelvio Pass. Vaše Porsche cez švajčiarske Alpy. My sa staráme o logistiku — vy šoférujete.",
+    "calloutBadge": "Vaše auto.\nAkákoľvek cesta.",
+    "signature": {
+      "tagline": "Vaša cesta, dokonale zostavená.",
+      "description": "Pre cestujúcich, ktorí chcú mať každý detail zariadený bez toho, aby prstom pohli. Staráme sa o hotely, transfery, rezervácie reštaurácií a miestne zážitky — všetko vybrané ručne.",
+      "includes": [
+        "Individuálne plánov anie trasy",
+        "Ručne vybrané 5-hviezdičkové hotely & vily",
+        "Súkromné letiskové transfery",
+        "Rezervácie reštaurácií & zážitkov",
+        "Cestovný concierge 24/7",
+        "Linka podpory počas cesty"
+      ],
+      "travelStyle": "Lety v business class, súkromné pozemné transfery"
+    },
+    "prive": {
+      "tagline": "Žiadne hranice. Žiadne kompromisy.",
+      "description": "Všetko zo Signature, na vyššej úrovni. Možnosti súkromného lietadla, prenájom jachty, exkluzívne vily a dedikovaný návrhár cestovania, ktorý sa stane vaším osobným expertom na každú cestu.",
+      "includes": [
+        "Všetko zo Signature",
+        "Koordinácia súkromného lietadla",
+        "Možnosti prenájmu jachty & plachtenia",
+        "Prístup k exkluzívnym vilám & sídlam",
+        "Dedikovaný osobný návrhár cestovania",
+        "VIP zážitky v destinácii",
+        "Prepravná služba pre športové auto*"
+      ],
+      "travelStyle": "Súkromné lietadlo, jachta, helikoptérové transfery",
+      "note": "*Zabezpečíme prepravu vášho vlastného luxusného vozidla do destinácie"
+    },
+    "grandPrive": {
+      "tagline": "Len na odporúčanie. Pre tých, čo chcú nemožné.",
+      "description": "Na tejto úrovni neexistujú žiadne balíky — len možnosti. Vyhradené pre klientov odporúčaných existujúcimi členmi. Ak sa musíte pýtať na cenu, toto nie je pre vás.",
+      "includes": [
+        "Všetko z Privé",
+        "Exkluzívny prenájom ostrovov & prístup k súkromným rezortom",
+        "Vaše vlastné športové auto na Stelvio Pass",
+        "Tvorba expedícií na mieru",
+        "Trasy súkromného lietadla do viacerých destinácií",
+        "Preverená bezpečnosť & logistika",
+        "Možnosť nulovej digitálnej stopy"
+      ],
+      "travelStyle": "Úplne súkromné, úplne na mieru"
+    }
+  },
+  "aboutPage": {
+    "heroLabel": "O Nomad Privé",
+    "heroHeadingPre": "Cestujeme, pretože",
+    "heroHeadingEm": "to musíme.",
+    "heroSubheading": "Nomad Privé je odpoveď na otázku, ktorú sme si stále kládli: prečo neexistuje cestovná kancelária, ktorá skutočne cestuje?",
+    "storyHeading": "Ako to začalo",
+    "quote": "Nepredávame zájazdy. Znovu tvoríme momenty, ktoré sme sami prežili.",
+    "howWeWorkHeading": "Ako pracujeme",
+    "referralHeading": "Len na odporúčanie.",
+    "referralBody1": "Neinzerujeme. Nemáme kamenné sídlo. Každý klient, s ktorým pracujeme, nám bol predstavený niekým, komu už dôverujeme.",
+    "referralBody2": "Nejde o elitárstvo — ide o kontrolu kvality. Cesty, ktoré budujeme, si vyžadujú čas, pozornosť a skutočnú starostlivosť. To môžeme správne robiť len pre malý počet klientov naraz.",
+    "getInTouch": "Kontaktujte nás →",
+    "ctaLabel": "Len na odporúčanie",
+    "ctaHeading": "Ste pripravení odísť niekam výnimočne?",
+    "ctaButton": "Začať plánovať",
+    "card1Title": "Boli sme tam",
+    "card1Body": "Každá destinácia, ktorú odporúčame, je taká, ktorú sme osobne zažili. Nepredávame žiadne miesto, kde sme sami nestáli.",
+    "card2Title": "Poznáme správnych ľudí",
+    "card2Body": "Našu sieť budujeme cestu po ceste. Správca vily v Positane. Majiteľ riadu v Marrákeši. Kapitán charterovej lode v Egejskom mori. Skutočné vzťahy, nie provízne dohody.",
+    "card3Title": "Riešime problémy",
+    "card3Body": "Cestovanie má premenné. Počasie, štrajky, preplnené hotely, zmeškané spoje. Riešime problémy skôr, ako o nich viete — pretože sme ich sami zažili.",
+    "stat1Label": "Krajín",
+    "stat2Label": "Kontinentov",
+    "stat3Label": "Z prvej ruky",
+    "stat4Label": "Kompromisov"
+  },
+  "journalPage": {
+    "heroLabel": "Denník",
+    "heroHeadingPre": "Kde sme",
+    "heroHeadingEm": "boli",
+    "heroSubheading": "Úprimné poznámky z destinácií, ktoré poznáme, milujeme a odporúčame našim klientom.",
+    "featuredLabel": "Odporúčané",
+    "allPostsLabel": "Všetky príspevky",
+    "readMore": "Čítať viac →"
+  },
+  "destinationsPage": {
+    "heroLabel": "Destinácie",
+    "heroHeadingPre": "Kam vás",
+    "heroHeadingEm": "berieme",
+    "heroSubheading": "Každú destináciu, ktorú odporúčame, poznáme osobne. Žiadne zoznamy, žiadne agregované rebríčky — len miesta, kde sme boli a v ktoré veríme.",
+    "featuredLabel": "Odporúčané",
+    "readLabel": "Čítať →"
   },
   "form": {
     "step1Heading": "Kam sa túžite dostať?",

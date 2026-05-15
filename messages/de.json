@@ -5,6 +5,7 @@
     "journal": "Journal",
     "about": "Über uns",
     "contact": "Kontakt",
+    "experiences": "Erlebnisse",
     "quiz": "Mein Reiseziel finden",
     "client": "Kundenbereich"
   },
@@ -78,6 +79,103 @@
   },
   "worldMap": {
     "stood": "Wir waren hier."
+  },
+  "packagesPage": {
+    "heroLabel": "Pakete",
+    "heroHeadingPre": "Wählen Sie das Erlebnis,",
+    "heroHeadingEm": "das für Sie gemacht wurde",
+    "heroSubheading": "Drei Servicelevels. Ein Qualitätsstandard. Jedes Paket ist ein vollständiger Service — wir kümmern uns um jedes Detail, damit Sie es nicht müssen.",
+    "travelStyleLabel": "Reisestil",
+    "enquire": "Anfragen →",
+    "exclusiveFeatureLabel": "Exklusives Feature",
+    "calloutHeading": "Fahren Sie die Straße, von der Sie immer geträumt haben",
+    "calloutBody": "Wir transportieren Ihr eigenes Luxus- oder Sportfahrzeug an jedes Ziel in Europa. Stellen Sie sich Ihren Ferrari auf dem Stilfser Joch vor. Ihren Porsche durch die Schweizer Alpen. Wir übernehmen die Logistik — Sie fahren.",
+    "calloutBadge": "Ihr Auto.\nJede Straße.",
+    "signature": {
+      "tagline": "Ihre Reise, perfekt kuratiert.",
+      "description": "Für Reisende, die jedes Detail geregelt haben möchten, ohne einen Finger zu rühren. Wir kümmern uns um Hotels, Transfers, Restaurantreservierungen und lokale Erlebnisse — alles handverlesen.",
+      "includes": [
+        "Individuelle Reiseroute",
+        "Handverlesene 5-Sterne-Hotels & Villen",
+        "Private Flughafentransfers",
+        "Restaurant- & Erlebnisreservierungen",
+        "24/7 Reiseconcierge",
+        "Support während der Reise"
+      ],
+      "travelStyle": "Business Class Flüge, private Bodentransfers"
+    },
+    "prive": {
+      "tagline": "Keine Grenzen. Keine Kompromisse.",
+      "description": "Alles aus dem Signature-Paket, auf einem höheren Niveau. Privatjet-Optionen, Yachtcharter, exklusive Villenanwesen und ein persönlicher Reisedesigner, der Ihr Experte für jede Reise wird.",
+      "includes": [
+        "Alles aus dem Signature-Paket",
+        "Privatjet-Koordination",
+        "Yacht- & Segelcharteroptionen",
+        "Exklusiver Zugang zu Villen & Anwesen",
+        "Persönlicher Reisedesigner",
+        "VIP-Erlebnisse am Zielort",
+        "Sportwagentransportservice*"
+      ],
+      "travelStyle": "Privatjet, Yacht, Hubschraubertransfers",
+      "note": "*Wir organisieren den Transport Ihres eigenen Luxusfahrzeugs zum Zielort"
+    },
+    "grandPrive": {
+      "tagline": "Nur auf Empfehlung. Für jene, die das Unmögliche wollen.",
+      "description": "Auf diesem Niveau gibt es keine Pakete — nur Möglichkeiten. Reserviert für Kunden, die von bestehenden Mitgliedern empfohlen wurden. Wenn Sie nach dem Preis fragen müssen, ist das hier nicht für Sie.",
+      "includes": [
+        "Alles aus dem Privé-Paket",
+        "Inselexklusivität & privater Resortezugang",
+        "Ihr eigener Sportwagen auf dem Stilfser Joch",
+        "Maßgeschneiderte Expeditionsplanung",
+        "Privatjet-Routen mit mehreren Zielen",
+        "Geprüfte Sicherheit & Logistik",
+        "Option für null digitalen Fußabdruck"
+      ],
+      "travelStyle": "Vollständig privat, vollständig maßgeschneidert"
+    }
+  },
+  "aboutPage": {
+    "heroLabel": "Über Nomad Privé",
+    "heroHeadingPre": "Wir reisen, weil wir",
+    "heroHeadingEm": "es müssen.",
+    "heroSubheading": "Nomad Privé ist die Antwort auf eine Frage, die wir uns immer wieder gestellt haben: Warum gibt es kein Reiseunternehmen, das wirklich reist?",
+    "storyHeading": "Wie es begann",
+    "quote": "Wir verkaufen keine Reisen. Wir erschaffen Momente, die wir selbst erlebt haben.",
+    "howWeWorkHeading": "Wie wir arbeiten",
+    "referralHeading": "Nur auf Empfehlung.",
+    "referralBody1": "Wir werben nicht. Wir haben kein Ladenlokal. Jeder Kunde, mit dem wir zusammenarbeiten, wurde uns von jemandem vorgestellt, dem wir bereits vertrauen.",
+    "referralBody2": "Das ist kein Türsteher-Prinzip — das ist Qualitätskontrolle. Die Reisen, die wir planen, erfordern Zeit, Aufmerksamkeit und echte Sorgfalt. Das können wir nur für eine kleine Anzahl von Kunden ordentlich leisten.",
+    "getInTouch": "Kontakt aufnehmen →",
+    "ctaLabel": "Nur auf Empfehlung",
+    "ctaHeading": "Bereit, irgendwohin Außergewöhnliches zu reisen?",
+    "ctaButton": "Reise planen",
+    "card1Title": "Wir waren dort",
+    "card1Body": "Jedes Reiseziel, das wir empfehlen, haben wir persönlich erlebt. Wir verkaufen keinen Ort, an dem wir nicht selbst waren.",
+    "card2Title": "Wir kennen die richtigen Leute",
+    "card2Body": "Unser Netzwerk ist Reise für Reise entstanden. Der Villaverwalter in Positano. Der Riad-Besitzer in Marrakesch. Der Charterkapitän in der Ägäis. Echte Beziehungen, keine Provisionsverträge.",
+    "card3Title": "Wir lösen Probleme",
+    "card3Body": "Reisen haben Unwägbarkeiten. Wetter, Streiks, überbuchte Hotels, verpasste Verbindungen. Wir lösen Probleme, bevor Sie wissen, dass es sie gibt — weil wir sie selbst schon erlebt haben.",
+    "stat1Label": "Länder",
+    "stat2Label": "Kontinente",
+    "stat3Label": "Aus erster Hand",
+    "stat4Label": "Kompromisse"
+  },
+  "journalPage": {
+    "heroLabel": "Journal",
+    "heroHeadingPre": "Wo wir",
+    "heroHeadingEm": "waren",
+    "heroSubheading": "Ehrliche Notizen aus den Reisezielen, die wir kennen, lieben und an unsere Kunden weiterempfehlen.",
+    "featuredLabel": "Empfohlen",
+    "allPostsLabel": "Alle Beiträge",
+    "readMore": "Weiterlesen →"
+  },
+  "destinationsPage": {
+    "heroLabel": "Reiseziele",
+    "heroHeadingPre": "Wohin wir",
+    "heroHeadingEm": "Sie mitnehmen",
+    "heroSubheading": "Jedes Reiseziel, das wir empfehlen, kennen wir persönlich. Keine Listen, keine aggregierten Rankings — nur Orte, an denen wir waren und die wir wirklich empfehlen.",
+    "featuredLabel": "Empfohlen",
+    "readLabel": "Lesen →"
   },
   "form": {
     "step1Heading": "Wohin träumen Sie?",

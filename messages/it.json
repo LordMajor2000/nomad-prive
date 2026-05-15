@@ -5,6 +5,7 @@
     "journal": "Diario",
     "about": "Chi siamo",
     "contact": "Contatti",
+    "experiences": "Esperienze",
     "quiz": "Trova la mia destinazione",
     "client": "Area clienti"
   },
@@ -78,6 +79,103 @@
   },
   "worldMap": {
     "stood": "Ci siamo stati."
+  },
+  "packagesPage": {
+    "heroLabel": "Pacchetti",
+    "heroHeadingPre": "Scegli l'esperienza",
+    "heroHeadingEm": "fatta per te",
+    "heroSubheading": "Tre livelli di servizio. Un solo standard di eccellenza. Ogni pacchetto è un servizio completo — gestiamo ogni dettaglio così non devi farlo tu.",
+    "travelStyleLabel": "Stile di viaggio",
+    "enquire": "Richiedi informazioni →",
+    "exclusiveFeatureLabel": "Caratteristica esclusiva",
+    "calloutHeading": "Guida la strada che hai sempre sognato",
+    "calloutBody": "Spediamo la tua auto di lusso o sportiva in qualsiasi destinazione in Europa. Immagina la tua Ferrari sul Passo dello Stelvio. La tua Porsche attraverso le Alpi svizzere. Noi gestiamo la logistica — tu guidi.",
+    "calloutBadge": "La tua auto.\nQualsiasi strada.",
+    "signature": {
+      "tagline": "Il tuo viaggio, perfettamente curato.",
+      "description": "Per i viaggiatori che vogliono ogni dettaglio sistemato senza muovere un dito. Ci occupiamo di hotel, trasferimenti, prenotazioni ristorante ed esperienze locali — tutto selezionato a mano.",
+      "includes": [
+        "Pianificazione itinerario su misura",
+        "Hotel & ville 5 stelle selezionati a mano",
+        "Trasferimenti aeroportuali privati",
+        "Prenotazioni ristoranti & esperienze",
+        "Concierge di viaggio 24/7",
+        "Linea di supporto durante il viaggio"
+      ],
+      "travelStyle": "Voli in business class, trasferimenti terrestri privati"
+    },
+    "prive": {
+      "tagline": "Nessun limite. Nessun compromesso.",
+      "description": "Tutto quello che c'è in Signature, elevato. Opzioni jet privato, charter di yacht, ville esclusive e un designer di viaggio dedicato che diventa il tuo esperto personale per ogni viaggio.",
+      "includes": [
+        "Tutto quello che c'è in Signature",
+        "Coordinazione jet privato",
+        "Opzioni charter yacht & vela",
+        "Accesso a ville & tenute esclusive",
+        "Designer di viaggio personale dedicato",
+        "Esperienze VIP a destinazione",
+        "Servizio trasporto auto sportiva*"
+      ],
+      "travelStyle": "Jet privato, yacht, trasferimenti in elicottero",
+      "note": "*Organizziamo il trasporto del tuo veicolo di lusso a destinazione"
+    },
+    "grandPrive": {
+      "tagline": "Solo su riferimento. Per chi vuole l'impossibile.",
+      "description": "A questo livello non ci sono pacchetti — solo possibilità. Riservato ai clienti raccomandati da membri esistenti. Se devi chiedere il prezzo, questo non fa per te.",
+      "includes": [
+        "Tutto quello che c'è in Privé",
+        "Acquisto di isole & accesso a resort privati",
+        "La tua auto sportiva sul Passo dello Stelvio",
+        "Progettazione di spedizioni su misura",
+        "Itinerari jet privato multi-destinazione",
+        "Sicurezza & logistica verificate",
+        "Opzione impronta digitale zero"
+      ],
+      "travelStyle": "Completamente privato, completamente su misura"
+    }
+  },
+  "aboutPage": {
+    "heroLabel": "Chi è Nomad Privé",
+    "heroHeadingPre": "Viaggiamo perché",
+    "heroHeadingEm": "dobbiamo farlo.",
+    "heroSubheading": "Nomad Privé è la risposta a una domanda che continuavamo a farci: perché non esiste un'agenzia di viaggi che viaggia davvero?",
+    "storyHeading": "Come è iniziato tutto",
+    "quote": "Non vendiamo viaggi. Ricreamo momenti che abbiamo già vissuto.",
+    "howWeWorkHeading": "Come lavoriamo",
+    "referralHeading": "Solo su riferimento.",
+    "referralBody1": "Non facciamo pubblicità. Non abbiamo un ufficio al pubblico. Ogni cliente con cui lavoriamo ci è stato presentato da qualcuno di cui già ci fidiamo.",
+    "referralBody2": "Non è una questione di esclusività — è controllo qualità. I viaggi che costruiamo richiedono tempo, attenzione e cura genuina. Possiamo farlo bene solo per un piccolo numero di clienti alla volta.",
+    "getInTouch": "Contattaci →",
+    "ctaLabel": "Solo su riferimento",
+    "ctaHeading": "Pronto a andare da qualche parte di straordinario?",
+    "ctaButton": "Inizia a pianificare",
+    "card1Title": "Ci siamo stati",
+    "card1Body": "Ogni destinazione che raccomandiamo è una che abbiamo vissuto personalmente. Non vendiamo nessun posto dove non siamo stati.",
+    "card2Title": "Conosciamo le persone giuste",
+    "card2Body": "La nostra rete è costruita viaggio dopo viaggio. Il manager della villa a Positano. Il proprietario del riad a Marrakech. Il capitano charter nell'Egeo. Relazioni vere, non accordi a provvigione.",
+    "card3Title": "Risolviamo i problemi",
+    "card3Body": "I viaggi hanno variabili. Meteo, scioperi, hotel sovraprenotati, coincidenze perse. Risolviamo i problemi prima che tu sappia che esistono — perché li abbiamo già vissuti noi stessi.",
+    "stat1Label": "Paesi",
+    "stat2Label": "Continenti",
+    "stat3Label": "Di prima mano",
+    "stat4Label": "Compromessi"
+  },
+  "journalPage": {
+    "heroLabel": "Diario",
+    "heroHeadingPre": "Dove siamo",
+    "heroHeadingEm": "stati",
+    "heroSubheading": "Note oneste dalle destinazioni che conosciamo, amiamo e consigliamo ai nostri clienti.",
+    "featuredLabel": "In evidenza",
+    "allPostsLabel": "Tutti gli articoli",
+    "readMore": "Leggi di più →"
+  },
+  "destinationsPage": {
+    "heroLabel": "Destinazioni",
+    "heroHeadingPre": "Dove ti",
+    "heroHeadingEm": "portiamo",
+    "heroSubheading": "Ogni destinazione che raccomandiamo è una che conosciamo personalmente. Niente liste, niente classifiche aggregate — solo posti dove siamo stati e in cui crediamo.",
+    "featuredLabel": "In evidenza",
+    "readLabel": "Leggi →"
   },
   "form": {
     "step1Heading": "Dove sogni di andare?",

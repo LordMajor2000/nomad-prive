@@ -9,8 +9,10 @@ import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog-posts";
+import { useTranslations } from "next-intl";
 
 export default function JournalPage() {
+  const t = useTranslations("journalPage");
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -84,7 +86,7 @@ export default function JournalPage() {
               color: "var(--gold-primary)",
             }}
           >
-            Journal
+            {t("heroLabel")}
           </span>
         </div>
         <h1
@@ -97,9 +99,9 @@ export default function JournalPage() {
             lineHeight: 1.1,
           }}
         >
-          Where We've{" "}
+          {t("heroHeadingPre")}{" "}
           <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-            Been
+            {t("heroHeadingEm")}
           </em>
         </h1>
         <p
@@ -111,7 +113,7 @@ export default function JournalPage() {
             fontWeight: 300,
           }}
         >
-          Honest notes from the destinations we know, love, and send our clients to.
+          {t("heroSubheading")}
         </p>
       </div>
 
@@ -137,7 +139,7 @@ export default function JournalPage() {
             }}
           >
             <div style={{ width: "30px", height: "1px", background: "var(--gold-primary)" }} />
-            Featured
+            {t("featuredLabel")}
           </div>
           <div
             style={{
@@ -192,7 +194,7 @@ export default function JournalPage() {
                           border: "1px solid rgba(201,169,110,0.2)",
                         }}
                       >
-                        Featured
+                        {t("featuredLabel")}
                       </div>
                       <div
                         style={{
@@ -268,7 +270,7 @@ export default function JournalPage() {
                           paddingBottom: "2px",
                         }}
                       >
-                        Read more →
+                        {t("readMore")}
                       </span>
                     </div>
                   </div>
@@ -301,7 +303,7 @@ export default function JournalPage() {
             }}
           >
             <div style={{ width: "30px", height: "1px", background: "var(--gold-primary)" }} />
-            All Posts
+            {t("allPostsLabel")}
           </div>
           <div
             style={{

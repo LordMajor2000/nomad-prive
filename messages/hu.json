@@ -5,6 +5,7 @@
     "journal": "Blog",
     "about": "Rólunk",
     "contact": "Kapcsolat",
+    "experiences": "Élmények",
     "quiz": "Melyik út passzol hozzám?",
     "client": "Ügyfél belépés"
   },
@@ -78,6 +79,103 @@
   },
   "worldMap": {
     "stood": "Mi is álltunk itt."
+  },
+  "packagesPage": {
+    "heroLabel": "Csomagok",
+    "heroHeadingPre": "Válaszd ki az élményt,",
+    "heroHeadingEm": "ami neked szól",
+    "heroSubheading": "Három szolgáltatási szint. Egyetlen minőségi mérce. Minden csomag teljes körű — mi intézünk minden részletet, neked semmihez sem kell nyúlnod.",
+    "travelStyleLabel": "Utazási stílus",
+    "enquire": "Érdeklődöm →",
+    "exclusiveFeatureLabel": "Exkluzív funkció",
+    "calloutHeading": "Vezess az álmaid útján",
+    "calloutBody": "Saját luxus- vagy sportkocsidat bármelyik európai úticélra kiszállítjuk. Képzeld el Ferraridal a Stelvio-hágón. Porschéddal a svájci Alpokon át. Mi intézzük a logisztikát — te vezetsz.",
+    "calloutBadge": "A te autód.\nBármely út.",
+    "signature": {
+      "tagline": "Az utazásod, tökéletesen összeállítva.",
+      "description": "Azoknak, akik minden részletet elintézve szeretnének, anélkül, hogy egy ujjukat is meg kellene mozdítani. Hoteleket, transzfereket, éttermi foglalásokat és helyi élményeket intézünk — mindent kézzel válogatva.",
+      "includes": [
+        "Egyedi útvonalterv készítése",
+        "Kézzel válogatott 5 csillagos hotelek és villák",
+        "Privát reptéri transzfer",
+        "Éttermi és élményfoglalások",
+        "24/7 utazási concierge",
+        "Úton lévő ügyfélszolgálat"
+      ],
+      "travelStyle": "Business class repülőjegyek, privát földi transzfer"
+    },
+    "prive": {
+      "tagline": "Nincs határ. Nincs kompromisszum.",
+      "description": "Minden, ami a Signature-ban van, de még magasabb szinten. Magánrepülő lehetőségek, jachtbérlés, exkluzív villabirtok és egy dedikált utazástervező, aki minden úton a személyes szakértőd lesz.",
+      "includes": [
+        "Minden, ami a Signature-ban",
+        "Magánrepülő koordináció",
+        "Jacht- és vitorlás charterbérlés",
+        "Exkluzív villa és birtok hozzáférés",
+        "Dedikált személyes utazástervező",
+        "VIP célponti élmények",
+        "Sportautó szállítási szolgáltatás*"
+      ],
+      "travelStyle": "Magánrepülő, jacht, helikopteres transzfer",
+      "note": "*Saját luxusjárműved szállítását intézzük az úticélra"
+    },
+    "grandPrive": {
+      "tagline": "Csak ajánlással. Azoknak, akik a lehetetlent akarják.",
+      "description": "Ezen a szinten nincsenek csomagok — csak lehetőségek. Fenntartva a meglévő tagok által ajánlott ügyfeleknek. Ha kérdezni kell az árat, ez nem neked szól.",
+      "includes": [
+        "Minden, ami a Privé-ban",
+        "Szigetfoglalás és privát üdülőhely hozzáférés",
+        "A saját sportautód a Stelvio-hágón",
+        "Egyedi expedíció tervezés",
+        "Több úticélt érintő magánrepülő útvonalak",
+        "Ellenőrzött biztonság és logisztika",
+        "Nulla digitális lábnyom opció"
+      ],
+      "travelStyle": "Teljesen privát, teljesen személyre szabott"
+    }
+  },
+  "aboutPage": {
+    "heroLabel": "A Nomad Privé-ről",
+    "heroHeadingPre": "Azért utazunk,",
+    "heroHeadingEm": "mert kell.",
+    "heroSubheading": "A Nomad Privé egy kérdés válasza, amit folyamatosan feltettünk: miért nem létezik olyan utazási cég, amelyik tényleg utazik?",
+    "storyHeading": "Hogyan kezdődött",
+    "quote": "Nem utakat adunk el. Már megélt pillanatokat teremtünk újra.",
+    "howWeWorkHeading": "Hogyan dolgozunk",
+    "referralHeading": "Csak ajánlással.",
+    "referralBody1": "Nem hirdetünk. Nincs sétálóutcai irodánk. Minden ügyfelünket valaki ajánlotta, akiben már megbízunk.",
+    "referralBody2": "Ez nem kapuőrzés — ez minőségellenőrzés. Az utazások, amiket építünk, időt, figyelmet és valódi gondoskodást igényelnek. Ezt csak kevés ügyfél esetén tudjuk rendesen megtenni.",
+    "getInTouch": "Lépj kapcsolatba →",
+    "ctaLabel": "Csak ajánlással",
+    "ctaHeading": "Készen állsz egy rendkívüli útra?",
+    "ctaButton": "Tervezés indítása",
+    "card1Title": "Mi voltunk ott",
+    "card1Body": "Minden úticél, amit ajánlunk, olyat, amelyet személyesen megtapasztaltunk. Nem adunk el olyan helyet, ahol még nem jártunk.",
+    "card2Title": "Ismerjük az embereket",
+    "card2Body": "Hálózatunkat út után utazással építettük. A villavezető Positanóban. A riad tulajdonosa Marrakeshben. A charterhajó kapitánya az Égei-tengeren. Valódi kapcsolatok, nem jutalékos megállapodások.",
+    "card3Title": "Megoldjuk a problémákat",
+    "card3Body": "Az utazásnak változói vannak. Időjárás, sztrájkok, túlfoglalt hotelek, lekésett csatlakozások. Megoldjuk a problémákat, mielőtt tudnál róluk — mert mi már átéltük őket.",
+    "stat1Label": "Ország",
+    "stat2Label": "Kontinens",
+    "stat3Label": "Első kézből",
+    "stat4Label": "Kompromisszum"
+  },
+  "journalPage": {
+    "heroLabel": "Blog",
+    "heroHeadingPre": "Ahol jártunk",
+    "heroHeadingEm": "",
+    "heroSubheading": "Őszinte feljegyzések azokról az úticélokról, amelyeket ismerünk, szeretünk, és ahová ügyfeleinket küldjük.",
+    "featuredLabel": "Kiemelt",
+    "allPostsLabel": "Összes bejegyzés",
+    "readMore": "Tovább olvasom →"
+  },
+  "destinationsPage": {
+    "heroLabel": "Úticélok",
+    "heroHeadingPre": "Ahová",
+    "heroHeadingEm": "elviszünk",
+    "heroSubheading": "Minden úticélt, amelyet ajánlunk, személyesen ismerünk. Nincs lista, nincs összesített rangsor — csak helyek, ahol jártunk és hiszünk bennük.",
+    "featuredLabel": "Kiemelt",
+    "readLabel": "Olvasom →"
   },
   "form": {
     "step1Heading": "Hova álmodod magad?",
