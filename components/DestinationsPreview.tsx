@@ -130,9 +130,9 @@ export default function DestinationsPreview() {
               opacity: 0,
             }}
           >
-            Where We&apos;ve{" "}
+            Featured{" "}
             <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-              Been
+              Destinations
             </em>
           </h2>
         </div>

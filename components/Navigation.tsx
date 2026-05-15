@@ -92,8 +92,8 @@ export default function Navigation() {
               <Image
                 src="/logo.png"
                 alt="Nomad Privé"
-                width={160}
-                height={40}
+                width={200}
+                height={52}
                 priority
                 style={{ objectFit: "contain" }}
               />

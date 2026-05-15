@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 const packages = [
@@ -30,11 +30,6 @@ const packages = [
 export default function PackagesPreview() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cardWidth, setCardWidth] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const x = useMotionValue(0);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -58,40 +53,7 @@ export default function PackagesPreview() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    const updateSizes = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      if (trackRef.current) {
-        const containerWidth = trackRef.current.parentElement?.clientWidth || window.innerWidth;
-        setCardWidth(mobile ? containerWidth * 0.85 : containerWidth / 3);
-      }
-    };
-    updateSizes();
-    window.addEventListener("resize", updateSizes);
-    return () => window.removeEventListener("resize", updateSizes);
-  }, []);
-
-  const snapToIndex = (index: number) => {
-    const clamped = Math.max(0, Math.min(packages.length - 1, index));
-    setActiveIndex(clamped);
-    if (cardWidth > 0) {
-      animate(x, -clamped * (cardWidth + 24), { type: "spring", stiffness: 300, damping: 30 });
-    }
-  };
-
-  const handleDragEnd = () => {
-    const current = x.get();
-    const gap = cardWidth + 24;
-    const nearest = Math.round(-current / gap);
-    snapToIndex(nearest);
-  };
-
-  const dragConstraints = cardWidth > 0
-    ? { left: -((packages.length - 1) * (cardWidth + 24)), right: 0 }
-    : { left: 0, right: 0 };
+  }, [])
 
   return (
     <section
@@ -175,44 +137,34 @@ export default function PackagesPreview() {
         </div>
       </div>
 
-      {/* Carousel track */}
+      {/* Cards grid */}
       <div
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          paddingLeft: "clamp(1.5rem, 5vw, 4rem)",
-          overflow: isMobile ? "hidden" : "visible",
+          padding: "0 clamp(1.5rem, 5vw, 4rem)",
         }}
       >
-        <div ref={trackRef} style={{ overflow: "hidden" }}>
-          <motion.div
-            drag={isMobile ? "x" : false}
-            dragConstraints={dragConstraints}
-            dragElastic={0.08}
-            onDragEnd={handleDragEnd}
-            style={{
-              x,
-              display: "flex",
-              gap: "1.5rem",
-              cursor: isMobile ? "grab" : "default",
-              width: isMobile ? "max-content" : "100%",
-            }}
-          >
-            {packages.map((pkg) => (
-              <motion.div
-                key={pkg.name}
-                whileHover={!isMobile ? { y: -4, transition: { duration: 0.3, ease: "easeOut" } } : {}}
-                style={{
-                  background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-primary)",
-                  border: pkg.featured
-                    ? "1px solid rgba(201,169,110,0.35)"
-                    : "1px solid rgba(201,169,110,0.1)",
-                  borderRadius: "2px",
-                  padding: "2rem",
-                  position: "relative",
-                  flexShrink: 0,
-                  width: cardWidth > 0 ? `${cardWidth}px` : "calc(33.333% - 1rem)",
-                }}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "1.5rem",
+          }}
+        >
+          {packages.map((pkg) => (
+            <motion.div
+              key={pkg.name}
+              whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
+              style={{
+                background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-primary)",
+                border: pkg.featured
+                  ? "1px solid rgba(201,169,110,0.35)"
+                  : "1px solid rgba(201,169,110,0.1)",
+                borderRadius: "2px",
+                padding: "2rem",
+                position: "relative",
+              }}
               >
                 {/* Top accent */}
                 <div
@@ -293,39 +245,8 @@ export default function PackagesPreview() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
         </div>
       </div>
-
-      {/* Dots — mobile only */}
-      {isMobile && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "0.6rem",
-            marginTop: "2rem",
-          }}
-        >
-          {packages.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => snapToIndex(i)}
-              style={{
-                width: i === activeIndex ? "20px" : "8px",
-                height: "8px",
-                borderRadius: "4px",
-                border: "none",
-                background: i === activeIndex ? "var(--gold-primary)" : "rgba(201,169,110,0.3)",
-                cursor: "pointer",
-                padding: 0,
-                transition: "width 0.3s ease, background 0.3s ease",
-              }}
-              aria-label={`Go to package ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
     </section>
   );
 }

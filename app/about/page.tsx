@@ -8,32 +8,6 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
-    alt: "Morocco",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=600&q=80",
-    alt: "Sri Lanka",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
-    alt: "Mykonos",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=600&q=80",
-    alt: "Miami",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?w=600&q=80",
-    alt: "Amalfi Coast",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",
-    alt: "Bali",
-  },
-];
 
 const howWeWork = [
   {
@@ -50,12 +24,6 @@ const howWeWork = [
   },
 ];
 
-const stats = [
-  { value: "8+", label: "Countries Explored" },
-  { value: "100%", label: "Bespoke Itineraries" },
-  { value: "24/7", label: "Concierge Support" },
-  { value: "2", label: "Founders, 1 Vision" },
-];
 
 export default function AboutPage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -361,124 +329,7 @@ export default function AboutPage() {
           `}</style>
         </section>
 
-        {/* Section 4 — Gallery */}
-        <section
-          style={{
-            padding: "clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem)",
-            background: "var(--bg-primary)",
-          }}
-        >
-          <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-            <div style={{ marginBottom: "3rem" }}>
-              <h2
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "clamp(1.6rem, 3.5vw, 2.5rem)",
-                  fontWeight: 700,
-                  color: "var(--cream)",
-                  margin: "0 0 0.5rem",
-                  display: "inline-block",
-                  borderBottom: "2px solid var(--gold-primary)",
-                  paddingBottom: "6px",
-                }}
-              >
-                Where We&apos;ve Stood
-              </h2>
-            </div>
-            <div
-              style={{
-                columns: "3 280px",
-                gap: "1rem",
-              }}
-            >
-              {galleryImages.map((img, i) => (
-                <div
-                  key={i}
-                  style={{
-                    breakInside: "avoid",
-                    marginBottom: "1rem",
-                    borderRadius: "4px",
-                    overflow: "hidden",
-                    position: "relative",
-                    transition: "transform 0.4s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "scale(1.03)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "scale(1)";
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    width={600}
-                    height={i % 3 === 0 ? 700 : 450}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      display: "block",
-                      objectFit: "cover",
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 5 — Stats bar */}
-        <section
-          style={{
-            background: "#060606",
-            padding: "clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem)",
-            borderTop: "1px solid rgba(201,169,110,0.08)",
-            borderBottom: "1px solid rgba(201,169,110,0.08)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "1400px",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "center",
-              gap: "clamp(2rem, 8vw, 6rem)",
-              flexWrap: "wrap",
-              textAlign: "center",
-            }}
-          >
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <div
-                  style={{
-                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                    fontWeight: 700,
-                    color: "var(--gold-primary)",
-                    lineHeight: 1,
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.65rem",
-                    letterSpacing: "0.15em",
-                    textTransform: "uppercase",
-                    color: "var(--cream)",
-                    fontVariant: "small-caps",
-                    opacity: 0.7,
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 6 — CTA */}
+        {/* Section 5 — CTA */}
         <section
           style={{
             padding: "clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem)",

@@ -6,12 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 
-const stats = [
-  { value: "8+", label: "Destinations" },
-  { value: "100%", label: "Bespoke" },
-  { value: "24/7", label: "Support" },
-  { value: "2", label: "Founders" },
-];
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -135,7 +129,7 @@ export default function AboutSection() {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80"
+              src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=90"
               alt="Travel landscape"
               fill
               style={{ objectFit: "cover" }}
@@ -264,45 +258,6 @@ export default function AboutSection() {
               </Link>
             </div>
 
-            {/* Stats row */}
-            <div
-              data-reveal
-              style={{
-                display: "flex",
-                gap: "clamp(1.5rem, 4vw, 3rem)",
-                flexWrap: "wrap",
-                paddingTop: "2rem",
-                borderTop: "1px solid rgba(201,169,110,0.1)",
-              }}
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                      fontSize: "clamp(1.4rem, 3vw, 2rem)",
-                      fontWeight: 700,
-                      color: "var(--gold-primary)",
-                      lineHeight: 1,
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      color: "var(--muted)",
-                      fontVariant: "small-caps",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
