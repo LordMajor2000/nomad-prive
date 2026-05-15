@@ -130,7 +130,7 @@ export default function PackagesPage() {
       <div
         ref={heroRef}
         style={{
-          padding: "10rem clamp(1.5rem, 5vw, 4rem) 5rem",
+          padding: "14rem clamp(1.5rem, 5vw, 4rem) 5rem",
           maxWidth: "1400px",
           margin: "0 auto",
           opacity: 0,

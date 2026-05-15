@@ -12,7 +12,6 @@ import BlogPreview from "@/components/BlogPreview";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
-import DestinationTicker from "@/components/DestinationTicker";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +29,6 @@ export default function Home() {
         <PackagesPreview />
         <BlogPreview />
         <ContactSection />
-        <DestinationTicker />
         <Footer />
       </main>
     </>

@@ -129,7 +129,7 @@ export default function AboutSection() {
             }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=90"
+              src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=90"
               alt="Travel landscape"
               fill
               style={{ objectFit: "cover" }}
