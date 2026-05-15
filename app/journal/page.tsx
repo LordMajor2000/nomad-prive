@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog-posts";
@@ -169,14 +170,12 @@ export default function JournalPage() {
                         overflow: "hidden",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          backgroundImage:
-                            "linear-gradient(rgba(201,169,110,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.05) 1px, transparent 1px)",
-                          backgroundSize: "40px 40px",
-                        }}
+                      <Image
+                        src={post.image}
+                        alt={`${post.location}, ${post.country}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
                       />
                       <div
                         style={{
@@ -332,16 +331,15 @@ export default function JournalPage() {
                         aspectRatio: "4 / 3",
                         background: post.gradient,
                         position: "relative",
+                        overflow: "hidden",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          backgroundImage:
-                            "linear-gradient(rgba(201,169,110,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.05) 1px, transparent 1px)",
-                          backgroundSize: "40px 40px",
-                        }}
+                      <Image
+                        src={post.image}
+                        alt={post.location}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{ objectFit: "cover" }}
                       />
                       <div
                         style={{

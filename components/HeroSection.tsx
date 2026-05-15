@@ -12,7 +12,7 @@ export default function HeroSection() {
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const scrollLineRef = useRef<HTMLDivElement>(null);
 
-  const titleText = "NOMAD PRIVÉ";
+  const titleLines = ["THE WORLD,", "ON YOUR TERMS."];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,7 +37,7 @@ export default function HeroSection() {
             filter: "blur(0px)",
             duration: 0.8,
             stagger: {
-              each: 0.06,
+              each: 0.05,
               from: "center",
             },
             ease: "power3.out",
@@ -221,18 +221,22 @@ export default function HeroSection() {
             textTransform: "uppercase",
           }}
         >
-          {titleText.split("").map((char, i) => (
-            <span
-              key={i}
-              className="letter"
-              style={{
-                display: "inline-block",
-                whiteSpace: char === " " ? "pre" : "normal",
-                opacity: 0,
-              }}
-            >
-              {char === " " ? " " : char}
-            </span>
+          {titleLines.map((line, lineIndex) => (
+            <div key={lineIndex} style={{ display: "block" }}>
+              {line.split("").map((char, charIndex) => (
+                <span
+                  key={`${lineIndex}-${charIndex}`}
+                  className="letter"
+                  style={{
+                    display: "inline-block",
+                    whiteSpace: char === " " ? "pre" : "normal",
+                    opacity: 0,
+                  }}
+                >
+                  {char === " " ? " " : char}
+                </span>
+              ))}
+            </div>
           ))}
         </h1>
 
@@ -250,7 +254,7 @@ export default function HeroSection() {
             opacity: 0,
           }}
         >
-          Every journey is a masterpiece.
+          Hyper-personalized luxury travel, crafted for the few.
         </p>
       </div>
 

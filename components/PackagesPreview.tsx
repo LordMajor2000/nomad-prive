@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import Link from "next/link";
 
 const packages = [
@@ -11,27 +11,30 @@ const packages = [
     number: "01",
     name: "SIGNATURE",
     tagline: "Your journey, perfectly curated.",
-    price: "From €3,500 / person",
+    featured: false,
   },
   {
     number: "02",
     name: "PRIVÉ",
     tagline: "No limits. No compromises.",
-    price: "From €9,500 / person",
     featured: true,
   },
   {
     number: "03",
     name: "GRAND PRIVÉ",
     tagline: "By referral only. For those who want the impossible.",
-    price: "By referral only",
+    featured: false,
   },
 ];
 
 export default function PackagesPreview() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const x = useMotionValue(0);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -52,41 +55,55 @@ export default function PackagesPreview() {
           },
         }
       );
-
-      itemsRef.current.forEach((item, i) => {
-        if (!item) return;
-        gsap.fromTo(
-          item,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            delay: i * 0.12,
-            scrollTrigger: {
-              trigger: item,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    const updateSizes = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (trackRef.current) {
+        const containerWidth = trackRef.current.parentElement?.clientWidth || window.innerWidth;
+        setCardWidth(mobile ? containerWidth * 0.85 : containerWidth / 3);
+      }
+    };
+    updateSizes();
+    window.addEventListener("resize", updateSizes);
+    return () => window.removeEventListener("resize", updateSizes);
+  }, []);
+
+  const snapToIndex = (index: number) => {
+    const clamped = Math.max(0, Math.min(packages.length - 1, index));
+    setActiveIndex(clamped);
+    if (cardWidth > 0) {
+      animate(x, -clamped * (cardWidth + 24), { type: "spring", stiffness: 300, damping: 30 });
+    }
+  };
+
+  const handleDragEnd = () => {
+    const current = x.get();
+    const gap = cardWidth + 24;
+    const nearest = Math.round(-current / gap);
+    snapToIndex(nearest);
+  };
+
+  const dragConstraints = cardWidth > 0
+    ? { left: -((packages.length - 1) * (cardWidth + 24)), right: 0 }
+    : { left: 0, right: 0 };
+
   return (
     <section
       ref={sectionRef}
       style={{
-        padding: "clamp(5rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)",
+        padding: "clamp(5rem, 12vw, 10rem) 0",
         background: "var(--bg-surface)",
         position: "relative",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 clamp(1.5rem, 5vw, 4rem)" }}>
         {/* Header */}
         <div
           style={{
@@ -156,23 +173,35 @@ export default function PackagesPreview() {
             Compare all packages →
           </Link>
         </div>
+      </div>
 
-        {/* Package items */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          {packages.map((pkg, i) => (
-            <div
-              key={pkg.name}
-              ref={(el) => { itemsRef.current[i] = el; }}
-              style={{ opacity: 0 }}
-            >
+      {/* Carousel track */}
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          paddingLeft: "clamp(1.5rem, 5vw, 4rem)",
+          overflow: isMobile ? "hidden" : "visible",
+        }}
+      >
+        <div ref={trackRef} style={{ overflow: "hidden" }}>
+          <motion.div
+            drag={isMobile ? "x" : false}
+            dragConstraints={dragConstraints}
+            dragElastic={0.08}
+            onDragEnd={handleDragEnd}
+            style={{
+              x,
+              display: "flex",
+              gap: "1.5rem",
+              cursor: isMobile ? "grab" : "default",
+              width: isMobile ? "max-content" : "100%",
+            }}
+          >
+            {packages.map((pkg) => (
               <motion.div
-                whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
+                key={pkg.name}
+                whileHover={!isMobile ? { y: -4, transition: { duration: 0.3, ease: "easeOut" } } : {}}
                 style={{
                   background: pkg.featured ? "var(--bg-surface-2)" : "var(--bg-primary)",
                   border: pkg.featured
@@ -181,7 +210,8 @@ export default function PackagesPreview() {
                   borderRadius: "2px",
                   padding: "2rem",
                   position: "relative",
-                  height: "100%",
+                  flexShrink: 0,
+                  width: cardWidth > 0 ? `${cardWidth}px` : "calc(33.333% - 1rem)",
                 }}
               >
                 {/* Top accent */}
@@ -246,25 +276,7 @@ export default function PackagesPreview() {
                   }}
                 />
 
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: "1rem",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.1em",
-                      color: "var(--gold-primary)",
-                      fontWeight: 500,
-                    }}
-                  >
-                    {pkg.price}
-                  </span>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Link
                     href="/packages"
                     style={{
@@ -280,10 +292,40 @@ export default function PackagesPreview() {
                   </Link>
                 </div>
               </motion.div>
-            </div>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </div>
+
+      {/* Dots — mobile only */}
+      {isMobile && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "0.6rem",
+            marginTop: "2rem",
+          }}
+        >
+          {packages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => snapToIndex(i)}
+              style={{
+                width: i === activeIndex ? "20px" : "8px",
+                height: "8px",
+                borderRadius: "4px",
+                border: "none",
+                background: i === activeIndex ? "var(--gold-primary)" : "rgba(201,169,110,0.3)",
+                cursor: "pointer",
+                padding: 0,
+                transition: "width 0.3s ease, background 0.3s ease",
+              }}
+              aria-label={`Go to package ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -16,6 +17,7 @@ const navLinks = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoExists, setLogoExists] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
@@ -25,6 +27,14 @@ export default function Navigation() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Check if logo.png exists
+  useEffect(() => {
+    const img = new window.Image();
+    img.onload = () => setLogoExists(true);
+    img.onerror = () => setLogoExists(false);
+    img.src = "/logo.png";
   }, []);
 
   // Close menu on route change
@@ -77,76 +87,34 @@ export default function Navigation() {
           }}
         >
           {/* Logo */}
-          <Link
-            href="/"
-            style={{
-              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-              fontSize: "1rem",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              color: "var(--gold-primary)",
-              textTransform: "uppercase",
-              textDecoration: "none",
-            }}
-          >
-            Nomad Privé
+          <Link href="/" style={{ textDecoration: "none" }}>
+            {logoExists ? (
+              <Image
+                src="/logo.png"
+                alt="Nomad Privé"
+                width={160}
+                height={40}
+                priority
+                style={{ objectFit: "contain" }}
+              />
+            ) : (
+              <span
+                style={{
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontSize: "1rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.25em",
+                  color: "var(--gold-primary)",
+                  textTransform: "uppercase",
+                }}
+              >
+                Nomad Privé
+              </span>
+            )}
           </Link>
 
-          {/* Desktop Links */}
-          <ul
-            className="hidden md:flex"
-            style={{
-              display: "flex",
-              gap: "2.5rem",
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-            }}
-          >
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    style={{
-                      color: active ? "var(--gold-primary)" : "var(--cream)",
-                      textDecoration: "none",
-                      fontSize: "0.8rem",
-                      letterSpacing: "0.15em",
-                      textTransform: "uppercase",
-                      fontWeight: 400,
-                      opacity: active ? 1 : 0.75,
-                      transition: "opacity 0.3s ease, color 0.3s ease",
-                      position: "relative",
-                      paddingBottom: "4px",
-                      borderBottom: active
-                        ? "1px solid var(--gold-primary)"
-                        : "1px solid transparent",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!active) {
-                        (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold-primary)";
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!active) {
-                        (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
-                        (e.currentTarget as HTMLAnchorElement).style.color = "var(--cream)";
-                      }
-                    }}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* Mobile hamburger */}
+          {/* Hamburger icon — always visible */}
           <button
-            className="md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
               background: "none",
@@ -195,7 +163,7 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile fullscreen overlay — slides in from RIGHT */}
+      {/* Fullscreen overlay — slides in from RIGHT */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div

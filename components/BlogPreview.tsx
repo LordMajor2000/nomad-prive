@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { blogPosts } from "@/data/blog-posts";
 
 export default function BlogPreview() {
@@ -171,15 +172,12 @@ export default function BlogPreview() {
                     background: post.gradient,
                   }}
                 >
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      backgroundImage:
-                        "linear-gradient(rgba(201,169,110,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.05) 1px, transparent 1px)",
-                      backgroundSize: "40px 40px",
-                      opacity: 0.5,
-                    }}
+                  <Image
+                    src={post.image}
+                    alt={`${post.location}, ${post.country}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: "cover" }}
                   />
                   <div
                     style={{

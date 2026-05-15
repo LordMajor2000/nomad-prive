@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const featured = [
   {
@@ -12,6 +13,7 @@ const featured = [
     location: "Sri Lanka",
     country: "Sri Lanka",
     tagline: "The exotic adventure Bali used to be.",
+    image: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&q=80",
     gradient: "linear-gradient(135deg, #0a0800 0%, #1a1200 30%, rgba(201,169,110,0.15) 100%)",
   },
   {
@@ -19,14 +21,16 @@ const featured = [
     location: "Morocco",
     country: "Morocco",
     tagline: "Two countries in one — surf and medina.",
+    image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80",
     gradient: "linear-gradient(135deg, #0d0500 0%, #1a0a00 30%, rgba(201,100,50,0.15) 100%)",
   },
   {
-    slug: "amalfi-coast",
-    location: "Amalfi Coast",
-    country: "Italy",
-    tagline: "Where the road ends and the dream begins.",
-    gradient: "linear-gradient(135deg, #1a0a00 0%, #2d1500 30%, rgba(201,169,110,0.2) 100%)",
+    slug: "miami",
+    location: "Miami",
+    country: "United States",
+    tagline: "The city you think you know.",
+    image: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
+    gradient: "linear-gradient(135deg, #000510 0%, #000a1a 30%, rgba(100,150,220,0.2) 100%)",
   },
 ];
 
@@ -92,72 +96,45 @@ export default function DestinationsPreview() {
         {/* Header */}
         <div
           style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
             marginBottom: "clamp(3rem, 6vw, 5rem)",
-            flexWrap: "wrap",
-            gap: "1.5rem",
           }}
         >
-          <div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1.5rem",
-                marginBottom: "1.5rem",
-              }}
-            >
-              <div style={{ width: "40px", height: "1px", background: "var(--gold-primary)" }} />
-              <span
-                style={{
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: "var(--gold-primary)",
-                }}
-              >
-                Destinations
-              </span>
-            </div>
-            <h2
-              ref={headingRef}
-              style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                fontWeight: 700,
-                color: "var(--cream)",
-                margin: 0,
-                opacity: 0,
-              }}
-            >
-              Where We{" "}
-              <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
-                Take You
-              </em>
-            </h2>
-          </div>
-
-          <Link
-            href="/destinations"
+          <div
             style={{
-              fontSize: "0.75rem",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "var(--gold-primary)",
-              textDecoration: "none",
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
-              borderBottom: "1px solid rgba(201,169,110,0.3)",
-              paddingBottom: "2px",
-              transition: "border-color 0.3s ease",
-              whiteSpace: "nowrap",
+              gap: "1.5rem",
+              marginBottom: "1.5rem",
             }}
           >
-            All destinations →
-          </Link>
+            <div style={{ width: "40px", height: "1px", background: "var(--gold-primary)" }} />
+            <span
+              style={{
+                fontSize: "0.7rem",
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
+                color: "var(--gold-primary)",
+              }}
+            >
+              Destinations
+            </span>
+          </div>
+          <h2
+            ref={headingRef}
+            style={{
+              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: 700,
+              color: "var(--cream)",
+              margin: 0,
+              opacity: 0,
+            }}
+          >
+            Where We&apos;ve{" "}
+            <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>
+              Been
+            </em>
+          </h2>
         </div>
 
         {/* Cards */}
@@ -192,20 +169,16 @@ export default function DestinationsPreview() {
                   <div
                     style={{
                       aspectRatio: "3 / 2",
-                      background: dest.gradient,
                       position: "relative",
                       overflow: "hidden",
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        backgroundImage:
-                          "linear-gradient(rgba(201,169,110,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.05) 1px, transparent 1px)",
-                        backgroundSize: "40px 40px",
-                        opacity: 0.5,
-                      }}
+                    <Image
+                      src={dest.image}
+                      alt={dest.location}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: "cover" }}
                     />
                     <div
                       style={{

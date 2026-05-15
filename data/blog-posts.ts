@@ -9,6 +9,7 @@ export interface BlogPost {
   readTime: string;
   gradient: string;
   featured: boolean;
+  image: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -22,7 +23,8 @@ export const blogPosts: BlogPost[] = [
     date: "March 2026",
     readTime: "5 min read",
     gradient: "linear-gradient(135deg, #0a0800 0%, #1a1200 30%, rgba(201,169,110,0.15) 100%)",
-    featured: true
+    featured: true,
+    image: "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?w=800&q=80",
   },
   {
     slug: "bali-vs-lombok",
@@ -34,7 +36,8 @@ export const blogPosts: BlogPost[] = [
     date: "January 2026",
     readTime: "6 min read",
     gradient: "linear-gradient(135deg, #000d0a 0%, #001a10 30%, rgba(100,180,140,0.15) 100%)",
-    featured: true
+    featured: true,
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
   },
   {
     slug: "morocco",
@@ -46,7 +49,8 @@ export const blogPosts: BlogPost[] = [
     date: "February 2026",
     readTime: "7 min read",
     gradient: "linear-gradient(135deg, #0d0500 0%, #1a0a00 30%, rgba(201,100,50,0.15) 100%)",
-    featured: true
+    featured: true,
+    image: "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80",
   },
   {
     slug: "miami",
@@ -58,7 +62,8 @@ export const blogPosts: BlogPost[] = [
     date: "April 2026",
     readTime: "8 min read",
     gradient: "linear-gradient(135deg, #000510 0%, #000a1a 30%, rgba(100,150,220,0.2) 100%)",
-    featured: true
+    featured: true,
+    image: "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?w=800&q=80",
   },
   {
     slug: "mykonos",
@@ -70,7 +75,8 @@ export const blogPosts: BlogPost[] = [
     date: "May 2026",
     readTime: "5 min read",
     gradient: "linear-gradient(135deg, #00050d 0%, #000a18 30%, rgba(180,200,240,0.15) 100%)",
-    featured: false
+    featured: false,
+    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
   },
   {
     slug: "amalfi-coast",
@@ -82,7 +88,8 @@ export const blogPosts: BlogPost[] = [
     date: "April 2025",
     readTime: "4 min read",
     gradient: "linear-gradient(135deg, #1a0a00 0%, #2d1500 30%, rgba(201,169,110,0.2) 100%)",
-    featured: false
+    featured: false,
+    image: "https://images.unsplash.com/photo-1612698093158-e07ac200d44e?w=800&q=80",
   },
   {
     slug: "dubrovnik",
@@ -94,6 +101,7 @@ export const blogPosts: BlogPost[] = [
     date: "June 2025",
     readTime: "5 min read",
     gradient: "linear-gradient(135deg, #000d1a 0%, #001a2e 30%, rgba(100,140,180,0.2) 100%)",
-    featured: false
+    featured: false,
+    image: "https://images.unsplash.com/photo-1555990538-c4d68e0f4a36?w=800&q=80",
   }
 ];

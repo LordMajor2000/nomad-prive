@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { blogPosts } from "@/data/blog-posts";
@@ -52,15 +53,14 @@ export default async function BlogPostPage({ params }: Props) {
           overflow: "hidden",
         }}
       >
-        {/* Grid overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "linear-gradient(rgba(201,169,110,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.04) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
+        {/* Hero background image */}
+        <Image
+          src={post.image}
+          alt={post.location}
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", opacity: 0.35 }}
         />
         {/* Bottom fade */}
         <div
@@ -316,16 +316,15 @@ export default async function BlogPostPage({ params }: Props) {
                         aspectRatio: "16 / 9",
                         background: relPost.gradient,
                         position: "relative",
+                        overflow: "hidden",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          backgroundImage:
-                            "linear-gradient(rgba(201,169,110,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.05) 1px, transparent 1px)",
-                          backgroundSize: "40px 40px",
-                        }}
+                      <Image
+                        src={relPost.image}
+                        alt={relPost.location}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
                       />
                     </div>
                     <div style={{ padding: "1.5rem" }}>

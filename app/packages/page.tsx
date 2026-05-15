@@ -24,7 +24,6 @@ const packages = [
       "On-trip support line",
     ],
     travelStyle: "Business class flights, private ground transfers",
-    price: "From €3,500 / person",
     featured: false,
   },
   {
@@ -43,7 +42,6 @@ const packages = [
       "Sports car transport service*",
     ],
     travelStyle: "Private jet, yacht, helicopter transfers",
-    price: "From €9,500 / person",
     note: "*We arrange transport of your own luxury vehicle to the destination",
     featured: true,
   },
@@ -63,7 +61,6 @@ const packages = [
       "Zero digital footprint option",
     ],
     travelStyle: "Fully private, fully bespoke",
-    price: "By referral only",
     featured: false,
   },
 ];
@@ -407,16 +404,6 @@ export default function PackagesPage() {
                   gap: "1rem",
                 }}
               >
-                <span
-                  style={{
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.05em",
-                    color: "var(--gold-primary)",
-                    fontWeight: 600,
-                  }}
-                >
-                  {pkg.price}
-                </span>
                 <Link
                   href="/contact"
                   style={{
