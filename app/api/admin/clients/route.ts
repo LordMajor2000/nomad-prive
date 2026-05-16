@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { supabaseAdmin } from "@/lib/supabase"
 import bcrypt from "bcryptjs"
-import { createHmac } from "crypto"
+import { createHmac } from "node:crypto"
 
 function checkAdminSession(req: NextRequest): boolean {
   const session = req.cookies.get("admin_session")

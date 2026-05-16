@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { createHmac } from "crypto"
+import { createHmac } from "node:crypto"
 
 export default async function AdminDashboardLayout({
   children,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createHmac } from "crypto"
+import { createHmac } from "node:crypto"
 
 export async function POST(req: NextRequest) {
   const { password } = await req.json()
