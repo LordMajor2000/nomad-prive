@@ -3,6 +3,12 @@ import { redirect } from "next/navigation";
 import { demoTrip } from "@/data/demo-trip";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CountdownTimer from "@/components/dashboard/CountdownTimer";
+import WishList from "@/components/dashboard/WishList";
+import Readings from "@/components/dashboard/Readings";
+import TripFeedback from "@/components/dashboard/TripFeedback";
+import PastTrips from "@/components/dashboard/PastTrips";
+import EmergencyCard from "@/components/dashboard/EmergencyCard";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -39,7 +45,7 @@ export default async function DashboardPage() {
             justifyContent: "space-between",
             flexWrap: "wrap",
             gap: "1.5rem",
-            marginBottom: "4rem",
+            marginBottom: "3rem",
           }}
         >
           <div>
@@ -121,6 +127,11 @@ export default async function DashboardPage() {
           </form>
         </div>
 
+        {/* Countdown */}
+        <div style={{ marginBottom: "2rem" }}>
+          <CountdownTimer targetDate={trip.tripStartDate} destination={trip.destination} />
+        </div>
+
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           {/* SECTION 1 — Hotel */}
           <div
@@ -178,7 +189,6 @@ export default async function DashboardPage() {
                     position: "relative",
                   }}
                 >
-                  {/* Timeline column */}
                   <div
                     style={{
                       display: "flex",
@@ -211,7 +221,6 @@ export default async function DashboardPage() {
                     )}
                   </div>
 
-                  {/* Content */}
                   <div style={{ flex: 1, paddingBottom: idx < trip.transfers.length - 1 ? "1.75rem" : 0 }}>
                     <div
                       style={{
@@ -423,7 +432,26 @@ export default async function DashboardPage() {
                 {trip.emergencyNote}
               </p>
             </div>
+
+            <EmergencyCard
+              contacts={trip.contacts}
+              destination={trip.destination}
+              hotel={trip.hotel.name}
+              dates={trip.dates}
+            />
           </div>
+
+          {/* SECTION 5 — Past Trips */}
+          <PastTrips trips={trip.pastTrips} />
+
+          {/* SECTION 6 — Readings */}
+          <Readings readings={trip.readings} />
+
+          {/* SECTION 7 — Wish List */}
+          <WishList />
+
+          {/* SECTION 8 — Feedback */}
+          <TripFeedback />
         </div>
       </main>
 

@@ -43,11 +43,11 @@ export default function WorldMap() {
     <section style={{ background: "#080808", padding: "clamp(4rem, 8vw, 7rem) 0", overflow: "hidden" }}>
       <div style={{ textAlign: "center", marginBottom: "3rem", padding: "0 2rem" }}>
         <div style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold-primary)", marginBottom: "1rem", opacity: 0.7 }}>
-          Our footprint
+          Kedvenc helyeink
         </div>
         <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 0.75rem", lineHeight: 1.2 }}>
           {t("stood")}{" "}
-          <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>We know the way.</em>
+          <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>Ismerjük az utat.</em>
         </h2>
         <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)", opacity: 0.5 }}>
           22+ countries · 4 continents

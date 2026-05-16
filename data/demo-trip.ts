@@ -2,6 +2,7 @@ export const demoTrip = {
   clientName: "James & Sarah",
   destination: "Amalfi Coast, Italy",
   dates: "June 14–21, 2026",
+  tripStartDate: "2026-06-14",
   status: "Confirmed",
   travelers: 2,
   package: "PRIVÉ",
@@ -32,4 +33,38 @@ export const demoTrip = {
     { role: "Hotel Concierge", name: "Il San Pietro", phone: "+39 089 875 455", available: "8:00–22:00" },
   ],
   emergencyNote: "For any urgent matter during your trip, WhatsApp us directly. We respond within minutes.",
+  readings: {
+    books: [
+      { title: "Italian Ways", author: "Tim Parks", note: "On Italy's character — best read on the train heading south." },
+      { title: "The Amalfi Coast & Pompeii", author: "Dana Facaros", note: "The definitive guide to the coastline's hidden corners." },
+      { title: "Christ Stopped at Eboli", author: "Carlo Levi", note: "Southern Italy's soul, captured in exile." },
+    ],
+    films: [
+      { title: "Il Postino", year: "1994", note: "Filmed on a Mediterranean island — the exact mood you'll feel." },
+      { title: "The Talented Mr. Ripley", year: "1999", note: "Shot partly on the Amalfi Coast. The water looks exactly like that." },
+      { title: "Eat Pray Love", year: "2010", note: "Italy chapter only. For the appetite it creates." },
+    ],
+    playlistName: "Amalfi Evenings",
+    playlist: "https://open.spotify.com/playlist/37i9dQZF1DX0SM0LYsmbMT",
+  },
+  pastTrips: [
+    {
+      destination: "Kyoto, Japan",
+      date: "2024 március",
+      image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",
+      package: "PRIVÉ",
+    },
+    {
+      destination: "Santorini, Görögország",
+      date: "2023 szeptember",
+      image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+      package: "SIGNATURE",
+    },
+    {
+      destination: "Marrakesh, Marokkó",
+      date: "2023 március",
+      image: "https://images.unsplash.com/photo-1539020140153-e479b8ccb89a?w=600&q=80",
+      package: "SIGNATURE",
+    },
+  ],
 }

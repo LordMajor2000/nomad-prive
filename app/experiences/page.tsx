@@ -32,7 +32,7 @@ const experiences: Experience[] = [
     description:
       "Panama City for the Canal and Panamanian rum culture, then north to Costa Rica's Guanacaste to visit private sugar estates. We arrange master blending sessions, private rolling rooms where your cigar is made to order, sunset tastings on a hacienda terrace, and a private gulet dinner on the Pacific.",
     categories: ["Gastronomy", "Culture"],
-    image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=900&q=85",
+    image: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=900&q=85",
     duration: "8–12 days",
   },
   {
@@ -76,7 +76,7 @@ const experiences: Experience[] = [
     description:
       "October in Tuscany during the vendemmia. We place you in an estate that still operates as a working winery — not a hotel that used to be one. You join the harvest at dawn, attend a private bottling session in the cantina, take lunch with the winemaker's family, and spend evenings doing blind tastings of vintages going back 30 years. Cooking lessons with the estate's nonna on request.",
     categories: ["Gastronomy", "Culture"],
-    image: "https://images.unsplash.com/photo-1518991669955-9c7e78ec80ca?w=900&q=85",
+    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=900&q=85",
     duration: "6–8 days",
   },
   {
@@ -98,7 +98,7 @@ const experiences: Experience[] = [
     description:
       "We use our Japanese connections to secure omakase counter seats at three-Michelin-starred restaurants that don't take international reservations directly. Sushi Yoshitake. Saito. Fujiya 1935 in Osaka for the road trip leg. Between meals: a private sake brewery in Nada, Tsukiji inner market at 5am with a retired tuna auctioneer, a 17th-century Kyoto ryokan where breakfast takes an hour.",
     categories: ["Gastronomy", "Culture"],
-    image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=900&q=85",
+    image: "https://images.unsplash.com/photo-1553621042-f6e147245754?w=900&q=85",
     duration: "10–14 days",
   },
   {
@@ -109,7 +109,7 @@ const experiences: Experience[] = [
     description:
       "A private 24-metre gulet with a crew of four, sailing the less-visited Cyclades. Not Mykonos, not the tourist trail — we chart a course through Milos's lunar coastline, the clifftop villages of Folegandros, the thermal springs of Nisyros, and arrive in Oia for the final sunset. Daily snorkelling in water you'll have entirely to yourself. A chef who adjusts every meal to the catch of the morning.",
     categories: ["Luxury", "Adventure"],
-    image: "https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=900&q=85",
+    image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=85",
     duration: "7 days",
   },
   {

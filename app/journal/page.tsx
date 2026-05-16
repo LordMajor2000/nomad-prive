@@ -17,7 +17,6 @@ export default function JournalPage() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const featured = blogPosts.filter((p) => p.featured);
-  const rest = blogPosts.filter((p) => !p.featured);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -52,8 +51,6 @@ export default function JournalPage() {
 
     return () => ctx.revert();
   }, []);
-
-  const allPosts = [...featured, ...rest];
 
   return (
     <main style={{ background: "var(--bg-primary)", minHeight: "100vh" }}>
@@ -272,138 +269,6 @@ export default function JournalPage() {
                       >
                         {t("readMore")}
                       </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* All posts */}
-      {rest.length > 0 && (
-        <div
-          style={{
-            padding: "3rem clamp(1.5rem, 5vw, 4rem) clamp(5rem, 10vw, 8rem)",
-            maxWidth: "1400px",
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "var(--gold-primary)",
-              marginBottom: "2rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            <div style={{ width: "30px", height: "1px", background: "var(--gold-primary)" }} />
-            {t("allPostsLabel")}
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "1.5rem",
-            }}
-          >
-            {rest.map((post, i) => (
-              <motion.div
-                key={post.slug}
-                ref={(el) => { cardsRef.current[featured.length + i] = el; }}
-                whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                style={{ opacity: 0 }}
-              >
-                <Link href={`/journal/${post.slug}`} style={{ textDecoration: "none", display: "block" }}>
-                  <div
-                    style={{
-                      background: "var(--bg-surface)",
-                      border: "1px solid rgba(201,169,110,0.08)",
-                      borderRadius: "2px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        aspectRatio: "4 / 3",
-                        background: post.gradient,
-                        position: "relative",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Image
-                        src={post.image}
-                        alt={post.location}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        style={{ objectFit: "cover" }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          padding: "1.5rem 1.25rem 1rem",
-                          background: "linear-gradient(to top, rgba(8,8,8,0.85) 0%, transparent 100%)",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                            fontSize: "1rem",
-                            fontWeight: 600,
-                            color: "var(--cream)",
-                          }}
-                        >
-                          {post.location}
-                        </span>
-                      </div>
-                    </div>
-                    <div style={{ padding: "1.25rem" }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "1rem",
-                          marginBottom: "0.6rem",
-                          fontSize: "0.6rem",
-                          letterSpacing: "0.15em",
-                          textTransform: "uppercase",
-                          color: "var(--muted)",
-                        }}
-                      >
-                        <span>{post.date}</span>
-                        <span>·</span>
-                        <span>{post.readTime}</span>
-                      </div>
-                      <h3
-                        style={{
-                          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                          fontSize: "1rem",
-                          fontWeight: 600,
-                          color: "var(--cream)",
-                          margin: "0 0 0.6rem 0",
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {post.title}
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "0.8rem",
-                          lineHeight: 1.7,
-                          color: "var(--muted)",
-                          margin: 0,
-                          fontWeight: 300,
-                        }}
-                      >
-                        {post.excerpt}
-                      </p>
                     </div>
                   </div>
                 </Link>
