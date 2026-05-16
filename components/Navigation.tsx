@@ -39,8 +39,8 @@ function NavRow({
       style={{
         display:        "flex",
         alignItems:     "center",
-        gap:            "0.75rem",
-        padding:        "0.75rem 1.25rem",
+        gap:            "0.85rem",
+        padding:        "0.9rem 1.5rem",
         textDecoration: "none",
         position:       "relative",
         borderBottom:   "1px solid rgba(201,169,110,0.05)",
@@ -82,7 +82,7 @@ function NavRow({
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{
           fontFamily:    "var(--font-playfair), 'Playfair Display', serif",
-          fontSize:      "1rem",
+          fontSize:      "1.1rem",
           fontWeight:    600,
           color:         active ? "var(--gold-primary)" : hovered ? "var(--cream)" : "rgba(245,240,232,0.8)",
           letterSpacing: "0.01em",
@@ -309,7 +309,7 @@ export default function Navigation() {
                       position:       "absolute",
                       top:            "calc(100% + 10px)",
                       right:          0,
-                      minWidth:       "260px",
+                      minWidth:       "320px",
                       background:     "rgba(7,7,7,0.92)",
                       backdropFilter: "blur(28px)",
                       border:         "1px solid rgba(201,169,110,0.18)",
@@ -342,17 +342,20 @@ export default function Navigation() {
         <AnimatePresence>
           {menuOpen && (
             <>
-              {/* Scrim */}
+              {/* Scrim — blur + darken the page behind the panel */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.3 }}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  position: "fixed", inset: 0,
-                  background: "rgba(0,0,0,0.55)",
-                  zIndex: 104,
+                  position:       "fixed",
+                  inset:          0,
+                  background:     "rgba(0,0,0,0.62)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  zIndex:         104,
                 }}
               />
 
@@ -461,7 +464,7 @@ function PanelContent({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.38, duration: 0.3 }}
-        style={{ padding: "0.6rem 1.25rem 0" }}
+        style={{ padding: "0.6rem 1.5rem 0" }}
       >
         <Link
           href="/quiz"
@@ -489,7 +492,7 @@ function PanelContent({
 
       {/* Divider */}
       <div style={{
-        margin:     "0.75rem 1.25rem 0",
+        margin:     "0.75rem 1.5rem 0",
         height:     "1px",
         background: "rgba(201,169,110,0.07)",
       }} />
@@ -500,7 +503,7 @@ function PanelContent({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.44, duration: 0.3 }}
         style={{
-          padding:        "0.75rem 1.25rem 1rem",
+          padding:        "0.75rem 1.5rem 1.1rem",
           display:        "flex",
           alignItems:     "center",
           justifyContent: "space-between",
