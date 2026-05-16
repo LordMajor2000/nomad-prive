@@ -1,6 +1,7 @@
 import { auth, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import { demoTrip } from "@/data/demo-trip";
+import { supabaseAdmin } from "@/lib/supabase";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CountdownTimer from "@/components/dashboard/CountdownTimer";
@@ -17,7 +18,25 @@ export default async function DashboardPage() {
     redirect("/client/login");
   }
 
-  const trip = demoTrip;
+  // Load trip from Supabase, fall back to demo data
+  const userId = (session.user as Record<string, unknown>).userId as string | undefined;
+  let tripData = null;
+  let clientName = session.user?.name ?? "Guest";
+
+  if (userId && userId !== "admin") {
+    const { data } = await supabaseAdmin
+      .from("trips")
+      .select("data, status")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+    if (data) tripData = data;
+  }
+
+  const trip = tripData
+    ? { ...(tripData.data as typeof demoTrip), clientName, status: tripData.status }
+    : { ...demoTrip, clientName };
 
   return (
     <div

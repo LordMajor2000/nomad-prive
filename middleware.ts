@@ -17,8 +17,8 @@ export default auth((req: NextRequest & { auth?: unknown }) => {
     return NextResponse.redirect(new URL("/client/login", req.url))
   }
 
-  // Don't apply intl middleware to client routes or API routes
-  if (isClientRoute || pathname.startsWith("/api/")) {
+  // Don't apply intl middleware to client/admin routes or API routes
+  if (isClientRoute || pathname.startsWith("/admin") || pathname.startsWith("/api/")) {
     return NextResponse.next()
   }
 
