@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { usePathname as useI18nPathname } from "@/i18n/navigation";
-import { useRouter } from "@/i18n/navigation";
+import { usePathname as useI18nPathname, useRouter } from "@/i18n/navigation";
 import { Compass, Lock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
@@ -16,51 +14,115 @@ const localeLabels: Record<string, string> = {
   en: "EN", hu: "HU", de: "DE", it: "IT", fr: "FR", es: "ES", sk: "SK",
 };
 
-/* Magnetic hamburger line component */
-function HamburgerLines({ open }: { open: boolean }) {
+/* ─── Single nav link row ─── */
+function NavRow({
+  label,
+  href,
+  index,
+  active,
+  onClick,
+}: {
+  label: string;
+  href: string;
+  index: number;
+  active: boolean;
+  onClick: () => void;
+}) {
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <span style={{ display: "flex", flexDirection: "column", gap: "5px", pointerEvents: "none" }}>
+    <Link
+      href={href}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display:        "flex",
+        alignItems:     "center",
+        gap:            "0.75rem",
+        padding:        "0.75rem 1.25rem",
+        textDecoration: "none",
+        position:       "relative",
+        borderBottom:   "1px solid rgba(201,169,110,0.05)",
+        overflow:       "hidden",
+        transition:     "background 0.18s ease-out",
+        background:     hovered ? "rgba(201,169,110,0.04)" : "transparent",
+      }}
+    >
+      {/* Left accent bar */}
+      <motion.div
+        animate={{ scaleY: hovered || active ? 1 : 0 }}
+        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position:        "absolute",
+          left:            0,
+          top:             0,
+          bottom:          0,
+          width:           "2px",
+          background:      "var(--gold-primary)",
+          transformOrigin: "bottom",
+        }}
+      />
+
+      {/* Index */}
       <span style={{
-        display: "block", width: "20px", height: "1.5px",
-        background: "#F5F0E8",
-        transition: "transform 0.38s cubic-bezier(0.16,1,0.3,1), opacity 0.22s ease-out",
-        transform: open ? "rotate(45deg) translate(4.5px, 5px)" : "none",
-        transformOrigin: "center",
-      }} />
-      <span style={{
-        display: "block", width: "13px", height: "1.5px",
-        background: "#F5F0E8",
-        opacity: open ? 0 : 0.55,
-        transition: "opacity 0.22s ease-out",
-      }} />
-      <span style={{
-        display: "block", width: "20px", height: "1.5px",
-        background: "#F5F0E8",
-        transition: "transform 0.38s cubic-bezier(0.16,1,0.3,1)",
-        transform: open ? "rotate(-45deg) translate(4.5px, -5px)" : "none",
-        transformOrigin: "center",
-      }} />
-    </span>
+        fontSize:      "0.5rem",
+        letterSpacing: "0.15em",
+        color:         active ? "rgba(201,169,110,0.7)" : "rgba(201,169,110,0.22)",
+        fontFamily:    "var(--font-inter), Inter, sans-serif",
+        minWidth:      "18px",
+        transition:    "color 0.18s ease-out",
+      }}>
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      {/* Label */}
+      <motion.span
+        animate={{ x: hovered ? 3 : 0 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        style={{
+          fontFamily:    "var(--font-playfair), 'Playfair Display', serif",
+          fontSize:      "1rem",
+          fontWeight:    600,
+          color:         active ? "var(--gold-primary)" : hovered ? "var(--cream)" : "rgba(245,240,232,0.8)",
+          letterSpacing: "0.01em",
+          transition:    "color 0.18s ease-out",
+          flex:          1,
+        }}
+      >
+        {label}
+      </motion.span>
+
+      {/* Active dot */}
+      {active && (
+        <span style={{
+          width:        "4px",
+          height:       "4px",
+          borderRadius: "50%",
+          background:   "var(--gold-primary)",
+          flexShrink:   0,
+        }} />
+      )}
+    </Link>
   );
 }
 
+/* ─── Main Navigation ─── */
 export default function Navigation() {
-  const t = useTranslations("nav");
-  const tFooter = useTranslations("footer");
-  const currentLocale = useLocale();
-  const router = useRouter();
-
-  const [scrolled, setScrolled]     = useState(false);
-  const [menuOpen, setMenuOpen]      = useState(false);
-  const [hoveredIdx, setHoveredIdx]  = useState<number | null>(null);
-  const [logoHidden, setLogoHidden]  = useState(false);
-
-  /* i18n-stripped pathname — "/" on home, "/packages" on packages, etc. */
+  const t        = useTranslations("nav");
+  const tFooter  = useTranslations("footer");
+  const locale   = useLocale();
+  const router   = useRouter();
   const i18nPath = useI18nPathname();
   const isHome   = i18nPath === "/";
 
-  /* full pathname for isActive */
-  const fullPath = usePathname();
+  const [scrolled,    setScrolled]    = useState(false);
+  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [isMobile,    setIsMobile]    = useState(false);
+  const [logoHidden,  setLogoHidden]  = useState(false);
+
+  const btnRef     = useRef<HTMLButtonElement>(null);
+  const panelRef   = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { label: t("packages"),    href: "/packages"    },
@@ -70,29 +132,71 @@ export default function Navigation() {
     { label: t("contact"),     href: "/contact"     },
   ];
 
+  /* scroll + resize */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
+    const onResize = () => setIsMobile(window.innerWidth < 700);
+    onScroll(); onResize();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
+  /* close on route change */
   useEffect(() => { setMenuOpen(false); }, [i18nPath]);
 
+  /* lock body scroll on mobile when open */
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (isMobile) document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [menuOpen, isMobile]);
+
+  /* click-outside to close */
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (
+        panelRef.current && !panelRef.current.contains(e.target as Node) &&
+        btnRef.current   && !btnRef.current.contains(e.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
+
+  /* keyboard ESC */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
 
   const isActive = (href: string) =>
     i18nPath === href || i18nPath.startsWith(href + "/");
 
-  const handleLocale = (locale: string) => {
-    router.replace(i18nPath as "/", { locale });
+  const handleLocale = (l: string) => {
+    router.replace(i18nPath as "/", { locale: l });
+    setMenuOpen(false);
+  };
+
+  /* Animation variants */
+  const desktopVariants = {
+    hidden:  { opacity: 0, scale: 0.88, y: -8 },
+    visible: { opacity: 1, scale: 1,    y:  0 },
+  };
+  const mobileVariants = {
+    hidden:  { y: "100%" },
+    visible: { y: "0%"   },
   };
 
   return (
     <>
-      {/* ── Fixed top bar ── */}
+      {/* ─── Fixed top bar ─── */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -115,9 +219,9 @@ export default function Navigation() {
           alignItems:     "center",
           justifyContent: "space-between",
         }}>
-          {/* Logo — only on non-home pages */}
+          {/* Logo — only non-home */}
           {!isHome && !logoHidden ? (
-            <Link href="/" style={{ textDecoration: "none", zIndex: 110, position: "relative" }}>
+            <Link href="/" style={{ textDecoration: "none", position: "relative", zIndex: 110 }}>
               <Image
                 src="/logo.png"
                 alt="Nomad Privé"
@@ -125,403 +229,344 @@ export default function Navigation() {
                 height={40}
                 priority
                 onError={() => setLogoHidden(true)}
-                style={{ objectFit: "contain", opacity: scrolled ? 1 : 0.92 }}
+                style={{ objectFit: "contain" }}
               />
             </Link>
           ) : (
-            /* Spacer so hamburger stays right-aligned even on home */
             <div />
           )}
 
-          {/* Hamburger — minimal, no overflow wrapper */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            style={{
-              background:     scrolled
-                ? "transparent"
-                : menuOpen
-                  ? "transparent"
-                  : "rgba(6,6,6,0.48)",
-              backdropFilter: scrolled ? "none" : menuOpen ? "none" : "blur(18px)",
-              border:         scrolled
-                ? "1px solid rgba(201,169,110,0.18)"
-                : "1px solid rgba(245,240,232,0.1)",
-              borderRadius:   "2px",
-              cursor:         "pointer",
-              padding:        "0.7rem 0.85rem",
-              display:        "flex",
-              flexDirection:  "column",
-              justifyContent: "center",
-              zIndex:         110,
-              position:       "relative",
-              transition:     "background 0.25s ease-out, border-color 0.35s ease-out",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.1)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background =
-                scrolled ? "transparent" : menuOpen ? "transparent" : "rgba(6,6,6,0.48)";
-            }}
-          >
-            <HamburgerLines open={menuOpen} />
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* ── Full-screen overlay menu ── */}
-      <AnimatePresence>
-        {menuOpen && (
-          <>
-            {/* Curtain panel — clips from top, reveals downward */}
-            <motion.div
-              initial={{ clipPath: "inset(0 0 100% 0)" }}
-              animate={{ clipPath: "inset(0 0 0% 0)" }}
-              exit={{   clipPath: "inset(0 0 100% 0)" }}
-              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+          {/* Hamburger — relative wrapper for dropdown anchor */}
+          <div style={{ position: "relative" }}>
+            <button
+              ref={btnRef}
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
               style={{
-                position:  "fixed",
-                inset:     0,
-                zIndex:    105,
-                background: "#070707",
-                display:   "flex",
-                flexDirection: "column",
-                overflow:  "hidden",
-              }}
-            >
-              {/* Subtle center radial glow */}
-              <div style={{
-                position:      "absolute",
-                top: "30%", left: "50%",
-                transform:     "translate(-50%, -50%)",
-                width:         "70vmax",
-                height:        "70vmax",
-                borderRadius:  "50%",
-                background:    "radial-gradient(ellipse at center, rgba(201,169,110,0.04) 0%, transparent 65%)",
-                pointerEvents: "none",
-              }} />
-
-              {/* Large decorative background letter */}
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={hoveredIdx ?? -1}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.03 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  style={{
-                    position:    "absolute",
-                    right:       "-0.05em",
-                    top:         "50%",
-                    transform:   "translateY(-50%)",
-                    fontFamily:  "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize:    "clamp(14rem, 30vw, 30rem)",
-                    fontWeight:  700,
-                    fontStyle:   "italic",
-                    lineHeight:  1,
-                    color:       "#C9A96E",
-                    userSelect:  "none",
-                    pointerEvents: "none",
-                    letterSpacing: "-0.05em",
-                  }}
-                >
-                  {hoveredIdx !== null
-                    ? String(hoveredIdx + 1).padStart(2, "0")
-                    : "N"}
-                </motion.span>
-              </AnimatePresence>
-
-              {/* Close button */}
-              <motion.button
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  position:       "absolute",
-                  top:            "1.5rem",
-                  right:          "2rem",
-                  background:     "transparent",
-                  border:         "1px solid rgba(201,169,110,0.15)",
-                  borderRadius:   "2px",
-                  cursor:         "pointer",
-                  padding:        "0.5rem 0.9rem",
-                  color:          "rgba(245,240,232,0.45)",
-                  fontSize:       "0.58rem",
-                  letterSpacing:  "0.2em",
-                  textTransform:  "uppercase",
-                  fontFamily:     "var(--font-inter), Inter, sans-serif",
-                  transition:     "color 0.2s ease-out, border-color 0.2s ease-out",
-                  zIndex:         2,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.color = "var(--gold-primary)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.45)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.15)";
-                }}
-              >
-                ESC
-              </motion.button>
-
-              {/* ── Nav links — main content ── */}
-              <div style={{
-                flex:           1,
+                background:     menuOpen
+                  ? "rgba(201,169,110,0.1)"
+                  : scrolled
+                    ? "transparent"
+                    : "rgba(6,6,6,0.5)",
+                backdropFilter: scrolled || menuOpen ? "none" : "blur(18px)",
+                border:         menuOpen
+                  ? "1px solid rgba(201,169,110,0.3)"
+                  : scrolled
+                    ? "1px solid rgba(201,169,110,0.18)"
+                    : "1px solid rgba(245,240,232,0.1)",
+                borderRadius:   "2px",
+                cursor:         "pointer",
+                padding:        "0.7rem 0.85rem",
                 display:        "flex",
                 flexDirection:  "column",
                 justifyContent: "center",
-                padding:        "clamp(5rem, 10vw, 8rem) clamp(2rem, 8vw, 7rem)",
+                gap:            "5px",
+                zIndex:         110,
                 position:       "relative",
-                zIndex:         2,
-              }}>
-                <nav>
-                  <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-                    {navLinks.map((link, i) => {
-                      const active = isActive(link.href);
-                      return (
-                        <motion.li
-                          key={link.href}
-                          initial={{ opacity: 0, x: -32 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -16 }}
-                          transition={{
-                            delay:    i * 0.07 + 0.22,
-                            duration: 0.5,
-                            ease:     [0.16, 1, 0.3, 1],
-                          }}
-                          onMouseEnter={() => setHoveredIdx(i)}
-                          onMouseLeave={() => setHoveredIdx(null)}
-                          style={{
-                            borderTop: i === 0
-                              ? "1px solid rgba(201,169,110,0.08)"
-                              : "none",
-                            borderBottom: "1px solid rgba(201,169,110,0.08)",
-                          }}
-                        >
-                          <Link
-                            href={link.href}
-                            onClick={() => setMenuOpen(false)}
-                            style={{
-                              display:    "flex",
-                              alignItems: "center",
-                              gap:        "clamp(1rem, 3vw, 2.5rem)",
-                              padding:    "clamp(0.7rem, 1.5vw, 1.1rem) 0",
-                              textDecoration: "none",
-                              position:   "relative",
-                            }}
-                          >
-                            {/* Index */}
-                            <span style={{
-                              fontSize:      "0.52rem",
-                              letterSpacing: "0.18em",
-                              color:         active
-                                ? "rgba(201,169,110,0.7)"
-                                : "rgba(201,169,110,0.25)",
-                              fontFamily:    "var(--font-inter), Inter, sans-serif",
-                              minWidth:      "22px",
-                              transition:    "color 0.2s ease-out",
-                            }}>
-                              {String(i + 1).padStart(2, "0")}
-                            </span>
+                transition:     "background 0.22s ease-out, border-color 0.22s ease-out",
+              }}
+              onMouseEnter={(e) => {
+                if (!menuOpen) (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.09)";
+              }}
+              onMouseLeave={(e) => {
+                if (!menuOpen) {
+                  (e.currentTarget as HTMLButtonElement).style.background =
+                    scrolled ? "transparent" : "rgba(6,6,6,0.5)";
+                }
+              }}
+            >
+              {/* Lines */}
+              <span style={{
+                display: "block", width: "20px", height: "1.5px", background: "#F5F0E8",
+                transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s",
+                transform: menuOpen ? "rotate(45deg) translate(4.5px, 5px)" : "none",
+              }} />
+              <span style={{
+                display: "block", width: "13px", height: "1.5px", background: "#F5F0E8",
+                opacity: menuOpen ? 0 : 0.55,
+                transition: "opacity 0.2s ease-out",
+              }} />
+              <span style={{
+                display: "block", width: "20px", height: "1.5px", background: "#F5F0E8",
+                transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
+                transform: menuOpen ? "rotate(-45deg) translate(4.5px, -5px)" : "none",
+              }} />
+            </button>
 
-                            {/* Accent line */}
-                            <motion.div
-                              animate={{ width: hoveredIdx === i || active ? "24px" : "8px" }}
-                              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                              style={{
-                                height:     "1px",
-                                background: active ? "#C9A96E" : "rgba(201,169,110,0.4)",
-                                flexShrink: 0,
-                              }}
-                            />
-
-                            {/* Link text */}
-                            <motion.span
-                              animate={{
-                                color: active
-                                  ? "#C9A96E"
-                                  : hoveredIdx === i
-                                    ? "rgba(245,240,232,0.65)"
-                                    : "#F5F0E8",
-                                x: hoveredIdx === i ? 4 : 0,
-                              }}
-                              transition={{ duration: 0.22, ease: "easeOut" }}
-                              style={{
-                                fontFamily:    "var(--font-playfair), 'Playfair Display', serif",
-                                fontSize:      "clamp(1.8rem, 3.5vw, 3rem)",
-                                fontWeight:    700,
-                                letterSpacing: "-0.01em",
-                                lineHeight:    1,
-                              }}
-                            >
-                              {link.label}
-                            </motion.span>
-
-                            {/* Active dot */}
-                            {active && (
-                              <motion.span
-                                layoutId="activeDot"
-                                style={{
-                                  marginLeft:   "auto",
-                                  width:        "6px",
-                                  height:       "6px",
-                                  borderRadius: "50%",
-                                  background:   "#C9A96E",
-                                  flexShrink:   0,
-                                }}
-                              />
-                            )}
-                          </Link>
-                        </motion.li>
-                      );
-                    })}
-                  </ul>
-                </nav>
-
-                {/* Quiz CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: navLinks.length * 0.07 + 0.3, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ marginTop: "clamp(1.5rem, 3vw, 2.5rem)" }}
-                >
-                  <Link
-                    href="/quiz"
-                    onClick={() => setMenuOpen(false)}
+            {/* ─── Dropdown panel (desktop) ─── */}
+            {!isMobile && (
+              <AnimatePresence>
+                {menuOpen && (
+                  <motion.div
+                    ref={panelRef}
+                    variants={desktopVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={{ type: "spring", stiffness: 300, damping: 26 }}
                     style={{
-                      display:        "inline-flex",
-                      alignItems:     "center",
-                      gap:            "0.75rem",
-                      fontFamily:     "var(--font-playfair), 'Playfair Display', serif",
-                      fontSize:       "clamp(0.9rem, 1.6vw, 1.1rem)",
-                      fontWeight:     500,
-                      fontStyle:      "italic",
-                      color:          "rgba(201,169,110,0.7)",
-                      textDecoration: "none",
-                      transition:     "color 0.2s ease-out",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "#C9A96E";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.7)";
+                      position:       "absolute",
+                      top:            "calc(100% + 10px)",
+                      right:          0,
+                      minWidth:       "260px",
+                      background:     "rgba(7,7,7,0.92)",
+                      backdropFilter: "blur(28px)",
+                      border:         "1px solid rgba(201,169,110,0.18)",
+                      borderRadius:   "4px",
+                      overflow:       "hidden",
+                      zIndex:         200,
+                      transformOrigin: "top right",
+                      boxShadow:      "0 24px 60px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(201,169,110,0.06)",
                     }}
                   >
-                    <Compass size={15} strokeWidth={1.5} />
-                    {t("quiz")}
-                    <span style={{ fontSize: "0.9em", opacity: 0.6 }}>→</span>
-                  </Link>
-                </motion.div>
-              </div>
+                    <PanelContent
+                      navLinks={navLinks}
+                      isActive={isActive}
+                      locale={locale}
+                      handleLocale={handleLocale}
+                      closeMenu={() => setMenuOpen(false)}
+                      t={t}
+                      tFooter={tFooter}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
+          </div>
+        </div>
+      </motion.nav>
 
-              {/* ── Footer strip ── */}
+      {/* ─── Mobile bottom panel ─── */}
+      {isMobile && (
+        <AnimatePresence>
+          {menuOpen && (
+            <>
+              {/* Scrim */}
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setMenuOpen(false)}
                 style={{
-                  padding:       "1.5rem clamp(2rem, 8vw, 7rem)",
-                  borderTop:     "1px solid rgba(201,169,110,0.07)",
-                  display:       "flex",
-                  alignItems:    "center",
-                  justifyContent: "space-between",
-                  flexWrap:      "wrap",
-                  gap:           "1rem",
-                  position:      "relative",
-                  zIndex:        2,
+                  position: "fixed", inset: 0,
+                  background: "rgba(0,0,0,0.55)",
+                  zIndex: 104,
+                }}
+              />
+
+              {/* Panel */}
+              <motion.div
+                ref={panelRef}
+                variants={mobileVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                transition={{ type: "spring", stiffness: 340, damping: 34 }}
+                style={{
+                  position:       "fixed",
+                  bottom:         0,
+                  left:           0,
+                  right:          0,
+                  background:     "rgba(7,7,7,0.96)",
+                  backdropFilter: "blur(28px)",
+                  borderTop:      "1px solid rgba(201,169,110,0.18)",
+                  borderRadius:   "14px 14px 0 0",
+                  zIndex:         105,
+                  overflow:       "hidden",
+                  paddingBottom:  "env(safe-area-inset-bottom, 0px)",
                 }}
               >
-                {/* Inline language buttons */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.35rem", flexWrap: "wrap" }}>
-                  {routing.locales.map((locale) => (
-                    <button
-                      key={locale}
-                      onClick={() => handleLocale(locale)}
-                      style={{
-                        background:    locale === currentLocale
-                          ? "rgba(201,169,110,0.12)"
-                          : "transparent",
-                        border:        locale === currentLocale
-                          ? "1px solid rgba(201,169,110,0.3)"
-                          : "1px solid rgba(255,255,255,0.07)",
-                        borderRadius:  "2px",
-                        color:         locale === currentLocale
-                          ? "#C9A96E"
-                          : "rgba(245,240,232,0.3)",
-                        fontSize:      "0.58rem",
-                        letterSpacing: "0.18em",
-                        padding:       "0.35rem 0.6rem",
-                        cursor:        "pointer",
-                        fontFamily:    "var(--font-inter), Inter, sans-serif",
-                        transition:    "all 0.18s ease-out",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (locale !== currentLocale) {
-                          (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.65)";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.15)";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (locale !== currentLocale) {
-                          (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.3)";
-                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.07)";
-                        }
-                      }}
-                    >
-                      {localeLabels[locale]}
-                    </button>
-                  ))}
+                {/* Drag handle */}
+                <div style={{
+                  display:        "flex",
+                  justifyContent: "center",
+                  padding:        "0.75rem 0 0",
+                }}>
+                  <div style={{
+                    width:        "36px",
+                    height:       "3px",
+                    borderRadius: "100px",
+                    background:   "rgba(201,169,110,0.2)",
+                  }} />
                 </div>
 
-                {/* Right side: tagline + lock */}
-                <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-                  <p style={{
-                    fontFamily:  "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize:    "0.75rem",
-                    fontStyle:   "italic",
-                    color:       "rgba(255,255,255,0.15)",
-                    margin:      0,
-                  }}>
-                    {tFooter("tagline")}
-                  </p>
-                  <Link
-                    href="/client/login"
-                    onClick={() => setMenuOpen(false)}
-                    style={{
-                      display:        "flex",
-                      alignItems:     "center",
-                      gap:            "0.4rem",
-                      fontSize:       "0.58rem",
-                      letterSpacing:  "0.15em",
-                      textTransform:  "uppercase",
-                      color:          "rgba(255,255,255,0.18)",
-                      textDecoration: "none",
-                      transition:     "color 0.2s ease-out",
-                      whiteSpace:     "nowrap",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.5)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.18)";
-                    }}
-                  >
-                    <Lock size={10} strokeWidth={1.5} />
-                    {t("client")}
-                  </Link>
-                </div>
+                <PanelContent
+                  navLinks={navLinks}
+                  isActive={isActive}
+                  locale={locale}
+                  handleLocale={handleLocale}
+                  closeMenu={() => setMenuOpen(false)}
+                  t={t}
+                  tFooter={tFooter}
+                />
               </motion.div>
-            </motion.div>
-
-            {/* Dim backdrop (for when menu is narrower, e.g. on large screens with side panel) */}
-          </>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </AnimatePresence>
+      )}
     </>
+  );
+}
+
+/* ─── Shared panel content ─── */
+function PanelContent({
+  navLinks,
+  isActive,
+  locale,
+  handleLocale,
+  closeMenu,
+  t,
+  tFooter,
+}: {
+  navLinks: { label: string; href: string }[];
+  isActive: (href: string) => boolean;
+  locale: string;
+  handleLocale: (l: string) => void;
+  closeMenu: () => void;
+  t: ReturnType<typeof useTranslations>;
+  tFooter: ReturnType<typeof useTranslations>;
+}) {
+  return (
+    <div>
+      {/* Gold top accent */}
+      <div style={{
+        height:     "1.5px",
+        background: "linear-gradient(90deg, transparent, rgba(201,169,110,0.55) 40%, rgba(201,169,110,0.55) 60%, transparent)",
+      }} />
+
+      {/* Nav links */}
+      <div>
+        {navLinks.map((link, i) => (
+          <motion.div
+            key={link.href}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 + 0.06, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <NavRow
+              label={link.label}
+              href={link.href}
+              index={i}
+              active={isActive(link.href)}
+              onClick={closeMenu}
+            />
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Quiz CTA */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.38, duration: 0.3 }}
+        style={{ padding: "0.6rem 1.25rem 0" }}
+      >
+        <Link
+          href="/quiz"
+          onClick={closeMenu}
+          style={{
+            display:        "inline-flex",
+            alignItems:     "center",
+            gap:            "0.5rem",
+            fontFamily:     "var(--font-playfair), 'Playfair Display', serif",
+            fontSize:       "0.82rem",
+            fontStyle:      "italic",
+            fontWeight:     500,
+            color:          "rgba(201,169,110,0.65)",
+            textDecoration: "none",
+            padding:        "0.45rem 0",
+            transition:     "color 0.18s ease-out",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#C9A96E"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.65)"; }}
+        >
+          <Compass size={13} strokeWidth={1.5} />
+          {t("quiz")} →
+        </Link>
+      </motion.div>
+
+      {/* Divider */}
+      <div style={{
+        margin:     "0.75rem 1.25rem 0",
+        height:     "1px",
+        background: "rgba(201,169,110,0.07)",
+      }} />
+
+      {/* Language + lock row */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.44, duration: 0.3 }}
+        style={{
+          padding:        "0.75rem 1.25rem 1rem",
+          display:        "flex",
+          alignItems:     "center",
+          justifyContent: "space-between",
+          gap:            "0.5rem",
+          flexWrap:       "wrap",
+        }}
+      >
+        {/* Locale pills */}
+        <div style={{ display: "flex", gap: "0.25rem", flexWrap: "wrap" }}>
+          {routing.locales.map((l) => (
+            <button
+              key={l}
+              onClick={() => handleLocale(l)}
+              style={{
+                background:    l === locale ? "rgba(201,169,110,0.14)" : "transparent",
+                border:        `1px solid ${l === locale ? "rgba(201,169,110,0.32)" : "rgba(255,255,255,0.07)"}`,
+                borderRadius:  "2px",
+                color:         l === locale ? "#C9A96E" : "rgba(245,240,232,0.28)",
+                fontSize:      "0.52rem",
+                letterSpacing: "0.16em",
+                padding:       "0.28rem 0.5rem",
+                cursor:        "pointer",
+                fontFamily:    "var(--font-inter), Inter, sans-serif",
+                transition:    "all 0.15s ease-out",
+              }}
+              onMouseEnter={(e) => {
+                if (l !== locale) {
+                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.6)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (l !== locale) {
+                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.28)";
+                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.07)";
+                }
+              }}
+            >
+              {localeLabels[l]}
+            </button>
+          ))}
+        </div>
+
+        {/* Client login */}
+        <Link
+          href="/client/login"
+          onClick={closeMenu}
+          style={{
+            display:        "flex",
+            alignItems:     "center",
+            gap:            "0.3rem",
+            fontSize:       "0.52rem",
+            letterSpacing:  "0.14em",
+            textTransform:  "uppercase",
+            color:          "rgba(255,255,255,0.18)",
+            textDecoration: "none",
+            transition:     "color 0.18s ease-out",
+            whiteSpace:     "nowrap",
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.5)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.18)"; }}
+        >
+          <Lock size={10} strokeWidth={1.5} />
+          {t("client")}
+        </Link>
+      </motion.div>
+    </div>
   );
 }
