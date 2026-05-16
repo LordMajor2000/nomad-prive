@@ -78,7 +78,11 @@
     "vehicleTransport": "Vehicle Transport"
   },
   "worldMap": {
-    "stood": "We've stood here."
+    "stood": "We've stood here.",
+    "label": "Our Destinations",
+    "headingPre": "Every place",
+    "headingEm": "we've been",
+    "destinations": "destinations"
   },
   "packagesPage": {
     "heroLabel": "Packages",

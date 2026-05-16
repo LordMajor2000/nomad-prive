@@ -78,7 +78,11 @@
     "vehicleTransport": "Preprava vozidiel"
   },
   "worldMap": {
-    "stood": "Boli sme tu."
+    "stood": "Boli sme tu.",
+    "label": "Naše Destinácie",
+    "headingPre": "Každé miesto,",
+    "headingEm": "kde sme boli",
+    "destinations": "destinácií"
   },
   "packagesPage": {
     "heroLabel": "Balíky",

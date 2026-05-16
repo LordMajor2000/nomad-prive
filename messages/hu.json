@@ -78,7 +78,11 @@
     "vehicleTransport": "Járműszállítás"
   },
   "worldMap": {
-    "stood": "Mi is álltunk itt."
+    "stood": "Mi is álltunk itt.",
+    "label": "Úticéljaink",
+    "headingPre": "Minden hely,",
+    "headingEm": "ahol voltunk",
+    "destinations": "úticél"
   },
   "packagesPage": {
     "heroLabel": "Csomagok",

@@ -111,6 +111,18 @@ export default function HeroSection() {
         }
       `}</style>
 
+      {/* Top gradient — ensures nav controls are always readable */}
+      <div style={{
+        position:      "absolute",
+        top:           0,
+        left:          0,
+        right:         0,
+        height:        "140px",
+        background:    "linear-gradient(to bottom, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.35) 55%, transparent 100%)",
+        zIndex:        4,
+        pointerEvents: "none",
+      }} />
+
       {/* LEFT — Text column */}
       <div
         className="hero-text-col"

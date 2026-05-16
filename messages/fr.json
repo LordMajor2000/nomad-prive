@@ -78,7 +78,11 @@
     "vehicleTransport": "Transport de véhicules"
   },
   "worldMap": {
-    "stood": "Nous y avons été."
+    "stood": "Nous y avons été.",
+    "label": "Nos Destinations",
+    "headingPre": "Chaque lieu",
+    "headingEm": "où nous avons été",
+    "destinations": "destinations"
   },
   "packagesPage": {
     "heroLabel": "Formules",
