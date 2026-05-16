@@ -78,79 +78,71 @@ export default function Navigation() {
           alignItems: "center",
           justifyContent: "space-between",
         }}>
-          {/* Logo */}
-          <Link href="/" style={{ textDecoration: "none", zIndex: 110, position: "relative" }}>
-            {logoExists ? (
+          {/* Logo — only show if image file exists */}
+          {logoExists && (
+            <Link href="/" style={{ textDecoration: "none", zIndex: 110, position: "relative" }}>
               <Image
                 src="/logo.png"
                 alt="Nomad Privé"
-                width={180}
-                height={46}
+                width={160}
+                height={42}
                 priority
                 style={{ objectFit: "contain" }}
               />
-            ) : (
-              <span style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "0.95rem",
-                fontWeight: 700,
-                letterSpacing: "0.28em",
-                color: "var(--gold-primary)",
-                textTransform: "uppercase",
-              }}>
-                Nomad Privé
-              </span>
-            )}
-          </Link>
+            </Link>
+          )}
 
           {/* Right side */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", zIndex: 110, position: "relative" }}>
             <LanguageSwitcher />
 
-            {/* Hamburger button */}
+            {/* Hamburger button — always visible with dark pill */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
               style={{
-                background: "none",
-                border: "1px solid rgba(201,169,110,0.2)",
+                background: menuOpen ? "rgba(8,8,8,0.9)" : "rgba(8,8,8,0.55)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(201,169,110,0.25)",
                 cursor: "pointer",
-                padding: "0.55rem 0.7rem",
+                padding: "0.7rem 0.9rem",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 gap: "5px",
                 position: "relative",
-                transition: "border-color 0.2s ease-out",
+                transition: "background 0.2s ease-out, border-color 0.2s ease-out",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.5)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(8,8,8,0.75)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.55)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.2)";
+                (e.currentTarget as HTMLButtonElement).style.background = menuOpen ? "rgba(8,8,8,0.9)" : "rgba(8,8,8,0.55)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.25)";
               }}
             >
               <span style={{
                 display: "block",
                 width: "20px",
                 height: "1px",
-                background: "var(--gold-primary)",
+                background: "#F5F0E8",
                 transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease-out",
                 transform: menuOpen ? "rotate(45deg) translate(4px, 4.5px)" : "none",
               }} />
               <span style={{
                 display: "block",
-                width: "14px",
+                width: "13px",
                 height: "1px",
-                background: "var(--gold-primary)",
-                transition: "opacity 0.2s ease-out, width 0.2s ease-out",
-                opacity: menuOpen ? 0 : 1,
+                background: "#F5F0E8",
+                transition: "opacity 0.2s ease-out",
+                opacity: menuOpen ? 0 : 0.7,
               }} />
               <span style={{
                 display: "block",
                 width: "20px",
                 height: "1px",
-                background: "var(--gold-primary)",
+                background: "#F5F0E8",
                 transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
                 transform: menuOpen ? "rotate(-45deg) translate(4px, -4.5px)" : "none",
               }} />
