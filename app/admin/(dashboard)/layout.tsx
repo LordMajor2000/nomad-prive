@@ -61,10 +61,7 @@ export default async function AdminDashboardLayout({
                     color: "rgba(255,255,255,0.45)",
                     textDecoration: "none",
                     letterSpacing: "0.05em",
-                    transition: "color 0.2s ease",
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#F5F0E8"; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)"; }}
                 >
                   {link.label}
                 </a>
