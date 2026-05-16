@@ -39,8 +39,8 @@ function NavRow({
       style={{
         display:        "flex",
         alignItems:     "center",
-        gap:            "0.85rem",
-        padding:        "0.9rem 1.5rem",
+        gap:            "1rem",
+        padding:        "1.05rem 1.6rem",
         textDecoration: "none",
         position:       "relative",
         borderBottom:   "1px solid rgba(201,169,110,0.05)",
@@ -82,7 +82,7 @@ function NavRow({
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{
           fontFamily:    "var(--font-playfair), 'Playfair Display', serif",
-          fontSize:      "1.1rem",
+          fontSize:      "1.35rem",
           fontWeight:    600,
           color:         active ? "var(--gold-primary)" : hovered ? "var(--cream)" : "rgba(245,240,232,0.8)",
           letterSpacing: "0.01em",
@@ -309,7 +309,7 @@ export default function Navigation() {
                       position:       "absolute",
                       top:            "calc(100% + 10px)",
                       right:          0,
-                      minWidth:       "320px",
+                      minWidth:       "400px",
                       background:     "rgba(7,7,7,0.92)",
                       backdropFilter: "blur(28px)",
                       border:         "1px solid rgba(201,169,110,0.18)",
@@ -464,7 +464,7 @@ function PanelContent({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.38, duration: 0.3 }}
-        style={{ padding: "0.6rem 1.5rem 0" }}
+        style={{ padding: "0.6rem 1.6rem 0" }}
       >
         <Link
           href="/quiz"
@@ -474,7 +474,7 @@ function PanelContent({
             alignItems:     "center",
             gap:            "0.5rem",
             fontFamily:     "var(--font-playfair), 'Playfair Display', serif",
-            fontSize:       "0.82rem",
+            fontSize:       "0.85rem",
             fontStyle:      "italic",
             fontWeight:     500,
             color:          "rgba(201,169,110,0.65)",
@@ -491,82 +491,91 @@ function PanelContent({
       </motion.div>
 
       {/* Divider */}
-      <div style={{
-        margin:     "0.75rem 1.5rem 0",
-        height:     "1px",
-        background: "rgba(201,169,110,0.07)",
-      }} />
+      <div style={{ margin: "0.8rem 1.6rem 0", height: "1px", background: "rgba(201,169,110,0.07)" }} />
 
-      {/* Language + lock row */}
+      {/* Language row */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.44, duration: 0.3 }}
-        style={{
-          padding:        "0.75rem 1.5rem 1.1rem",
-          display:        "flex",
-          alignItems:     "center",
-          justifyContent: "space-between",
-          gap:            "0.5rem",
-          flexWrap:       "wrap",
-        }}
+        transition={{ delay: 0.42, duration: 0.3 }}
+        style={{ padding: "0.7rem 1.6rem 0", display: "flex", gap: "0.25rem", flexWrap: "wrap" }}
       >
-        {/* Locale pills */}
-        <div style={{ display: "flex", gap: "0.25rem", flexWrap: "wrap" }}>
-          {routing.locales.map((l) => (
-            <button
-              key={l}
-              onClick={() => handleLocale(l)}
-              style={{
-                background:    l === locale ? "rgba(201,169,110,0.14)" : "transparent",
-                border:        `1px solid ${l === locale ? "rgba(201,169,110,0.32)" : "rgba(255,255,255,0.07)"}`,
-                borderRadius:  "2px",
-                color:         l === locale ? "#C9A96E" : "rgba(245,240,232,0.28)",
-                fontSize:      "0.52rem",
-                letterSpacing: "0.16em",
-                padding:       "0.28rem 0.5rem",
-                cursor:        "pointer",
-                fontFamily:    "var(--font-inter), Inter, sans-serif",
-                transition:    "all 0.15s ease-out",
-              }}
-              onMouseEnter={(e) => {
-                if (l !== locale) {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.6)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (l !== locale) {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.28)";
-                  (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.07)";
-                }
-              }}
-            >
-              {localeLabels[l]}
-            </button>
-          ))}
-        </div>
+        {routing.locales.map((l) => (
+          <button
+            key={l}
+            onClick={() => handleLocale(l)}
+            style={{
+              background:    l === locale ? "rgba(201,169,110,0.14)" : "transparent",
+              border:        `1px solid ${l === locale ? "rgba(201,169,110,0.32)" : "rgba(255,255,255,0.07)"}`,
+              borderRadius:  "2px",
+              color:         l === locale ? "#C9A96E" : "rgba(245,240,232,0.28)",
+              fontSize:      "0.52rem",
+              letterSpacing: "0.16em",
+              padding:       "0.28rem 0.5rem",
+              cursor:        "pointer",
+              fontFamily:    "var(--font-inter), Inter, sans-serif",
+              transition:    "all 0.15s ease-out",
+            }}
+            onMouseEnter={(e) => {
+              if (l !== locale) {
+                (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.6)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.14)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (l !== locale) {
+                (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.28)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.07)";
+              }
+            }}
+          >
+            {localeLabels[l]}
+          </button>
+        ))}
+      </motion.div>
 
-        {/* Client login */}
+      {/* ── Client Login — prominent CTA button ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.48, duration: 0.3 }}
+        style={{ padding: "0.75rem 1.6rem 1.4rem" }}
+      >
         <Link
           href="/client/login"
           onClick={closeMenu}
           style={{
             display:        "flex",
             alignItems:     "center",
-            gap:            "0.3rem",
-            fontSize:       "0.52rem",
-            letterSpacing:  "0.14em",
-            textTransform:  "uppercase",
-            color:          "rgba(255,255,255,0.18)",
+            justifyContent: "center",
+            gap:            "0.55rem",
+            width:          "100%",
+            padding:        "0.75rem 1rem",
+            border:         "1px solid rgba(201,169,110,0.28)",
+            borderRadius:   "2px",
+            color:          "rgba(201,169,110,0.75)",
             textDecoration: "none",
-            transition:     "color 0.18s ease-out",
-            whiteSpace:     "nowrap",
+            fontSize:       "0.62rem",
+            letterSpacing:  "0.2em",
+            textTransform:  "uppercase",
+            fontFamily:     "var(--font-inter), Inter, sans-serif",
+            background:     "rgba(201,169,110,0.04)",
+            transition:     "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
           }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.5)"; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.18)"; }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background    = "rgba(201,169,110,0.1)";
+            el.style.borderColor   = "rgba(201,169,110,0.5)";
+            el.style.color         = "#C9A96E";
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background    = "rgba(201,169,110,0.04)";
+            el.style.borderColor   = "rgba(201,169,110,0.28)";
+            el.style.color         = "rgba(201,169,110,0.75)";
+          }}
         >
-          <Lock size={10} strokeWidth={1.5} />
+          <Lock size={11} strokeWidth={1.5} />
           {t("client")}
         </Link>
       </motion.div>

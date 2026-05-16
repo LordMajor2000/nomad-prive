@@ -125,22 +125,50 @@ export default function DestinationsPreview() {
           color: var(--gold-primary);
           transform: translate(4px, -4px);
         }
-        @media (max-width: 600px) {
-          .dest-row { grid-template-columns: 40px 1fr auto; gap: 1rem; }
-          .dest-row:hover .dest-row-image { width: 64px; }
-          .dest-row-location { font-size: 1.4rem !important; }
+        /* ── Mobile overrides ── */
+        @media (max-width: 640px) {
+          .dest-row {
+            grid-template-columns: 28px 1fr 20px !important;
+            gap: 0.75rem !important;
+            padding: 1.4rem 0 !important;
+          }
+          .dest-row-image { display: none !important; }
+          .dest-row-location { font-size: 1.35rem !important; }
+          .dest-row-tagline {
+            color: rgba(255,255,255,0.38) !important;
+            max-height: 50px !important;
+          }
+        }
+        /* Touch devices: always show tagline, hide expanding image */
+        @media (hover: none) {
+          .dest-row-image { display: none !important; }
+          .dest-row-tagline {
+            color: rgba(255,255,255,0.38) !important;
+            max-height: 50px !important;
+          }
         }
       `}</style>
 
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         {/* Header — asymmetric */}
+        <style>{`
+          @media (max-width: 640px) {
+            .dest-header {
+              grid-template-columns: 1fr !important;
+            }
+            .dest-header-link {
+              padding-top: 0 !important;
+            }
+          }
+        `}</style>
         <div
           ref={headingRef}
+          className="dest-header"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr auto",
             alignItems: "flex-end",
-            gap: "2rem",
+            gap: "1.5rem 2rem",
             marginBottom: "clamp(2.5rem, 5vw, 4rem)",
             opacity: 0,
           }}
@@ -175,6 +203,7 @@ export default function DestinationsPreview() {
 
           <Link
             href="/journal"
+            className="dest-header-link"
             style={{
               fontSize: "0.62rem",
               letterSpacing: "0.2em",
