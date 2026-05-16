@@ -75,22 +75,23 @@ export default function DestinationsPreview() {
           cursor: pointer;
           transition: background 0.2s ease-out;
           position: relative;
-          overflow: hidden;
           text-decoration: none;
         }
         .dest-row:first-child { border-top: 1px solid rgba(201,169,110,0.07); }
         .dest-row-image {
-          width: 0;
+          /* use max-width so the fill image never escapes its container */
+          width: 96px;
+          max-width: 0;
           height: 64px;
           overflow: hidden;
           border-radius: 2px;
-          transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
           flex-shrink: 0;
           position: relative;
+          transition: max-width 0.48s cubic-bezier(0.16,1,0.3,1);
         }
         .dest-row:hover .dest-row-image,
         .dest-row-active .dest-row-image {
-          width: 96px;
+          max-width: 96px;
         }
         .dest-row-location {
           font-family: var(--font-playfair), 'Playfair Display', serif;
@@ -117,13 +118,15 @@ export default function DestinationsPreview() {
         }
         .dest-row-arrow {
           font-size: 1.1rem;
-          color: rgba(201,169,110,0.25);
-          transition: color 0.2s ease-out, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+          color: rgba(201,169,110,0.3);
+          transition: color 0.22s ease-out, transform 0.32s cubic-bezier(0.16,1,0.3,1);
           flex-shrink: 0;
+          display: inline-block;
         }
-        .dest-row:hover .dest-row-arrow {
+        .dest-row:hover .dest-row-arrow,
+        .dest-row-active .dest-row-arrow {
           color: var(--gold-primary);
-          transform: translate(4px, -4px);
+          transform: translate(3px, -3px);
         }
         /* ── Mobile overrides ── */
         @media (max-width: 640px) {

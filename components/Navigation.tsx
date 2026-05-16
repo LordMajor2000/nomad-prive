@@ -21,12 +21,14 @@ function NavRow({
   index,
   active,
   onClick,
+  large = false,
 }: {
   label: string;
   href: string;
   index: number;
   active: boolean;
   onClick: () => void;
+  large?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -39,8 +41,8 @@ function NavRow({
       style={{
         display:        "flex",
         alignItems:     "center",
-        gap:            "1rem",
-        padding:        "1.05rem 1.6rem",
+        gap:            large ? "1.25rem" : "1rem",
+        padding:        large ? "1.1rem 2.5rem" : "1.05rem 1.6rem",
         textDecoration: "none",
         position:       "relative",
         borderBottom:   "1px solid rgba(201,169,110,0.05)",
@@ -82,7 +84,7 @@ function NavRow({
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{
           fontFamily:    "var(--font-playfair), 'Playfair Display', serif",
-          fontSize:      "1.35rem",
+          fontSize:      large ? "1.75rem" : "1.35rem",
           fontWeight:    600,
           color:         active ? "var(--gold-primary)" : hovered ? "var(--cream)" : "rgba(245,240,232,0.8)",
           letterSpacing: "0.01em",
@@ -294,48 +296,202 @@ export default function Navigation() {
               }} />
             </button>
 
-            {/* ─── Dropdown panel (desktop) ─── */}
-            {!isMobile && (
-              <AnimatePresence>
-                {menuOpen && (
-                  <motion.div
-                    ref={panelRef}
-                    variants={desktopVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    transition={{ type: "spring", stiffness: 300, damping: 26 }}
-                    style={{
-                      position:       "absolute",
-                      top:            "calc(100% + 10px)",
-                      right:          0,
-                      minWidth:       "400px",
-                      background:     "rgba(7,7,7,0.92)",
-                      backdropFilter: "blur(28px)",
-                      border:         "1px solid rgba(201,169,110,0.18)",
-                      borderRadius:   "4px",
-                      overflow:       "hidden",
-                      zIndex:         200,
-                      transformOrigin: "top right",
-                      boxShadow:      "0 24px 60px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(201,169,110,0.06)",
-                    }}
-                  >
-                    <PanelContent
-                      navLinks={navLinks}
-                      isActive={isActive}
-                      locale={locale}
-                      handleLocale={handleLocale}
-                      closeMenu={() => setMenuOpen(false)}
-                      t={t}
-                      tFooter={tFooter}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
-          </div>
+            </div>
         </div>
       </motion.nav>
+
+      {/* ─── Desktop half-screen side panel ─── */}
+      {!isMobile && (
+        <AnimatePresence>
+          {menuOpen && (
+            <>
+              {/* Scrim */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  position:       "fixed",
+                  inset:          0,
+                  background:     "rgba(0,0,0,0.45)",
+                  backdropFilter: "blur(6px)",
+                  WebkitBackdropFilter: "blur(6px)",
+                  zIndex:         104,
+                }}
+              />
+
+              {/* Half-screen panel from right */}
+              <motion.div
+                ref={panelRef}
+                initial={{ x: "100%" }}
+                animate={{ x: "0%" }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", stiffness: 280, damping: 30 }}
+                style={{
+                  position:       "fixed",
+                  top:            0,
+                  right:          0,
+                  bottom:         0,
+                  width:          "min(540px, 46vw)",
+                  background:     "rgba(7,7,7,0.97)",
+                  backdropFilter: "blur(32px)",
+                  borderLeft:     "1px solid rgba(201,169,110,0.12)",
+                  zIndex:         105,
+                  display:        "flex",
+                  flexDirection:  "column",
+                  overflowY:      "auto",
+                }}
+              >
+                {/* Top accent line */}
+                <div style={{
+                  height:     "1.5px",
+                  background: "linear-gradient(90deg, transparent, rgba(201,169,110,0.5) 50%, transparent)",
+                  flexShrink: 0,
+                }} />
+
+                {/* Links — take up the middle space */}
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: "3rem 0" }}>
+                  {navLinks.map((link, i) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: 24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: i * 0.06 + 0.12, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <NavRow
+                        label={link.label}
+                        href={link.href}
+                        index={i}
+                        active={isActive(link.href)}
+                        onClick={() => setMenuOpen(false)}
+                        large
+                      />
+                    </motion.div>
+                  ))}
+
+                  {/* Quiz CTA */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.48, duration: 0.35 }}
+                    style={{ padding: "1rem 2.5rem 0" }}
+                  >
+                    <Link
+                      href="/quiz"
+                      onClick={() => setMenuOpen(false)}
+                      style={{
+                        display:        "inline-flex",
+                        alignItems:     "center",
+                        gap:            "0.5rem",
+                        fontFamily:     "var(--font-playfair), 'Playfair Display', serif",
+                        fontSize:       "0.9rem",
+                        fontStyle:      "italic",
+                        color:          "rgba(201,169,110,0.65)",
+                        textDecoration: "none",
+                        transition:     "color 0.18s ease-out",
+                      }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#C9A96E"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.65)"; }}
+                    >
+                      <Compass size={14} strokeWidth={1.5} />
+                      {t("quiz")} →
+                    </Link>
+                  </motion.div>
+                </div>
+
+                {/* Footer — language + client login */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.52, duration: 0.35 }}
+                  style={{
+                    flexShrink: 0,
+                    borderTop:  "1px solid rgba(201,169,110,0.07)",
+                    padding:    "1.5rem 2.5rem 2rem",
+                  }}
+                >
+                  {/* Language row */}
+                  <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+                    {routing.locales.map((l) => (
+                      <button
+                        key={l}
+                        onClick={() => handleLocale(l)}
+                        style={{
+                          background:    l === locale ? "rgba(201,169,110,0.14)" : "transparent",
+                          border:        `1px solid ${l === locale ? "rgba(201,169,110,0.32)" : "rgba(255,255,255,0.08)"}`,
+                          borderRadius:  "2px",
+                          color:         l === locale ? "#C9A96E" : "rgba(245,240,232,0.3)",
+                          fontSize:      "0.55rem",
+                          letterSpacing: "0.16em",
+                          padding:       "0.3rem 0.55rem",
+                          cursor:        "pointer",
+                          fontFamily:    "var(--font-inter), Inter, sans-serif",
+                          transition:    "all 0.15s ease-out",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (l !== locale) {
+                            (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.6)";
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.15)";
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (l !== locale) {
+                            (e.currentTarget as HTMLButtonElement).style.color = "rgba(245,240,232,0.3)";
+                            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.08)";
+                          }
+                        }}
+                      >
+                        {localeLabels[l]}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Client login button */}
+                  <Link
+                    href="/client/login"
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display:        "flex",
+                      alignItems:     "center",
+                      justifyContent: "center",
+                      gap:            "0.6rem",
+                      padding:        "0.85rem 1rem",
+                      border:         "1px solid rgba(201,169,110,0.28)",
+                      borderRadius:   "2px",
+                      color:          "rgba(201,169,110,0.75)",
+                      textDecoration: "none",
+                      fontSize:       "0.62rem",
+                      letterSpacing:  "0.22em",
+                      textTransform:  "uppercase",
+                      fontFamily:     "var(--font-inter), Inter, sans-serif",
+                      background:     "rgba(201,169,110,0.04)",
+                      transition:     "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
+                    }}
+                    onMouseEnter={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background  = "rgba(201,169,110,0.1)";
+                      el.style.borderColor = "rgba(201,169,110,0.5)";
+                      el.style.color       = "#C9A96E";
+                    }}
+                    onMouseLeave={(e) => {
+                      const el = e.currentTarget as HTMLAnchorElement;
+                      el.style.background  = "rgba(201,169,110,0.04)";
+                      el.style.borderColor = "rgba(201,169,110,0.28)";
+                      el.style.color       = "rgba(201,169,110,0.75)";
+                    }}
+                  >
+                    <Lock size={12} strokeWidth={1.5} />
+                    {t("client")}
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      )}
 
       {/* ─── Mobile bottom panel ─── */}
       {isMobile && (
