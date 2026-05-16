@@ -10,7 +10,6 @@ import PackagesPreview from "@/components/PackagesPreview";
 import BlogPreview from "@/components/BlogPreview";
 import MomentsStrip from "@/components/MomentsStrip";
 import QuizCTA from "@/components/QuizCTA";
-import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
 
@@ -30,7 +29,6 @@ export default function Home() {
         <BlogPreview />
         <MomentsStrip />
         <QuizCTA />
-        <ContactSection />
         <Footer />
       </main>
     </>

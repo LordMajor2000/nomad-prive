@@ -198,17 +198,6 @@ export default function Footer() {
             </div>
           )}
 
-          <p style={{
-            fontSize: "0.82rem",
-            lineHeight: 1.85,
-            color: "var(--muted)",
-            margin: "0 0 2rem",
-            maxWidth: "300px",
-            fontWeight: 300,
-          }}>
-            {t("description")}
-          </p>
-
           {/* Social */}
           <div style={{ display: "flex", gap: "0.75rem", marginBottom: "2rem" }}>
             {[
@@ -264,9 +253,6 @@ export default function Footer() {
             ))}
           </div>
 
-          <p style={{ fontSize: "0.65rem", color: "rgba(201,169,110,0.35)", letterSpacing: "0.12em", fontStyle: "italic", margin: 0 }}>
-            Budapest · Worldwide
-          </p>
         </div>
 
         {/* Col 2 — Navigate */}
