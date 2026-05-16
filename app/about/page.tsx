@@ -266,31 +266,6 @@ export default function AboutPage() {
         {/* ── WORLD MAP ── */}
         <WorldMap />
 
-        {/* ── CTA ── */}
-        <section style={{ padding: "clamp(5rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem)", background: "var(--bg-primary)", textAlign: "center" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <p style={{ fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "var(--gold-primary)", marginBottom: "1.5rem", opacity: 0.7 }}>
-              {t("ctaLabel")}
-            </p>
-            <h2 style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontSize: "clamp(1.6rem, 4vw, 3rem)", fontWeight: 700, color: "var(--cream)", margin: "0 0 2.5rem", lineHeight: 1.2 }}>
-              {t("ctaHeading")}
-            </h2>
-            <Link
-              href="/contact"
-              style={{ display: "inline-block", padding: "1rem 3rem", background: "transparent", border: "1px solid rgba(201,169,110,0.5)", color: "var(--gold-primary)", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", textDecoration: "none", transition: "all 0.3s ease" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(201,169,110,0.08)"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--gold-primary)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,169,110,0.5)"; }}
-            >
-              {t("ctaButton")}
-            </Link>
-          </motion.div>
-        </section>
-
       </main>
       <Footer />
     </>

@@ -71,7 +71,7 @@ export default function WishList() {
               border: `1px solid ${overIdx === i ? "rgba(201,169,110,0.25)" : "rgba(201,169,110,0.07)"}`,
               borderRadius: "2px",
               cursor: "grab",
-              transition: "all 0.15s ease",
+              transition: "background 0.15s ease-out, border-color 0.15s ease-out, opacity 0.15s ease-out",
               opacity: dragIdx === i ? 0.35 : 1,
             }}
           >
@@ -132,7 +132,7 @@ export default function WishList() {
             cursor: "pointer",
             fontFamily: "var(--font-inter), Inter, sans-serif",
             borderRadius: "2px",
-            transition: "all 0.2s ease",
+            transition: "background 0.2s ease-out",
             whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.08)"; }}

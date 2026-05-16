@@ -27,14 +27,11 @@ export default function Navigation() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Check if logo.png exists
   useEffect(() => {
     const img = new window.Image();
     img.onload = () => setLogoExists(true);
@@ -42,18 +39,10 @@ export default function Navigation() {
     img.src = "/logo.png";
   }, []);
 
-  // Close menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
-  // Lock body scroll when menu open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
@@ -66,278 +55,312 @@ export default function Navigation() {
     <>
       <motion.nav
         ref={navRef}
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "1.5rem 2rem",
-          transition: "background 0.4s ease, backdrop-filter 0.4s ease",
-          background: scrolled ? "rgba(8,8,8,0.95)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(201,169,110,0.1)" : "none",
+          padding: scrolled ? "0.9rem 2rem" : "1.4rem 2rem",
+          transition: "background 0.35s ease-out, backdrop-filter 0.35s ease-out, padding 0.35s ease-out, border-color 0.35s ease-out",
+          background: scrolled ? "rgba(8,8,8,0.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(201,169,110,0.08)" : "1px solid transparent",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1400px",
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
+        <div style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
           {/* Logo */}
-          <Link href="/" style={{ textDecoration: "none" }}>
+          <Link href="/" style={{ textDecoration: "none", zIndex: 110, position: "relative" }}>
             {logoExists ? (
               <Image
                 src="/logo.png"
                 alt="Nomad Privé"
-                width={200}
-                height={52}
+                width={180}
+                height={46}
                 priority
                 style={{ objectFit: "contain" }}
               />
             ) : (
-              <span
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "1rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.25em",
-                  color: "var(--gold-primary)",
-                  textTransform: "uppercase",
-                }}
-              >
+              <span style={{
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontSize: "0.95rem",
+                fontWeight: 700,
+                letterSpacing: "0.28em",
+                color: "var(--gold-primary)",
+                textTransform: "uppercase",
+              }}>
                 Nomad Privé
               </span>
             )}
           </Link>
 
-          {/* Language switcher + Hamburger */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <LanguageSwitcher />
+          {/* Right side */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", zIndex: 110, position: "relative" }}>
+            <LanguageSwitcher />
 
-          {/* Hamburger icon — always visible */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "0.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "5px",
-              zIndex: 110,
-              position: "relative",
-            }}
-            aria-label="Menu"
-          >
-            <span
+            {/* Hamburger button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
               style={{
-                display: "block",
-                width: "24px",
-                height: "1px",
-                background: "var(--gold-primary)",
-                transition: "transform 0.3s ease, opacity 0.3s ease",
-                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
+                background: "none",
+                border: "1px solid rgba(201,169,110,0.2)",
+                cursor: "pointer",
+                padding: "0.55rem 0.7rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "5px",
+                position: "relative",
+                transition: "border-color 0.2s ease-out",
               }}
-            />
-            <span
-              style={{
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.5)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.2)";
+              }}
+            >
+              <span style={{
                 display: "block",
-                width: "24px",
+                width: "20px",
                 height: "1px",
                 background: "var(--gold-primary)",
+                transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease-out",
+                transform: menuOpen ? "rotate(45deg) translate(4px, 4.5px)" : "none",
+              }} />
+              <span style={{
+                display: "block",
+                width: "14px",
+                height: "1px",
+                background: "var(--gold-primary)",
+                transition: "opacity 0.2s ease-out, width 0.2s ease-out",
                 opacity: menuOpen ? 0 : 1,
-                transition: "opacity 0.3s ease",
-              }}
-            />
-            <span
-              style={{
+              }} />
+              <span style={{
                 display: "block",
-                width: "24px",
+                width: "20px",
                 height: "1px",
                 background: "var(--gold-primary)",
-                transition: "transform 0.3s ease",
-                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
-              }}
-            />
-          </button>
+                transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1)",
+                transform: menuOpen ? "rotate(-45deg) translate(4px, -4.5px)" : "none",
+              }} />
+            </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Fullscreen overlay — slides in from RIGHT */}
+      {/* Fullscreen overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: "0%" }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
             style={{
               position: "fixed",
               top: 0,
               right: 0,
               bottom: 0,
-              width: "100%",
-              maxWidth: "420px",
-              background: "rgba(8,8,8,0.98)",
-              backdropFilter: "blur(20px)",
+              width: "min(460px, 100%)",
+              background: "#0a0a0a",
+              backdropFilter: "blur(30px)",
               zIndex: 105,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "4rem 3rem",
-              borderLeft: "1px solid rgba(201,169,110,0.1)",
+              padding: "5rem 3.5rem",
+              borderLeft: "1px solid rgba(201,169,110,0.08)",
             }}
           >
-            {/* Decorative line */}
-            <div
-              style={{
-                width: "40px",
-                height: "1px",
-                background: "var(--gold-primary)",
-                marginBottom: "3rem",
-              }}
-            />
-
-            <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "2rem" }}>
-              {navLinks.map((link, i) => {
-                const active = isActive(link.href);
-                return (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07 + 0.1, duration: 0.4 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
+            {/* Index numbers + links */}
+            <nav>
+              <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+                {navLinks.map((link, i) => {
+                  const active = isActive(link.href);
+                  return (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, y: 28 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 16 }}
+                      transition={{
+                        delay: i * 0.06 + 0.08,
+                        duration: 0.45,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
                       style={{
-                        fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                        fontSize: "1.8rem",
-                        fontWeight: 700,
-                        color: active ? "var(--gold-primary)" : "var(--cream)",
-                        textDecoration: "none",
-                        letterSpacing: "0.05em",
-                        display: "block",
-                        transition: "color 0.3s ease",
-                        borderBottom: active ? "1px solid rgba(201,169,110,0.4)" : "none",
-                        paddingBottom: active ? "4px" : "0",
+                        overflow: "hidden",
+                        borderBottom: "1px solid rgba(201,169,110,0.06)",
                       }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                );
-              })}
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        style={{
+                          display: "flex",
+                          alignItems: "baseline",
+                          gap: "1.25rem",
+                          padding: "1.1rem 0",
+                          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                          fontSize: "clamp(1.6rem, 3vw, 2rem)",
+                          fontWeight: 700,
+                          color: active ? "var(--gold-primary)" : "var(--cream)",
+                          textDecoration: "none",
+                          transition: "color 0.2s ease-out",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "rgba(245,240,232,0.55)";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!active) (e.currentTarget as HTMLAnchorElement).style.color = "var(--cream)";
+                        }}
+                      >
+                        <span style={{
+                          fontSize: "0.55rem",
+                          letterSpacing: "0.15em",
+                          color: "rgba(201,169,110,0.35)",
+                          fontFamily: "var(--font-inter), Inter, sans-serif",
+                          fontWeight: 400,
+                          alignSelf: "center",
+                          minWidth: "24px",
+                        }}>
+                          0{i + 1}
+                        </span>
+                        {link.label}
+                        {active && (
+                          <span style={{
+                            marginLeft: "auto",
+                            width: "6px",
+                            height: "6px",
+                            borderRadius: "50%",
+                            background: "var(--gold-primary)",
+                            flexShrink: 0,
+                          }} />
+                        )}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
 
-              {/* Quiz link */}
-              <motion.li
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.07 + 0.1, duration: 0.4 }}
-              >
-                <Link
-                  href="/quiz"
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.6rem",
-                    fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                    fontSize: "1.4rem",
-                    fontWeight: 700,
-                    color: isActive("/quiz") ? "var(--gold-primary)" : "rgba(201,169,110,0.85)",
-                    textDecoration: "none",
-                    letterSpacing: "0.05em",
-                    transition: "color 0.3s ease",
+                {/* Quiz link */}
+                <motion.li
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 16 }}
+                  transition={{
+                    delay: navLinks.length * 0.06 + 0.08,
+                    duration: 0.45,
+                    ease: [0.16, 1, 0.3, 1],
                   }}
+                  style={{ overflow: "hidden" }}
                 >
-                  <Compass size={20} />
-                  {t("quiz")}
-                </Link>
-              </motion.li>
-            </ul>
+                  <Link
+                    href="/quiz"
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      padding: "1.4rem 0 0.5rem",
+                      fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                      fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+                      fontWeight: 600,
+                      fontStyle: "italic",
+                      color: "rgba(201,169,110,0.8)",
+                      textDecoration: "none",
+                      transition: "color 0.2s ease-out",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color = "var(--gold-primary)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.8)";
+                    }}
+                  >
+                    <Compass size={16} strokeWidth={1.5} />
+                    {t("quiz")}
+                  </Link>
+                </motion.li>
+              </ul>
+            </nav>
 
-            {/* Client login — subtle */}
+            {/* Bottom strip */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.65, duration: 0.4 }}
-              style={{ marginTop: "2rem" }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+              style={{
+                marginTop: "2.5rem",
+                paddingTop: "2rem",
+                borderTop: "1px solid rgba(201,169,110,0.08)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
+              <p style={{
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontSize: "0.8rem",
+                fontStyle: "italic",
+                color: "rgba(255,255,255,0.2)",
+                margin: 0,
+              }}>
+                {tFooter("tagline")}
+              </p>
+
               <Link
                 href="/client/login"
                 onClick={() => setMenuOpen(false)}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.5rem",
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.12em",
+                  gap: "0.4rem",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.15em",
                   textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.3)",
+                  color: "rgba(255,255,255,0.2)",
                   textDecoration: "none",
-                  transition: "color 0.3s ease",
-                  fontFamily: "var(--font-inter), Inter, sans-serif",
+                  transition: "color 0.2s ease-out",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.6)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(201,169,110,0.55)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.3)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.2)";
                 }}
               >
-                <Lock size={13} />
+                <Lock size={11} strokeWidth={1.5} />
                 {t("client")}
               </Link>
             </motion.div>
-
-            <div
-              style={{
-                marginTop: "3rem",
-                paddingTop: "2rem",
-                borderTop: "1px solid rgba(201,169,110,0.1)",
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                  fontSize: "0.85rem",
-                  fontStyle: "italic",
-                  color: "var(--muted)",
-                  margin: 0,
-                }}
-              >
-                {tFooter("tagline")}
-              </p>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Backdrop overlay */}
+      {/* Backdrop */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.35 }}
             onClick={() => setMenuOpen(false)}
             style={{
               position: "fixed",
               inset: 0,
-              background: "rgba(0,0,0,0.6)",
+              background: "rgba(0,0,0,0.65)",
               zIndex: 104,
             }}
           />

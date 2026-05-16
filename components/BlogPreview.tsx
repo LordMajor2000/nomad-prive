@@ -43,9 +43,9 @@ export default function BlogPreview() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.9,
+            duration: 0.55,
             ease: "power3.out",
-            delay: i * 0.15,
+            delay: i * 0.1,
             scrollTrigger: {
               trigger: card,
               start: "top 80%",

@@ -12,6 +12,7 @@ import MomentsStrip from "@/components/MomentsStrip";
 import QuizCTA from "@/components/QuizCTA";
 import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
+import FloatingShapes from "@/components/FloatingShapes";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,6 +21,7 @@ export default function Home() {
     <>
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       <AmbientBackground />
+      <FloatingShapes />
       <main style={{ visibility: isLoading ? "hidden" : "visible", position: "relative", zIndex: 1 }}>
         <Navigation />
         <HeroSection />

@@ -141,7 +141,7 @@ export default function PlanningForm() {
                   : s === step
                   ? "none"
                   : "1px solid rgba(255,255,255,0.15)",
-              transition: "all 0.3s ease",
+              transition: "background 0.3s ease-out, border-color 0.3s ease-out",
             }}
           />
         ))}
@@ -207,7 +207,7 @@ export default function PlanningForm() {
                         letterSpacing: "0.08em",
                         cursor: "pointer",
                         borderRadius: "1px",
-                        transition: "all 0.2s ease",
+                        transition: "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
                         fontFamily: "var(--font-inter), Inter, sans-serif",
                       }}
                     >
@@ -265,7 +265,7 @@ export default function PlanningForm() {
                         letterSpacing: "0.05em",
                         cursor: "pointer",
                         borderRadius: "1px",
-                        transition: "all 0.2s ease",
+                        transition: "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
                         fontFamily: "var(--font-inter), Inter, sans-serif",
                         textAlign: "center",
                       }}
@@ -441,7 +441,7 @@ export default function PlanningForm() {
                       textTransform: "uppercase",
                       cursor: "pointer",
                       borderRadius: "1px",
-                      transition: "all 0.2s ease",
+                      transition: "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
                       fontFamily: "var(--font-inter), Inter, sans-serif",
                     }}
                   >
@@ -652,7 +652,7 @@ export default function PlanningForm() {
                     : "pointer",
                 opacity:
                   (step === 1 && !step1Valid) || (step === 2 && !step2Valid) ? 0.35 : 1,
-                transition: "all 0.2s ease",
+                transition: "background 0.2s ease-out, border-color 0.2s ease-out, opacity 0.2s ease-out",
                 fontFamily: "var(--font-inter), Inter, sans-serif",
               }}
             >
@@ -675,7 +675,7 @@ export default function PlanningForm() {
                 textTransform: "uppercase",
                 cursor: step4Valid ? "pointer" : "not-allowed",
                 opacity: step4Valid ? 1 : 0.35,
-                transition: "all 0.2s ease",
+                transition: "background 0.2s ease-out, opacity 0.2s ease-out",
                 fontFamily: "var(--font-inter), Inter, sans-serif",
               }}
             >

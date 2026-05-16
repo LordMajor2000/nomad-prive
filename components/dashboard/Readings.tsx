@@ -37,7 +37,7 @@ export default function Readings({ readings }: { readings: ReadingsData }) {
               textTransform: "uppercase",
               cursor: "pointer",
               fontFamily: "var(--font-inter), Inter, sans-serif",
-              transition: "all 0.2s ease",
+              transition: "color 0.2s ease-out, border-color 0.2s ease-out",
               marginBottom: "-1px",
             }}
           >
@@ -127,7 +127,7 @@ export default function Readings({ readings }: { readings: ReadingsData }) {
               fontSize: "0.65rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              transition: "all 0.2s ease",
+              transition: "background 0.2s ease-out",
               borderRadius: "2px",
             }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(201,169,110,0.08)"; }}

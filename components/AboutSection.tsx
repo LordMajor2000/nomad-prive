@@ -25,7 +25,7 @@ export default function AboutSection() {
         {
           opacity: 1,
           x: 0,
-          duration: 1.1,
+          duration: 0.6,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,

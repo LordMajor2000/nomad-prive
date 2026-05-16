@@ -36,7 +36,7 @@ export default function EmergencyCard({
             cursor: "pointer",
             fontFamily: "var(--font-inter), Inter, sans-serif",
             borderRadius: "2px",
-            transition: "all 0.2s ease",
+            transition: "border-color 0.2s ease-out, color 0.2s ease-out",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.5)";

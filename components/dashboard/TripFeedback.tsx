@@ -125,7 +125,7 @@ export default function TripFeedback() {
                   cursor: "pointer",
                   fontFamily: "var(--font-inter), Inter, sans-serif",
                   borderRadius: "2px",
-                  transition: "all 0.2s ease",
+                  transition: "background 0.2s ease-out, border-color 0.2s ease-out, color 0.2s ease-out",
                 }}
               >
                 {val === "yes" ? "Igen" : "Nem"}
@@ -149,7 +149,7 @@ export default function TripFeedback() {
             cursor: "pointer",
             fontFamily: "var(--font-inter), Inter, sans-serif",
             borderRadius: "2px",
-            transition: "all 0.2s ease",
+            transition: "background 0.2s ease-out",
           }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.08)"; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
