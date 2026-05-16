@@ -339,6 +339,25 @@ export default function PackagesPreview() {
       </div>
 
       {/* ── Cards grid ── */}
+      <style>{`
+        @media (max-width: 768px) {
+          .pkg-grid {
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 1rem !important;
+            padding: 0 1.5rem 1.5rem !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+          }
+          .pkg-grid::-webkit-scrollbar { display: none; }
+          .pkg-card-wrap {
+            flex: 0 0 80vw !important;
+            max-width: 320px !important;
+            scroll-snap-align: start !important;
+          }
+        }
+      `}</style>
       <div
         ref={gridRef}
         style={{
@@ -348,6 +367,7 @@ export default function PackagesPreview() {
         }}
       >
         <motion.div
+          className="pkg-grid"
           variants={containerVariants}
           initial="hidden"
           animate={gridInView ? "visible" : "hidden"}
@@ -358,7 +378,7 @@ export default function PackagesPreview() {
           }}
         >
           {packages.map((pkg, i) => (
-            <motion.div key={pkg.name} variants={cardVariants} transition={{ duration: 0.75, ease: "easeOut" }}>
+            <motion.div key={pkg.name} className="pkg-card-wrap" variants={cardVariants} transition={{ duration: 0.75, ease: "easeOut" }}>
               <Link href="/packages" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <PackageCard
                   pkg={pkg}

@@ -86,6 +86,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
+      className="hero-grid"
       style={{
         position: "relative",
         width: "100%",
