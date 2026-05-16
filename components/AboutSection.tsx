@@ -18,15 +18,14 @@ export default function AboutSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Image slides in from left
+      // Image: clip-path reveal from bottom
       gsap.fromTo(
         imageRef.current,
-        { opacity: 0, x: -60 },
+        { clipPath: "inset(100% 0 0 0)", opacity: 1 },
         {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power3.out",
+          clipPath: "inset(0% 0 0 0)",
+          duration: 1.1,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 75%",
@@ -35,19 +34,20 @@ export default function AboutSection() {
         }
       );
 
-      // Text lines reveal one by one
+      // Text lines — blur + y stagger
       if (textBlockRef.current) {
         const lines = textBlockRef.current.querySelectorAll("[data-reveal]");
         lines.forEach((line, i) => {
           gsap.fromTo(
             line,
-            { opacity: 0, y: 24 },
+            { opacity: 0, y: 28, filter: "blur(5px)" },
             {
               opacity: 1,
               y: 0,
-              duration: 0.7,
+              filter: "blur(0px)",
+              duration: 0.65,
               ease: "power3.out",
-              delay: i * 0.1,
+              delay: i * 0.09,
               scrollTrigger: {
                 trigger: sectionRef.current,
                 start: "top 75%",
@@ -122,12 +122,10 @@ export default function AboutSection() {
           <div
             ref={imageRef}
             style={{
-              opacity: 0,
               position: "relative",
               aspectRatio: "3/4",
-              borderRadius: "4px",
               overflow: "hidden",
-              border: "1px solid rgba(201,169,110,0.2)",
+              border: "1px solid rgba(201,169,110,0.12)",
             }}
           >
             <Image

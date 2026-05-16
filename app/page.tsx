@@ -7,9 +7,8 @@ import HeroSection from "@/components/HeroSection";
 import ServicesStrip from "@/components/ServicesStrip";
 import AboutSection from "@/components/AboutSection";
 import PackagesPreview from "@/components/PackagesPreview";
-import BlogPreview from "@/components/BlogPreview";
 import MomentsStrip from "@/components/MomentsStrip";
-import QuizCTA from "@/components/QuizCTA";
+import DestinationsPreview from "@/components/DestinationsPreview";
 import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
 import FloatingShapes from "@/components/FloatingShapes";
@@ -28,9 +27,8 @@ export default function Home() {
         <ServicesStrip />
         <AboutSection />
         <PackagesPreview />
-        <BlogPreview />
+        <DestinationsPreview />
         <MomentsStrip />
-        <QuizCTA />
         <Footer />
       </main>
     </>

@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const PREVIEW_QUOTES = [
-  { quote: "Három nap után abbahagytam az e-mailek ellenőrzését.", name: "K. Anna", destination: "Maldív-szigetek" },
-  { quote: "A repülő leszállásán már azt terveztem, mikor jövök vissza.", name: "M. Péter", destination: "Kyoto" },
-  { quote: "Az egész úton egyetlen döntést sem kellett meghoznom. Csak léteztem.", name: "V. Márton", destination: "Santorini" },
+  { quote: "Három nap után abbahagytam az e-mailek ellenőrzését.", name: "K. Anna", destination: "Maldív-szigetek", num: "01" },
+  { quote: "A repülő leszállásán már azt terveztem, mikor jövök vissza.", name: "M. Péter", destination: "Kyoto", num: "02" },
+  { quote: "Az egész úton egyetlen döntést sem kellett meghoznom. Csak léteztem.", name: "V. Márton", destination: "Santorini", num: "03" },
 ];
 
 export default function MomentsStrip() {
@@ -14,29 +14,42 @@ export default function MomentsStrip() {
     <section style={{
       background: "#060606",
       borderTop: "1px solid rgba(201,169,110,0.06)",
-      padding: "clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem)",
+      padding: "clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem)",
     }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-        {/* Header row */}
-        <div style={{
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          marginBottom: "clamp(2.5rem, 5vw, 4rem)",
-          flexWrap: "wrap",
-          gap: "1rem",
-        }}>
+
+        {/* Header — asymmetric */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-60px" }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "flex-end",
+            marginBottom: "clamp(3rem, 6vw, 5rem)",
+            gap: "2rem",
+          }}
+        >
           <div>
-            <p style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold-primary)", marginBottom: "0.75rem", opacity: 0.7 }}>
+            <p style={{
+              fontSize: "0.58rem",
+              letterSpacing: "0.35em",
+              textTransform: "uppercase",
+              color: "var(--gold-primary)",
+              marginBottom: "0.85rem",
+              opacity: 0.7,
+            }}>
               Visszatérve
             </p>
             <h2 style={{
               fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-              fontSize: "clamp(1.4rem, 3vw, 2rem)",
+              fontSize: "clamp(1.5rem, 3.2vw, 2.2rem)",
               fontWeight: 700,
               color: "var(--cream)",
               margin: 0,
-              lineHeight: 1.2,
+              lineHeight: 1.15,
             }}>
               Milyen voltál,{" "}
               <em style={{ color: "var(--gold-primary)", fontStyle: "italic" }}>mikor visszajöttél?</em>
@@ -45,85 +58,116 @@ export default function MomentsStrip() {
           <Link
             href="/moments"
             style={{
-              fontSize: "0.65rem",
+              fontSize: "0.6rem",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "var(--gold-primary)",
+              color: "rgba(201,169,110,0.5)",
               textDecoration: "none",
-              opacity: 0.7,
-              borderBottom: "1px solid rgba(201,169,110,0.3)",
-              paddingBottom: "2px",
-              transition: "opacity 0.3s ease",
-              flexShrink: 0,
+              whiteSpace: "nowrap",
+              paddingBottom: "0.2rem",
+              borderBottom: "1px solid rgba(201,169,110,0.15)",
+              transition: "color 0.2s ease-out, border-color 0.2s ease-out",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"; }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = "var(--gold-primary)";
+              el.style.borderColor = "rgba(201,169,110,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.color = "rgba(201,169,110,0.5)";
+              el.style.borderColor = "rgba(201,169,110,0.15)";
+            }}
           >
-            Mind a tíz →
+            Mind →
           </Link>
-        </div>
+        </motion.div>
 
-        {/* Quotes grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: "1px",
-        }}>
+        {/* Quotes — horizontal rows with dividers */}
+        <div>
           {PREVIEW_QUOTES.map((m, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              viewport={{ once: true, margin: "-40px" }}
               style={{
-                background: "var(--bg-primary)",
-                padding: "2.5rem 2rem",
-                position: "relative",
+                display: "grid",
+                gridTemplateColumns: "40px 1fr auto",
+                alignItems: "start",
+                gap: "2rem",
+                padding: "2rem 0",
+                borderBottom: "1px solid rgba(201,169,110,0.06)",
               }}
             >
-              {/* Gold top accent on first */}
-              {i === 0 && (
-                <div style={{
-                  position: "absolute", top: 0, left: 0, right: 0, height: "1px",
-                  background: "linear-gradient(90deg, var(--gold-primary), var(--gold-light), var(--gold-primary))",
-                }} />
-              )}
-              <div style={{
-                fontSize: "2rem",
-                color: "var(--gold-primary)",
-                opacity: 0.2,
-                fontFamily: "Georgia, serif",
-                lineHeight: 1,
-                marginBottom: "1rem",
-              }}>
-                &ldquo;
-              </div>
-              <blockquote style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
-                fontStyle: "italic",
-                color: "var(--cream)",
-                opacity: 0.85,
-                margin: "0 0 1.5rem",
-                lineHeight: 1.6,
-              }}>
-                {m.quote}
-              </blockquote>
-              <p style={{
-                fontSize: "0.65rem",
+              {/* Number */}
+              <span style={{
+                fontSize: "0.52rem",
                 letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "var(--gold-primary)",
-                opacity: 0.5,
-                margin: 0,
+                color: "rgba(201,169,110,0.25)",
+                paddingTop: "0.3rem",
+                fontVariant: "tabular-nums",
               }}>
-                {m.name} — {m.destination}
-              </p>
+                {m.num}
+              </span>
+
+              {/* Quote */}
+              <div>
+                <div style={{
+                  fontSize: "clamp(1rem, 1.8vw, 1.3rem)",
+                  fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                  fontStyle: "italic",
+                  color: "rgba(245,240,232,0.82)",
+                  lineHeight: 1.55,
+                  marginBottom: "1rem",
+                }}>
+                  &ldquo;{m.quote}&rdquo;
+                </div>
+              </div>
+
+              {/* Attribution */}
+              <div style={{
+                textAlign: "right",
+                paddingTop: "0.2rem",
+                flexShrink: 0,
+              }}>
+                <p style={{
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--gold-primary)",
+                  opacity: 0.55,
+                  margin: "0 0 0.25rem",
+                  whiteSpace: "nowrap",
+                }}>
+                  {m.name}
+                </p>
+                <p style={{
+                  fontSize: "0.55rem",
+                  letterSpacing: "0.1em",
+                  color: "rgba(255,255,255,0.2)",
+                  margin: 0,
+                  whiteSpace: "nowrap",
+                }}>
+                  {m.destination}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .moments-row { grid-template-columns: 32px 1fr !important; }
+          .moments-attribution { display: none; }
+        }
+      `}</style>
     </section>
   );
 }

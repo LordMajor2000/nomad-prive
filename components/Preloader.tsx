@@ -7,231 +7,303 @@ interface PreloaderProps {
   onComplete: () => void;
 }
 
+const BRAND_TOP = "NOMAD";
+const BRAND_BOTTOM = "PRIVÉ";
+
 export default function Preloader({ onComplete }: PreloaderProps) {
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const globeRef = useRef<SVGSVGElement>(null);
-  const planeRef = useRef<SVGGElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const topPanelRef = useRef<HTMLDivElement>(null);
+  const botPanelRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const topCharsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const botCharsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
+  const coordRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          onComplete();
+      const tl = gsap.timeline({ onComplete });
+
+      // — counter ticks up 0 → 100
+      const obj = { val: 0 };
+      tl.to(obj, {
+        val: 100,
+        duration: 2.4,
+        ease: "power1.inOut",
+        onUpdate() {
+          if (counterRef.current) {
+            counterRef.current.textContent = String(Math.round(obj.val)).padStart(3, "0");
+          }
         },
-      });
+      }, 0);
 
-      // Globe lines draw in
-      const latLines = globeRef.current?.querySelectorAll(".lat-line");
-      const lonLines = globeRef.current?.querySelectorAll(".lon-line");
+      // — gold line draws from center outward
+      tl.fromTo(lineRef.current,
+        { scaleX: 0, opacity: 1 },
+        { scaleX: 1, duration: 1.0, ease: "expo.out" },
+        0.15
+      );
 
-      if (latLines) {
-        tl.fromTo(
-          Array.from(latLines),
-          { strokeDashoffset: 400, opacity: 0 },
-          {
-            strokeDashoffset: 0,
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.08,
-            ease: "power2.out",
-          },
-          0
-        );
-      }
+      // — eyebrow fades in
+      tl.fromTo(eyebrowRef.current,
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+        0.3
+      );
 
-      if (lonLines) {
-        tl.fromTo(
-          Array.from(lonLines),
-          { strokeDashoffset: 600, opacity: 0 },
-          {
-            strokeDashoffset: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power2.out",
-          },
-          0.2
-        );
-      }
+      // — NOMAD chars clip up from below
+      const topChars = topCharsRef.current.filter(Boolean);
+      tl.fromTo(topChars,
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: { each: 0.055, from: "center" },
+          ease: "power3.out",
+        },
+        0.45
+      );
 
-      // Plane traces arc around the globe
-      tl.fromTo(
-        planeRef.current,
+      // — PRIVÉ chars clip up from below (slight delay)
+      const botChars = botCharsRef.current.filter(Boolean);
+      tl.fromTo(botChars,
+        { yPercent: 110, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: { each: 0.055, from: "center" },
+          ease: "power3.out",
+        },
+        0.6
+      );
+
+      // — coordinate fades in
+      tl.fromTo(coordRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.3 },
-        0.4
+        { opacity: 1, duration: 0.6, ease: "power2.out" },
+        1.1
       );
 
-      // Animate plane along arc path manually
-      tl.fromTo(
-        planeRef.current,
-        { motionPath: { path: "#flight-arc", align: "#flight-arc", alignOrigin: [0.5, 0.5], start: 0, end: 0 } },
-        {
-          motionPath: { path: "#flight-arc", align: "#flight-arc", alignOrigin: [0.5, 0.5], start: 0, end: 1 },
-          duration: 1.5,
-          ease: "power1.inOut",
-        },
-        0.5
-      );
+      // — brief hold
+      tl.to({}, { duration: 0.55 }, 2.3);
 
-      // Text fades in
-      tl.fromTo(
-        textRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        1.0
+      // — curtain split: top panel slides up, bottom panel slides down
+      tl.to(topPanelRef.current,
+        { yPercent: -100, duration: 0.85, ease: "power3.inOut" },
+        2.85
       );
-
-      tl.fromTo(
-        taglineRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-        1.4
+      tl.to(botPanelRef.current,
+        { yPercent: 100, duration: 0.85, ease: "power3.inOut" },
+        2.85
       );
-
-      // Hold then exit
-      tl.to({}, { duration: 0.5 }, 2.2);
-
-      // Overlay fades out upward
-      tl.to(
-        overlayRef.current,
-        {
-          yPercent: -100,
-          duration: 0.9,
-          ease: "power3.inOut",
-        },
-        2.7
-      );
-    });
+    }, rootRef);
 
     return () => ctx.revert();
   }, [onComplete]);
 
   return (
     <div
-      ref={overlayRef}
+      ref={rootRef}
       style={{
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "#080808",
+        pointerEvents: "none",
+      }}
+    >
+      {/* Top half panel */}
+      <div
+        ref={topPanelRef}
+        style={{
+          position: "absolute",
+          top: 0, left: 0, right: 0,
+          height: "50%",
+          background: "#080808",
+          zIndex: 2,
+          transformOrigin: "top center",
+        }}
+      />
+
+      {/* Bottom half panel */}
+      <div
+        ref={botPanelRef}
+        style={{
+          position: "absolute",
+          bottom: 0, left: 0, right: 0,
+          height: "50%",
+          background: "#080808",
+          zIndex: 2,
+          transformOrigin: "bottom center",
+        }}
+      />
+
+      {/* Center content — sits between the panels */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 3,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: "2rem",
-      }}
-    >
-      {/* Globe SVG */}
-      <svg
-        ref={globeRef}
-        width="200"
-        height="200"
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ overflow: "visible" }}
-      >
-        {/* Outer circle */}
-        <circle
-          cx="100"
-          cy="100"
-          r="80"
-          stroke="rgba(201,169,110,0.25)"
-          strokeWidth="1"
-          fill="rgba(8,8,8,0.9)"
-          className="lat-line"
-          style={{ strokeDasharray: 502, strokeDashoffset: 502 }}
-        />
+        gap: 0,
+        pointerEvents: "none",
+      }}>
 
-        {/* Latitude lines */}
-        <ellipse cx="100" cy="70" rx="72" ry="22" stroke="rgba(201,169,110,0.25)" strokeWidth="0.8" fill="none" className="lat-line" style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
-        <ellipse cx="100" cy="85" rx="79" ry="16" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" className="lat-line" style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
-        <ellipse cx="100" cy="100" rx="80" ry="10" stroke="rgba(201,169,110,0.3)" strokeWidth="1" fill="none" className="lat-line" style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
-        <ellipse cx="100" cy="115" rx="79" ry="16" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" className="lat-line" style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
-        <ellipse cx="100" cy="130" rx="72" ry="22" stroke="rgba(201,169,110,0.25)" strokeWidth="0.8" fill="none" className="lat-line" style={{ strokeDasharray: 400, strokeDashoffset: 400 }} />
-
-        {/* Longitude lines */}
-        <ellipse cx="100" cy="100" rx="15" ry="80" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-        <ellipse cx="100" cy="100" rx="40" ry="80" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-        <line x1="100" y1="20" x2="100" y2="180" stroke="rgba(201,169,110,0.3)" strokeWidth="0.8" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-        <ellipse cx="100" cy="100" rx="40" ry="80" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" transform="rotate(60 100 100)" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-        <ellipse cx="100" cy="100" rx="40" ry="80" stroke="rgba(201,169,110,0.2)" strokeWidth="0.8" fill="none" transform="rotate(-60 100 100)" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-
-        {/* Equator highlight */}
-        <ellipse cx="100" cy="100" rx="80" ry="8" stroke="rgba(201,169,110,0.4)" strokeWidth="1" fill="none" className="lon-line" style={{ strokeDasharray: 600, strokeDashoffset: 600 }} />
-
-        {/* Flight arc path (hidden, used for motion) */}
-        <path
-          id="flight-arc"
-          d="M 30 80 Q 100 10 170 80"
-          stroke="rgba(201,169,110,0.15)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="4 4"
-        />
-
-        {/* Plane icon group */}
-        <g ref={planeRef} style={{ opacity: 0 }}>
-          {/* Simple plane shape */}
-          <g transform="translate(-8,-8)">
-            <polygon
-              points="8,0 16,14 8,10 0,14"
-              fill="var(--gold-primary, #C9A96E)"
-            />
-          </g>
-        </g>
-
-        {/* Globe glow */}
-        <circle
-          cx="100"
-          cy="100"
-          r="80"
-          fill="none"
-          stroke="rgba(201,169,110,0.08)"
-          strokeWidth="20"
-          filter="blur(8px)"
-        />
-      </svg>
-
-      {/* Text */}
-      <div
-        ref={textRef}
-        style={{
-          textAlign: "center",
-          opacity: 0,
-        }}
-      >
+        {/* Eyebrow */}
         <div
+          ref={eyebrowRef}
           style={{
-            fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-            fontSize: "clamp(1.2rem, 4vw, 1.8rem)",
-            fontWeight: 700,
-            letterSpacing: "0.35em",
-            color: "var(--cream, #F5F0E8)",
+            fontSize: "0.52rem",
+            letterSpacing: "0.45em",
             textTransform: "uppercase",
+            color: "rgba(201,169,110,0.55)",
+            marginBottom: "1.4rem",
+            opacity: 0,
           }}
         >
-          Nomad Privé
+          Private Travel Curation
+        </div>
+
+        {/* NOMAD */}
+        <div style={{
+          overflow: "hidden",
+          lineHeight: 1,
+          marginBottom: "0.1rem",
+        }}>
+          {BRAND_TOP.split("").map((ch, i) => (
+            <span
+              key={i}
+              ref={(el) => { topCharsRef.current[i] = el; }}
+              style={{
+                display: "inline-block",
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+                fontWeight: 700,
+                letterSpacing: "0.45em",
+                color: "var(--cream, #F5F0E8)",
+                textTransform: "uppercase",
+                opacity: 0,
+              }}
+            >
+              {ch}
+            </span>
+          ))}
+        </div>
+
+        {/* Gold divider line */}
+        <div
+          ref={lineRef}
+          style={{
+            width: "clamp(180px, 30vw, 320px)",
+            height: "1px",
+            background: "linear-gradient(90deg, transparent, #C9A96E 30%, #E8D5AC 50%, #C9A96E 70%, transparent)",
+            margin: "0.5rem 0",
+            transformOrigin: "center",
+            transform: "scaleX(0)",
+          }}
+        />
+
+        {/* PRIVÉ */}
+        <div style={{
+          overflow: "hidden",
+          lineHeight: 1,
+          marginTop: "0.1rem",
+        }}>
+          {BRAND_BOTTOM.split("").map((ch, i) => (
+            <span
+              key={i}
+              ref={(el) => { botCharsRef.current[i] = el; }}
+              style={{
+                display: "inline-block",
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+                fontWeight: 700,
+                fontStyle: "italic",
+                letterSpacing: "0.35em",
+                color: "var(--gold-primary, #C9A96E)",
+                opacity: 0,
+              }}
+            >
+              {ch}
+            </span>
+          ))}
+        </div>
+
+        {/* Coordinates */}
+        <div
+          ref={coordRef}
+          style={{
+            marginTop: "1.8rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            opacity: 0,
+          }}
+        >
+          <span style={{ width: "20px", height: "1px", background: "rgba(201,169,110,0.35)", display: "inline-block" }} />
+          <span style={{
+            fontSize: "0.55rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.25)",
+          }}>
+            47°N · 19°E · Est. 2024
+          </span>
+          <span style={{ width: "20px", height: "1px", background: "rgba(201,169,110,0.35)", display: "inline-block" }} />
         </div>
       </div>
 
-      <p
-        ref={taglineRef}
-        style={{
-          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-          fontSize: "0.85rem",
-          fontStyle: "italic",
-          color: "var(--gold-primary, #C9A96E)",
-          letterSpacing: "0.1em",
-          margin: 0,
-          opacity: 0,
-        }}
-      >
-        Every journey is a masterpiece.
-      </p>
+      {/* Loading counter — bottom right, over panels */}
+      <div style={{
+        position: "absolute",
+        bottom: "2.5rem",
+        right: "2.5rem",
+        zIndex: 4,
+        display: "flex",
+        alignItems: "baseline",
+        gap: "0.25rem",
+      }}>
+        <span
+          ref={counterRef}
+          style={{
+            fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 700,
+            color: "rgba(201,169,110,0.15)",
+            fontVariant: "tabular-nums",
+            letterSpacing: "-0.02em",
+            lineHeight: 1,
+          }}
+        >
+          000
+        </span>
+        <span style={{
+          fontSize: "0.55rem",
+          letterSpacing: "0.15em",
+          color: "rgba(201,169,110,0.12)",
+          paddingBottom: "0.3rem",
+        }}>
+          %
+        </span>
+      </div>
+
+      {/* Top-left brand mark */}
+      <div style={{
+        position: "absolute",
+        top: "2rem",
+        left: "2.5rem",
+        zIndex: 4,
+        fontSize: "0.55rem",
+        letterSpacing: "0.3em",
+        textTransform: "uppercase",
+        color: "rgba(201,169,110,0.2)",
+      }}>
+        NP · {new Date().getFullYear()}
+      </div>
     </div>
   );
 }
