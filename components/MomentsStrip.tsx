@@ -24,12 +24,13 @@ export default function MomentsStrip() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: true, margin: "-60px" }}
+          className="moments-header"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr auto",
             alignItems: "flex-end",
             marginBottom: "clamp(3rem, 6vw, 5rem)",
-            gap: "2rem",
+            gap: "1.5rem 2rem",
           }}
         >
           <div>
@@ -96,6 +97,7 @@ export default function MomentsStrip() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               viewport={{ once: true, margin: "-40px" }}
+              className="moments-row"
               style={{
                 display: "grid",
                 gridTemplateColumns: "40px 1fr auto",
@@ -131,7 +133,7 @@ export default function MomentsStrip() {
               </div>
 
               {/* Attribution */}
-              <div style={{
+              <div className="moments-attribution" style={{
                 textAlign: "right",
                 paddingTop: "0.2rem",
                 flexShrink: 0,
@@ -163,9 +165,13 @@ export default function MomentsStrip() {
       </div>
 
       <style>{`
-        @media (max-width: 600px) {
-          .moments-row { grid-template-columns: 32px 1fr !important; }
-          .moments-attribution { display: none; }
+        @media (max-width: 640px) {
+          .moments-header { grid-template-columns: 1fr !important; }
+          .moments-row {
+            grid-template-columns: 32px 1fr !important;
+            gap: 1rem !important;
+          }
+          .moments-attribution { display: none !important; }
         }
       `}</style>
     </section>

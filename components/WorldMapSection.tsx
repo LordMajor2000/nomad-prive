@@ -202,7 +202,15 @@ export default function WorldMapSection() {
         overflow:   "hidden",
       }}
     >
-      {/* Image trail lives here — triggered by mouse movement over the section */}
+      {/* Image trail — desktop only (pointer:fine) */}
+      <style>{`
+        @media (hover: none), (pointer: coarse) {
+          .map-trail-img { display: none !important; }
+        }
+        @media (max-width: 640px) {
+          .map-tooltip { display: none !important; }
+        }
+      `}</style>
       <MapImageTrail containerRef={sectionRef as React.RefObject<HTMLElement>} />
 
       {/* Header */}
@@ -328,7 +336,7 @@ export default function WorldMapSection() {
               {/* Tooltip */}
               <AnimatePresence>
                 {hoveredPin === dest.name && (
-                  <foreignObject
+                  <foreignObject className="map-tooltip"
                     x={dest.x - 75}
                     y={dest.y - 74}
                     width={150}

@@ -334,21 +334,24 @@ export default function Navigation() {
                   top:            0,
                   right:          0,
                   bottom:         0,
-                  width:          "min(540px, 46vw)",
+                  width:          "min(560px, 46vw)",
                   background:     "rgba(7,7,7,0.97)",
                   backdropFilter: "blur(32px)",
-                  borderLeft:     "1px solid rgba(201,169,110,0.12)",
+                  /* Bubble / deformed shape — asymmetric left-edge radius */
+                  borderRadius:   "52px 0 0 36px",
+                  boxShadow:      "-2px 0 0 rgba(201,169,110,0.1), -32px 0 80px rgba(0,0,0,0.5)",
                   zIndex:         105,
                   display:        "flex",
                   flexDirection:  "column",
                   overflowY:      "auto",
                 }}
               >
-                {/* Top accent line */}
+                {/* Top accent line — starts after the radius curve */}
                 <div style={{
-                  height:     "1.5px",
-                  background: "linear-gradient(90deg, transparent, rgba(201,169,110,0.5) 50%, transparent)",
-                  flexShrink: 0,
+                  height:      "1.5px",
+                  marginLeft:  "52px",
+                  background:  "linear-gradient(90deg, rgba(201,169,110,0.3), rgba(201,169,110,0.55) 50%, rgba(201,169,110,0.1))",
+                  flexShrink:  0,
                 }} />
 
                 {/* Links — take up the middle space */}
