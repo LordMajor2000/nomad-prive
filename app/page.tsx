@@ -8,6 +8,7 @@ import ServicesStrip from "@/components/ServicesStrip";
 import AboutSection from "@/components/AboutSection";
 import PackagesPreview from "@/components/PackagesPreview";
 import BlogPreview from "@/components/BlogPreview";
+import MomentsStrip from "@/components/MomentsStrip";
 import QuizCTA from "@/components/QuizCTA";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -27,6 +28,7 @@ export default function Home() {
         <AboutSection />
         <PackagesPreview />
         <BlogPreview />
+        <MomentsStrip />
         <QuizCTA />
         <ContactSection />
         <Footer />

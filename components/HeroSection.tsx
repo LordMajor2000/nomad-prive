@@ -110,73 +110,65 @@ export default function HeroSection() {
         background: "#080808",
       }}
     >
-      {/* Background gradient (simulating cinematic landscape) */}
+      {/* Video background */}
       <div
         ref={bgRef}
         style={{
           position: "absolute",
           inset: 0,
           opacity: 0,
-          background: `
-            radial-gradient(ellipse at 50% 70%, rgba(201,169,110,0.06) 0%, transparent 60%),
-            radial-gradient(ellipse at 20% 50%, rgba(10,30,60,0.8) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 50%, rgba(5,15,30,0.9) 0%, transparent 50%),
-            linear-gradient(
-              to bottom,
-              #030508 0%,
-              #05090F 20%,
-              #080D14 40%,
-              #0A0E12 60%,
-              #060A0F 75%,
-              rgba(201,169,110,0.15) 85%,
-              rgba(100,70,20,0.4) 90%,
-              #080808 100%
-            )
-          `,
           zIndex: 1,
         }}
       >
-        {/* Star field effect */}
+        {/* Replace /videos/hero.mp4 with your own footage for production */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+          {/* Fallback: Pexels aerial ocean — replace with owned footage */}
+          <source src="https://videos.pexels.com/video-files/3795405/3795405-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        </video>
+        {/* Cinematic gradient overlay */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `
-              radial-gradient(circle, rgba(245,240,232,0.6) 1px, transparent 1px),
-              radial-gradient(circle, rgba(245,240,232,0.3) 1px, transparent 1px),
-              radial-gradient(circle, rgba(201,169,110,0.4) 1px, transparent 1px)
+            background: `
+              linear-gradient(to bottom,
+                rgba(6,6,6,0.55) 0%,
+                rgba(6,6,6,0.25) 40%,
+                rgba(6,6,6,0.4) 70%,
+                rgba(6,6,6,0.85) 100%
+              ),
+              linear-gradient(to right, rgba(6,6,6,0.3) 0%, transparent 50%, rgba(6,6,6,0.2) 100%)
             `,
-            backgroundSize: "300px 300px, 200px 200px, 400px 400px",
-            backgroundPosition: "0 0, 100px 50px, 200px 150px",
-            opacity: 0.4,
           }}
         />
-        {/* Horizon glow */}
+        {/* Gold horizon glow */}
         <div
           style={{
             position: "absolute",
             bottom: "15%",
             left: "50%",
             transform: "translateX(-50%)",
-            width: "60%",
-            height: "2px",
+            width: "50%",
+            height: "1px",
             background:
-              "linear-gradient(90deg, transparent, rgba(201,169,110,0.6), rgba(232,213,176,0.8), rgba(201,169,110,0.6), transparent)",
-            boxShadow: "0 0 60px 20px rgba(201,169,110,0.15)",
-            filter: "blur(1px)",
+              "linear-gradient(90deg, transparent, rgba(201,169,110,0.4), rgba(232,213,176,0.6), rgba(201,169,110,0.4), transparent)",
+            boxShadow: "0 0 40px 12px rgba(201,169,110,0.08)",
           }}
         />
       </div>
-
-      {/* Dark overlay for text readability */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(8,8,8,0.4)",
-          zIndex: 2,
-        }}
-      />
 
       {/* Content */}
       <div

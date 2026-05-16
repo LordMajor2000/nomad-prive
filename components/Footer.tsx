@@ -25,6 +25,7 @@ export default function Footer() {
     { label: tNav("journal"), href: "/journal" },
     { label: tNav("about"), href: "/about" },
     { label: tNav("contact"), href: "/contact" },
+    { label: "Visszatérve", href: "/moments" },
   ];
 
   useEffect(() => {
