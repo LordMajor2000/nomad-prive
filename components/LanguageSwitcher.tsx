@@ -53,24 +53,30 @@ export default function LanguageSwitcher() {
       <button
         onClick={() => setOpen(!open)}
         style={{
-          background: "none",
+          background: "transparent",
           border: "none",
           cursor: "pointer",
-          padding: "0.4rem 0.5rem",
-          color: "#C9A96E",
-          fontSize: "0.65rem",
-          fontVariant: "small-caps",
-          letterSpacing: "0.2em",
+          padding: "0.7rem 0.85rem",
+          color: "#F5F0E8",
+          fontSize: "0.62rem",
+          letterSpacing: "0.18em",
           textTransform: "uppercase",
           fontFamily: "var(--font-inter), Inter, sans-serif",
           display: "flex",
           alignItems: "center",
-          gap: "4px",
+          gap: "5px",
           opacity: 0.85,
-          transition: "opacity 0.2s ease",
+          transition: "opacity 0.2s ease-out, background 0.2s ease-out",
+          whiteSpace: "nowrap",
         }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.85"; }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.opacity = "1";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.07)";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLButtonElement).style.opacity = "0.85";
+          (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+        }}
         aria-label="Change language"
       >
         {localeLabels[currentLocale] || "EN"}

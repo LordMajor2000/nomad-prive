@@ -92,34 +92,49 @@ export default function Navigation() {
             </Link>
           )}
 
-          {/* Right side */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", zIndex: 110, position: "relative" }}>
+          {/* Right side — single dark pill wraps everything */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 0,
+            zIndex: 110,
+            position: "relative",
+            background: "rgba(6,6,6,0.62)",
+            backdropFilter: "blur(16px)",
+            border: "1px solid rgba(201,169,110,0.18)",
+            overflow: "hidden",
+          }}>
             <LanguageSwitcher />
 
-            {/* Hamburger button — always visible with dark pill */}
+            {/* Divider */}
+            <div style={{
+              width: "1px",
+              height: "20px",
+              background: "rgba(201,169,110,0.15)",
+              flexShrink: 0,
+            }} />
+
+            {/* Hamburger button */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu"
               style={{
-                background: menuOpen ? "rgba(8,8,8,0.9)" : "rgba(8,8,8,0.55)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(201,169,110,0.25)",
+                background: "transparent",
+                border: "none",
                 cursor: "pointer",
-                padding: "0.7rem 0.9rem",
+                padding: "0.7rem 0.85rem",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 gap: "5px",
                 position: "relative",
-                transition: "background 0.2s ease-out, border-color 0.2s ease-out",
+                transition: "background 0.2s ease-out",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = "rgba(8,8,8,0.75)";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.55)";
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.07)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = menuOpen ? "rgba(8,8,8,0.9)" : "rgba(8,8,8,0.55)";
-                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.25)";
+                (e.currentTarget as HTMLButtonElement).style.background = "transparent";
               }}
             >
               <span style={{
@@ -136,7 +151,7 @@ export default function Navigation() {
                 height: "1px",
                 background: "#F5F0E8",
                 transition: "opacity 0.2s ease-out",
-                opacity: menuOpen ? 0 : 0.7,
+                opacity: menuOpen ? 0 : 0.65,
               }} />
               <span style={{
                 display: "block",
