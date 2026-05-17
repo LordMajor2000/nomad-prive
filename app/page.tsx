@@ -7,6 +7,7 @@ import HeroSection from "@/components/HeroSection";
 import ServicesStrip from "@/components/ServicesStrip";
 import AboutSection from "@/components/AboutSection";
 import PackagesPreview from "@/components/PackagesPreview";
+import JourneySection from "@/components/JourneySection";
 import MomentsStrip from "@/components/MomentsStrip";
 import DestinationsPreview from "@/components/DestinationsPreview";
 import WorldMapSection from "@/components/WorldMapSection";
@@ -14,6 +15,7 @@ import Footer from "@/components/Footer";
 import AmbientBackground from "@/components/AmbientBackground";
 import FloatingShapes from "@/components/FloatingShapes";
 import ScrollProgress from "@/components/ScrollProgress";
+import StickyCtaPill from "@/components/StickyCtaPill";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,11 +26,13 @@ export default function Home() {
       <ScrollProgress />
       <AmbientBackground />
       <FloatingShapes />
+      <StickyCtaPill />
       <main style={{ visibility: isLoading ? "hidden" : "visible", position: "relative", zIndex: 1 }}>
         <Navigation />
         <HeroSection />
         <ServicesStrip />
         <AboutSection />
+        <JourneySection />
         <PackagesPreview />
         <DestinationsPreview />
         <WorldMapSection />

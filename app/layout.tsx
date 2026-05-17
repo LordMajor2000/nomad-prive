@@ -22,20 +22,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Nomad Privé — Bespoke Luxury Travel",
+  title: {
+    default: "Nomad Privé — Bespoke Luxury Travel",
+    template: "%s · Nomad Privé",
+  },
   description:
-    "Hyper-personalized luxury travel experiences for the discerning traveler.",
+    "Private, hyper-personalized luxury travel curated for the discerning traveler. Every detail arranged — from villa to chauffeur to table.",
   keywords: [
-    "luxury travel",
-    "bespoke travel",
-    "private travel",
-    "premium travel",
-    "Nomad Privé",
+    "luxury travel", "bespoke travel", "private travel",
+    "premium travel", "luxury vacation", "Nomad Privé",
+    "private villa", "tailored itinerary",
   ],
+  authors: [{ name: "Nomad Privé" }],
+  creator: "Nomad Privé",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
   openGraph: {
-    title: "Nomad Privé",
-    description: "Every journey is a masterpiece.",
+    title: "Nomad Privé — Bespoke Luxury Travel",
+    description: "Private travel, perfected. Every journey is a masterpiece.",
     type: "website",
+    siteName: "Nomad Privé",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nomad Privé — Bespoke Luxury Travel",
+    description: "Private travel, perfected.",
   },
 };
 
@@ -46,6 +61,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <head>
+        {/* Preload LCP hero image */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=85"
+          fetchPriority="high"
+        />
+      </head>
       <body
         style={{
           fontFamily: "var(--font-inter), Inter, sans-serif",
