@@ -168,7 +168,9 @@ export default function BlogPostClient({ post }: Props) {
           style={{
             maxWidth: "860px",
             margin: "0 auto",
-            padding: "0 clamp(1.5rem, 5vw, 4rem)",
+            padding: "0 clamp(1rem, 5vw, 4rem)",
+            boxSizing: "border-box",
+            width: "100%",
           }}
         >
           <BestTimeBar data={post.bestTime} />

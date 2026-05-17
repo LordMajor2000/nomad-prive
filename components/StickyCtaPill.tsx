@@ -21,6 +21,7 @@ export default function StickyCtaPill() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          data-sticky-pill
           initial={{ opacity: 0, y: 18, scale: 0.88 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 18, scale: 0.88 }}
@@ -30,6 +31,7 @@ export default function StickyCtaPill() {
             bottom: "clamp(1.5rem, 4vw, 2.25rem)",
             right: "clamp(1rem, 3vw, 2rem)",
             zIndex: 95,
+            transition: "opacity 0.22s ease-out, transform 0.22s ease-out",
           }}
         >
           <Link

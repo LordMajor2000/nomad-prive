@@ -24,9 +24,10 @@ export default function BestTimeBar({ data }: Props) {
       style={{
         background: "#0d0d0d",
         borderTop: "2px solid #C9A96E",
-        padding: "2rem",
+        padding: "clamp(1rem, 4vw, 2rem)",
         marginTop: "3rem",
         borderRadius: "1px",
+        overflow: "hidden",
       }}
     >
       <div
@@ -47,8 +48,9 @@ export default function BestTimeBar({ data }: Props) {
         style={{
           display: "flex",
           alignItems: "flex-end",
-          gap: "0.5rem",
+          gap: "clamp(0.2rem, 0.8vw, 0.5rem)",
           marginBottom: "0.75rem",
+          overflow: "hidden",
         }}
       >
         {data.map((item, i) => {
@@ -58,6 +60,7 @@ export default function BestTimeBar({ data }: Props) {
               key={item.month}
               style={{
                 flex: 1,
+                minWidth: 0,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -77,16 +80,19 @@ export default function BestTimeBar({ data }: Props) {
                   width: "100%",
                   background: config.color,
                   borderRadius: "1px",
-                  minWidth: "12px",
                 }}
               />
               <span
                 style={{
-                  fontSize: "0.55rem",
-                  letterSpacing: "0.05em",
+                  fontSize: "clamp(0.38rem, 1.6vw, 0.55rem)",
+                  letterSpacing: "0.03em",
                   textTransform: "uppercase",
                   color: "rgba(255,255,255,0.35)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
+                  maxWidth: "100%",
+                  display: "block",
                 }}
               >
                 {item.month}

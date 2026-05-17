@@ -207,7 +207,16 @@ export default function Navigation() {
 
   useEffect(() => {
     if (isMobile) document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    /* Signal menu state globally so other components (e.g. StickyCtaPill) can react */
+    if (menuOpen) {
+      document.body.setAttribute("data-menu", "open");
+    } else {
+      document.body.removeAttribute("data-menu");
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.removeAttribute("data-menu");
+    };
   }, [menuOpen, isMobile]);
 
   useEffect(() => {
@@ -358,11 +367,14 @@ export default function Navigation() {
                     : "rgba(7,7,7,0.88)",
                   backdropFilter:      "blur(28px)",
                   WebkitBackdropFilter:"blur(28px)",
+                  border:              menuOpen
+                    ? "1px solid rgba(201,169,110,0.35)"
+                    : "1px solid rgba(201,169,110,0.2)",
                   boxShadow:           menuOpen
-                    ? "0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,169,110,0.28)"
-                    : "0 4px 28px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(201,169,110,0.16)",
+                    ? "0 6px 32px rgba(0,0,0,0.65), 0 2px 12px rgba(201,169,110,0.12)"
+                    : "0 6px 32px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.3)",
                   pointerEvents:       "auto",
-                  transition:          "background 0.22s ease-out, box-shadow 0.22s ease-out",
+                  transition:          "background 0.22s ease-out, box-shadow 0.22s ease-out, border-color 0.22s ease-out",
                 }}
               >
                 {/* Wordmark */}

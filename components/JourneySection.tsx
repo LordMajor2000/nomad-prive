@@ -69,8 +69,9 @@ export default function JourneySection() {
         scrollTrigger: {
           trigger:   wrapRef.current,
           pin:       true,
-          scrub:     1.2,
-          end:       () => `+=${totalWidth}vw`,
+          scrub:     2.2,
+          /* Each slide gets ~2× viewport height of scrolling room */
+          end:       () => `+=${window.innerHeight * 2.2 * (PHASES.length - 1)}`,
           invalidateOnRefresh: true,
         },
       });
