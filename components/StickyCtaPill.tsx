@@ -8,8 +8,10 @@ import { useTranslations } from "next-intl";
 
 export default function StickyCtaPill() {
   const t = useTranslations("nav");
-  const [visible, setVisible] = useState(false);
+  const [visible,   setVisible]   = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
 
+  /* Track scroll position */
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 340);
     onScroll();
@@ -17,21 +19,31 @@ export default function StickyCtaPill() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Watch body data-menu attribute set by Navigation */
+  useEffect(() => {
+    const sync = () => setMenuOpen(document.body.hasAttribute("data-menu"));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["data-menu"] });
+    return () => observer.disconnect();
+  }, []);
+
+  const show = visible && !menuOpen;
+
   return (
     <AnimatePresence>
-      {visible && (
+      {show && (
         <motion.div
-          data-sticky-pill
+          key="sticky-cta"
           initial={{ opacity: 0, y: 18, scale: 0.88 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 18, scale: 0.88 }}
+          animate={{ opacity: 1, y: 0,  scale: 1    }}
+          exit={{    opacity: 0, y: 18, scale: 0.88 }}
           transition={{ type: "spring", stiffness: 380, damping: 28 }}
           style={{
             position: "fixed",
-            bottom: "clamp(1.5rem, 4vw, 2.25rem)",
-            right: "clamp(1rem, 3vw, 2rem)",
-            zIndex: 95,
-            transition: "opacity 0.22s ease-out, transform 0.22s ease-out",
+            bottom:   "clamp(1.5rem, 4vw, 2.25rem)",
+            right:    "clamp(1rem, 3vw, 2rem)",
+            zIndex:   95,
           }}
         >
           <Link
@@ -56,15 +68,15 @@ export default function StickyCtaPill() {
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background  = "#E8D5AC";
-              el.style.boxShadow   = "0 10px 40px rgba(201,169,110,0.45), 0 2px 8px rgba(0,0,0,0.4)";
-              el.style.transform   = "translateY(-1px)";
+              el.style.background = "#E8D5AC";
+              el.style.boxShadow  = "0 10px 40px rgba(201,169,110,0.45), 0 2px 8px rgba(0,0,0,0.4)";
+              el.style.transform  = "translateY(-1px)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background  = "rgba(201,169,110,0.92)";
-              el.style.boxShadow   = "0 8px 32px rgba(201,169,110,0.35), 0 2px 8px rgba(0,0,0,0.4)";
-              el.style.transform   = "translateY(0)";
+              el.style.background = "rgba(201,169,110,0.92)";
+              el.style.boxShadow  = "0 8px 32px rgba(201,169,110,0.35), 0 2px 8px rgba(0,0,0,0.4)";
+              el.style.transform  = "translateY(0)";
             }}
             onMouseDown={(e) => {
               (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0) scale(0.97)";

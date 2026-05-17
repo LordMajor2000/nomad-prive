@@ -131,7 +131,7 @@ export default function DestinationsPreview() {
         /* ── Mobile overrides ── */
         @media (max-width: 640px) {
           .dest-row {
-            grid-template-columns: 28px 1fr 20px !important;
+            grid-template-columns: 28px 1fr 28px !important;
             gap: 0.75rem !important;
             padding: 1.4rem 0 !important;
           }
@@ -141,13 +141,25 @@ export default function DestinationsPreview() {
             color: rgba(255,255,255,0.38) !important;
             max-height: 50px !important;
           }
+          /* Arrow always visible & gold on mobile */
+          .dest-row-arrow {
+            color: rgba(201,169,110,0.55) !important;
+            font-size: 1.05rem !important;
+            transform: none !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+          }
         }
-        /* Touch devices: always show tagline, hide expanding image */
+        /* Touch devices: always show tagline, hide expanding image, show gold arrow */
         @media (hover: none) {
           .dest-row-image { display: none !important; }
           .dest-row-tagline {
             color: rgba(255,255,255,0.38) !important;
             max-height: 50px !important;
+          }
+          .dest-row-arrow {
+            color: rgba(201,169,110,0.55) !important;
           }
         }
       `}</style>

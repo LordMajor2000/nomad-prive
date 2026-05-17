@@ -137,13 +137,6 @@ body {
   }
 }
 
-/* Hide sticky CTA pill while nav menu is open */
-body[data-menu="open"] [data-sticky-pill] {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transform: translateY(12px) scale(0.9) !important;
-}
-
 /* Gold text utility */
 .text-gold {
   color: var(--gold-primary);
